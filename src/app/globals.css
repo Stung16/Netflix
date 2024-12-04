@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-[96.7rem] lg:min-w-[96.7rem] mx-auto xsm:w-full xsm:px-[1rem] xlg:w-[98%] xlg:min-w-[98%] xlg:max-w-[98%];
+  }
+
+  .rotateY-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+}
+input,
+select,
+textarea {
+  background-color: transparent;
+  outline: none;
+}
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+
+html {
+  font-size: 1vw;
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  -webkit-user-drag: none;
+  -ms-content-zooming: none;
+  vertical-align: baseline;
+  --radix-navigation-menu-viewport-width: 100% !important;
+  position: relative;
+}
+
+[data-tooltip]:active::after {
+  top: -45px;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid black;
+  background: #eee;
+  padding: 0.25em;
+}
+
+@media (max-width: 639px) {
+  html {
+    font-size: 4.267vw;
+  }
+  /* fix shadcn */
+  html body[data-scroll-locked] header,
+  html body[data-scroll-locked] #mega_menu {
+    padding-right: 0 !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: 0px; /* Firefox */
+}
+
+/* end change color in header */
+
+.font-dnom {
+  font-feature-settings: 'dnom' on;
+}
+.netflix-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+  width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
+  background-color: #000;
+  position: absolute; /* Đảm bảo loader chiếm toàn màn hình */
+  top: 0;
+  left: 0;
+  z-index: 999999; /* Đảm bảo nó nổi lên trên các phần tử khác */
+}
+
+.logo {
+  font-family: 'Arial', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #e50914;
+  display: flex;
+  z-index: 20; /* Đảm bảo logo nằm trên cùng */
+}
+
+.logo span {
+  animation: bounce 1.5s infinite alternate;
+}
+
+.logo span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.logo span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.logo span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.logo span:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.logo span:nth-child(6) {
+  animation-delay: 1s;
+}
+
+.logo span:nth-child(7) {
+  animation-delay: 1.2s;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.dots {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 15; /* Đảm bảo chấm nằm dưới logo */
+}
+
+.dots span {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background-color: #e50914;
+  border-radius: 50%;
+  animation: dot-bounce 0.6s infinite alternate;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+.error-container {
+  text-align: center;
+  padding: 50px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.error-container h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.error-container p {
+  font-size: 18px;
+}

@@ -1,0 +1,8 @@
+.itemListProfile {
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+.itemListProfile:hover > p {
+  color: #fff;
+  text-decoration-line: underline;
+}

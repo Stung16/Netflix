@@ -1,0 +1,56 @@
+.listMovieSlide :global(.slick-slide) {
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+/* .listMovieSlide :global(.swiper-slide):first-of-type {
+} */
+/* margin-left: 0 !important; */
+.listMovieSlide :global(.slick-list) {
+  overflow: visible;
+}
+
+.nextBtn,
+.prevBtn {
+  display: block;
+  transform-origin: 45% 50%;
+  font-size: 1.5rem;
+  transition: transform 0.1s ease-out 0s;
+  cursor: pointer;
+  color: #fff;
+  font-family: font-nf-icon;
+}
+.btnSeeAll {
+  opacity: 0;
+  max-width: 0;
+  transition:
+    all 1s,
+    opacity 1s,
+    transform 0.75s;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.iconNext {
+  transition: transform 0.75s;
+}
+
+.titleSub:hover .iconNext {
+  visibility: visible;
+}
+.titlePlayList:hover ~ .groupBtnSeeAll .btnSeeAll {
+  max-width: fit-content !important;
+  opacity: 1 !important;
+  transform: translate(1vw);
+}
+.titlePlayList:hover ~ .groupBtnSeeAll .iconNext {
+  transform: translate(1.2rem);
+}
+/* .listMovieSlide :global(.slick-active) .slideItem_slick {
+  transform-origin: 50% 50% !important;
+}
+.listMovieSlide :global(.slick-active):first-of-type div .slideItem_slick {
+  transform-origin: bottom left !important;
+}
+.listMovieSlide :global(.slick-active):nth-of-type(6) .slideItem_slick {
+  transform-origin: bottom right !important;
+} */
