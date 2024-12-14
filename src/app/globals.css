@@ -165,9 +165,8 @@ body {
   height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
   width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
   background-color: #000;
-  position: absolute; /* Đảm bảo loader chiếm toàn màn hình */
-  top: 0;
-  left: 0;
+  position: fixed; /* Đảm bảo loader chiếm toàn màn hình */
+  inset: 0;
   z-index: 999999; /* Đảm bảo nó nổi lên trên các phần tử khác */
 }
 

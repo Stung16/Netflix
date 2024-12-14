@@ -8,8 +8,8 @@ import {useEffect, useState} from 'react'
 import {Input} from '@/components/ui/input'
 import Image from 'next/image'
 import Link from 'next/link'
-import IcManager from '@/components/icons/IcManager'
-import IcChangeProfile from '@/components/icons/IcChangeProfile'
+// import IcManager from '@/components/icons/IcManager'
+// import IcChangeProfile from '@/components/icons/IcChangeProfile'
 import IcInforAcount from '@/components/icons/IcInforAcount'
 import IcAcount from '@/components/icons/IcAcount'
 import style from './style.module.css'
@@ -214,7 +214,7 @@ export default function Header({profile}: any) {
               )}
             >
               <ul className='flex px-2 flex-col text-[#b3b3b3] py-3'>
-                <li
+                {/* <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >
                   <IcManager className='size-6 text-white' />
@@ -225,7 +225,7 @@ export default function Header({profile}: any) {
                 >
                   <IcChangeProfile className='size-6 text-white' />
                   <p>Chuyển hồ sơ</p>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href={'/account'}

@@ -124,3 +124,51 @@ export const fetcher = async (url: string) => {
 export const getYear = (dateString: string) => {
   return new Date(dateString).getFullYear()
 }
+
+export function convertDateToMembership(dateString: string) {
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1 // Tháng bắt đầu từ 0
+
+  // Chuyển đổi tháng thành chuỗi
+  return `Thành viên từ tháng ${month} năm ${year}`
+}
+export interface propService {
+  premium: string
+  standard: string
+  basic: string
+  phone: string
+}
+
+export const listService: propService = {
+  premium: 'Gói cao cấp',
+  standard: 'Gói tiêu chuẩn',
+  basic: 'Gói cơ bản',
+  phone: 'Gói di động',
+}
+
+export function getNextPaymentDate(dateString: string) {
+  const date = new Date(dateString)
+
+  // Thêm 1 tháng
+  date.setMonth(date.getMonth() + 1)
+
+  // Định dạng ngày tháng
+  const options: any = {month: 'long', day: 'numeric', year: 'numeric'}
+  const formattedDate = date.toLocaleDateString('vi-VN', options)
+
+  return formattedDate
+}
+export function formatPhoneNumber(phoneNumber: string = '000000000') {
+  // Loại bỏ các ký tự không phải số
+  const numericPhoneNumber = phoneNumber?.replace(/\D/g, '')
+
+  // Lấy 3 chữ số cuối cùng
+  const lastThreeDigits = numericPhoneNumber?.slice(-3)
+
+  // Tạo chuỗi ẩn danh với phần còn lại là dấu sao
+  const maskedPhoneNumber =
+    '*'.repeat(numericPhoneNumber?.length - 3) + lastThreeDigits
+
+  return maskedPhoneNumber
+}

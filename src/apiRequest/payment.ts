@@ -2,7 +2,8 @@
 import http from '@/lib/http'
 
 const paymentRequest = {
-  payment: () => http.post<any>('/payment', null),
+  payment: (body: {service: string; price: number; phone: string}) =>
+    http.post<any>('/payment', body),
   check_transaction: () => http.get<any>('/transaction-status'),
 }
 export default paymentRequest

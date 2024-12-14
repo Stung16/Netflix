@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import HeaderProfile from '@/layout/header/HeaderProfile'
 import {redirect} from 'next/navigation'
+import NavBarAccount from '@/components/navBar/NavBarAccount'
 
 export default async function AccountLayout({
   children,
@@ -13,7 +14,6 @@ export default async function AccountLayout({
 }) {
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
-  let profile = null
   try {
     const [resAccount] = await Promise.all([acountApiRequest.Sme(accesstoken)])
     const dataAcount = resAccount.payload?.data
@@ -22,8 +22,9 @@ export default async function AccountLayout({
     }
     return (
       <div className='bg-white'>
-        <HeaderProfile profile={profile} />
-        <main className='relative h-[200vh] mx-[20.75rem] mt-[4.25rem]'>
+        <HeaderProfile profile={dataAcount} />
+        <main className='relative min-h-screen mx-[20.75rem] mt-[4.25rem] flex pt-8 space-x-8'>
+          <NavBarAccount />
           {children}
         </main>
       </div>

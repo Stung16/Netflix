@@ -1,7 +1,7 @@
 import React from 'react'
 interface Plan {
   title: string
-  price: string
+  price: number
   quality: string
   resolution: string
   devices: string
@@ -34,7 +34,7 @@ export default function PlanCard({
         </div>
       )}
       <h3 className='text-xl font-bold mb-2'>{title}</h3>
-      <p className='text-gray-700 mb-1'>Giá hàng tháng: {price}</p>
+      <p className='text-gray-700 mb-1'>{`Giá hàng tháng: ${price.toLocaleString('vi-VN')} đ`}</p>
       <p className='text-gray-700 mb-1'>Chất lượng hình và âm: {quality}</p>
       <p className='text-gray-700 mb-1'>Độ phân giải: {resolution}</p>
       <p className='text-gray-700'>Thiết bị hỗ trợ: {devices}</p>
