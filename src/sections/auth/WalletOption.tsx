@@ -52,7 +52,12 @@ export default function WalletOption() {
   // Xử lý submit form
   const onSubmit = (data: MomoFormValues) => {
     setTransition(async () => {
-      const {payload, status} = await paymentRequest.payment()
+      const {payload, status} = await paymentRequest.payment({
+        service: option?.name,
+        price: option?.price,
+        phone: data.phoneNumber,
+      })
+
       if (status === 200) {
         if (payload?.data?.resultCode === 0) {
           setOrderIdToLocalStorage(payload?.data?.orderId)
@@ -75,6 +80,7 @@ export default function WalletOption() {
       return router.push('/signup/planform')
     }
   }, [router])
+  console.log(option)
 
   return (
     <div className='max-w-[30rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] z-30 bg-white'>
@@ -105,6 +111,7 @@ export default function WalletOption() {
                     <FormControl>
                       <Input
                         {...field}
+                        type='number'
                         placeholder='Số điện thoại di động'
                         className='flex-1 px-3 py-2 border-none ring-0 focus-visible:ring-0 focus-visible:ring-transparent'
                       />
@@ -118,7 +125,10 @@ export default function WalletOption() {
             <div className='flex justify-between items-center bg-gray-100 p-4 rounded-lg mb-4'>
               <div>
                 <p className='text-lg font-medium'>
-                  {option?.price ? option?.price : 'loading...'}/tháng
+                  {option?.price
+                    ? `${option?.price.toLocaleString('vi-VN')} đ`
+                    : 'loading...'}
+                  /tháng
                 </p>
                 <p className='text-sm text-gray-600'>
                   {option?.title ? option?.title : 'loading...'}

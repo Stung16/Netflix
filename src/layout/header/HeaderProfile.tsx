@@ -13,34 +13,20 @@ import IcAcount from '@/components/icons/IcAcount'
 import style from './style.module.css'
 import IcBackHistory from '@/components/icons/IcBackHistory'
 import IcLogo from '@/components/icons/IcLogo'
+import useStore from '@/app/(store)/profile'
+
 // import debounce from 'lodash/debounce'
 export default function HeaderProfile({profile}: any) {
   const router = useRouter()
-  const pathname = usePathname()
-  const [active, setActive] = useState<boolean>(false)
-
+  const {setProfile} = useStore((state) => state)
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY <= 0) {
-        return setActive(false)
-      }
-      setActive(true)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    // Cleanup listener khi component bị unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
+    setProfile(profile)
+  }, [router, profile, setProfile])
   return (
     <header
-      className={cn(
-        'flex items-center bg-black fixed left-0 right-0 h-auto min-h-[4.25rem] z-[100] top-0 transition-["background-color"] duration-400 bg-transparent text-sm  px-[20.75rem] [&.active]:shadow-xl border-b',
-        active && 'active',
-      )}
+      className={
+        'flex items-center bg-white fixed left-0 right-0 h-auto min-h-[4.25rem] z-[100] top-0 transition-["background-color"] duration-400 bg-transparent text-sm  px-[20.75rem] [&.active]:shadow-xl border-b'
+      }
     >
       {/* logo */}
       <Link href='/'>

@@ -1,19 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {NextResponse, userAgent} from 'next/server'
 import type {NextRequest} from 'next/server'
+
 const defaultLocale = 'en'
 const locales = ['en', 'vi']
 const protectedPaths = [
   '/signup/mobileWalletOption',
   '/signup/paymentPicker',
   '/signup/planform',
-  '/signup/regform',
+  // '/signup/regform',
   '/address-book',
   '/watch',
   '/genre',
   '/my-list',
   '/search',
   '/account',
+  '/logout',
+  // '/refresh-token',
 ]
 
 export function middleware(request: NextRequest) {
@@ -23,41 +26,38 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken')?.value
   const refreshToken = request.cookies.get('refreshToken')?.value
 
-  // Nếu chưa đăng nhập về login
-  if (
-    !pathname.startsWith('/login') &&
-    !refreshToken &&
-    !pathname.startsWith('/signup')
-  ) {
+  // Redirect to login if accessing protected paths without a refresh token
+  const isProtectedPath = protectedPaths.some((path) =>
+    pathname.startsWith(path),
+  )
+  if (isProtectedPath && !refreshToken) {
     const url = new URL('/login', request.url)
-    url.searchParams.set('clearStorage', 'true' as string)
+    url.searchParams.set('clearStorage', 'true')
     return NextResponse.redirect(url)
   }
-  // neeus dawng nhap r k cho vao logn
+
+  // Redirect to home if trying to access login while already logged in
   if (pathname.startsWith('/login') && refreshToken) {
     return NextResponse.redirect(new URL('/', request.url))
   }
-  // ddawng nhap r nhuwn token heets hanj
-  if (
-    !accessToken &&
-    refreshToken &&
-    !pathname.startsWith('/login') &&
-    !pathname.startsWith('/logout') &&
-    !pathname.startsWith('/refresh-token')
-  ) {
+
+  // Redirect to refresh-token if access token is missing but refresh token is present
+  if (isProtectedPath && !accessToken && refreshToken) {
     const url = new URL('/refresh-token', request.url)
-    url.searchParams.set('refreshToken', refreshToken as string)
-    url.searchParams.set('redirect', pathname as string)
+    url.searchParams.set('refreshToken', refreshToken)
+    url.searchParams.set('redirect', pathname)
     return NextResponse.redirect(url)
   }
-  // đã xác thực
+
+  // Redirect to home if search query `q` is missing
   if (pathname === '/search') {
     const queryParam = nextUrl.searchParams.get('q')
     if (!queryParam) {
-      // Redirect về trang chủ nếu `q` không có hoặc rỗng
       return NextResponse.redirect(new URL('/', request.url))
     }
   }
+
+  // Add viewport info based on user agent
   const {device} = userAgent(request)
   const viewport =
     device.type === 'mobile'
@@ -68,6 +68,7 @@ export function middleware(request: NextRequest) {
   nextUrl.searchParams.set('viewport', viewport)
   nextUrl.searchParams.set('pathname', pathname)
 
+  // Remove default locale prefix if present
   if (
     pathname.startsWith(`/${defaultLocale}/`) ||
     pathname === `/${defaultLocale}`
@@ -83,22 +84,19 @@ export function middleware(request: NextRequest) {
     )
   }
 
+  // Rewrite missing locale in the path
   const pathnameIsMissingLocale = locales.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   )
 
   if (pathnameIsMissingLocale) {
-    if (nextUrl.searchParams) {
-      const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url)
-      newUrl.search = nextUrl.searchParams.toString()
-      return NextResponse.rewrite(newUrl)
-    }
-
-    return NextResponse.rewrite(
-      new URL(`/${defaultLocale}${pathname}`, request.url),
-    )
+    const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url)
+    newUrl.search = nextUrl.searchParams.toString()
+    return NextResponse.rewrite(newUrl)
   }
+
+  // Final rewrite with updated search parameters
   const newUrl = new URL(`${pathname}`, request.url)
   newUrl.search = nextUrl.searchParams.toString()
   return NextResponse.rewrite(newUrl)
