@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // todo
-import {Dialog, DialogContent, DialogTitle} from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog'
 import {Cross2Icon} from '@radix-ui/react-icons'
-import {Fragment, useEffect, useState} from 'react'
+import {Fragment, useEffect, useState, useRef, memo} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
 import {getYear} from '@/lib/utils'
 import IcPlay from '@/components/icons/IcPlay'
 import ListEpisode from '@/components/movie/ListEpisode/ListEpisode'
 import Link from 'next/link'
 import Image from 'next/image'
+import Control_type from '@/components/banner/Control_type'
+import controlStore from '@/app/(store)/control'
 
-export default function PopUpInfoMovie({
+const PopUpInfoMovie = ({
   open,
   setOpen,
   dataBanner,
@@ -18,27 +25,86 @@ export default function PopUpInfoMovie({
   open: boolean
   setOpen: (state: boolean) => void
   dataBanner: any
-}) {
-  const trackId =
-    dataBanner?.seasons
-      .find((item: any) => item.season_number === '1')
-      ?.episodes.find((episode: any) => episode.episode_number === 1)?.id ||
-    '123'
-
+}) => {
+  const {videoBanner} = controlStore()
   const [isVideoEnded, setIsVideoEnded] = useState<boolean>(false)
+  const [isMuted, setIsMuted] = useState<boolean>(true) // Mặc định tắt tiếng
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const trackId = dataBanner?.seasons
+    .find((item: any) => item.season_number === '1')
+    ?.episodes.find((episode: any) => episode.episode_number === 1)?.id
+
+  // Lưu vị trí phát video
+  const saveVideoPosition = () => {
+    if (videoRef.current) {
+      localStorage.setItem(
+        'videoPosition',
+        videoRef.current.currentTime.toString(),
+      )
+    }
+  }
   const handleVideoEnd = () => {
     setIsVideoEnded(true)
   }
   useEffect(() => {
-    setIsVideoEnded(false)
-  }, [open])
+    const video = videoRef.current
+    // Khôi phục vị trí video
+    if (video) {
+      const savedPosition = localStorage.getItem('videoPosition')
+      if (savedPosition) {
+        video.currentTime = parseFloat(savedPosition)
+      }
+      video.muted = true // Đảm bảo tắt tiếng mặc định
+      video.play().catch(() => {
+        console.warn('User interaction required to autoplay video.')
+      })
+    }
+
+    // Dừng video khi tab không hiển thị
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video?.pause()
+        saveVideoPosition() // Lưu vị trí khi tab bị ẩn
+      } else {
+        video?.play().catch(() => {
+          console.warn('User interaction required to autoplay video.')
+        })
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    // Cleanup khi component bị unmount
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      saveVideoPosition()
+      localStorage.removeItem('videoPosition')
+      video?.pause()
+    }
+  }, [])
+  // useEffect(() => {
+  //   if (videoBanner) {
+  //     if (open) {
+  //       videoBanner?.pause()
+  //     } else {
+  //       videoBanner?.play()
+  //     }
+  //     console.log(videoBanner?.paused)
+  //   }
+  // }, [open, videoBanner])
 
   return (
     <Dialog
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={(e: boolean) => {
+        if (!e) {
+          videoBanner?.play()
+        }
+        setOpen(e)
+      }}
     >
       <DialogContent className='font-netflix outline-none ring-0 max-w-[70rem] sm:w-[55rem] bg-[#181818] p-0 m-0 border-none text-white overflow-y-scroll max-h-[40rem] scrollCustom'>
+        <DialogDescription></DialogDescription>
         {/* videoTrailer */}
         {!dataBanner ? (
           <Skeleton className='w-full h-[30rem] bg-[#666]' />
@@ -54,22 +120,30 @@ export default function PopUpInfoMovie({
               />
             ) : (
               <Fragment>
-                <Image
-                  width={1000}
-                  height={500}
-                  src={dataBanner?.image_url}
-                  alt=''
-                  className='size-full object-cover absolute z-10'
-                />
                 <video
+                  ref={videoRef}
                   src={dataBanner?.trailer}
                   autoPlay
-                  muted
+                  muted={true} // Luôn tắt tiếng khi phát tự động
+                  onCanPlay={() => {
+                    videoRef.current?.play().catch(() => {
+                      console.warn(
+                        'User interaction required to autoplay video.',
+                      )
+                    })
+                  }}
                   onEnded={handleVideoEnd}
                   poster={dataBanner?.image_url}
                   playsInline
                   webkit-playsinline={true.toString()}
-                  className='object-cover size-full absolute z-20'
+                  className='object-cover size-full'
+                />
+                <Control_type
+                  isMuted={isMuted}
+                  setIsMuted={setIsMuted}
+                  videoRef={videoRef}
+                  age_rating={dataBanner?.age_rating}
+                  cls='top-[25rem]'
                 />
               </Fragment>
             )}
@@ -157,3 +231,4 @@ export default function PopUpInfoMovie({
     </Dialog>
   )
 }
+export default memo(PopUpInfoMovie)

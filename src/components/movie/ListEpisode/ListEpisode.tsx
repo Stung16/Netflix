@@ -13,8 +13,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {useState} from 'react'
 export default function ListEpisode({dataMovie}: any) {
-  console.log(dataMovie)
-
   const [seasion, setSeasion] = useState('1')
   return (
     <div>

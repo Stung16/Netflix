@@ -12,15 +12,19 @@ import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
 import {cn} from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import controlStore from '@/app/(store)/control'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
+import Control_type from '@/components/banner/Control_type'
 
 export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
+  const {videoBanner} = controlStore()
+  const [isMuted, setIsMuted] = useState<boolean>(true)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isPending, setTransition] = useTransition()
   const trackId = inforMovie?.seasons
     .find((item: any) => item.season_number === '1')
     ?.episodes.find((episode: any) => episode.episode_number === 1)?.id
   const [open, setOpent] = useState<boolean>(false)
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
   const myRef = useRef(null)
   const hoverTimeout = useRef<NodeJS.Timeout | null>(null)
   const [active, setActive] = useState<boolean>(false)
@@ -38,12 +42,6 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
       }
     }
   }, [myRef, active])
-  useEffect(() => {
-    if (open) {
-      setActive(false)
-    }
-  }, [open])
-  // console.log(inforMovie);
   const handleAddFavorite = (id: string | number) => {
     setTransition(async () => {
       const res = await movieApiRequest.addFavorite(id)
@@ -60,7 +58,6 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
       }
     })
   }
-
   return (
     <Fragment>
       <div
@@ -69,6 +66,7 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
         onMouseEnter={() => {
           hoverTimeout.current = setTimeout(() => {
             setActive(true)
+            videoBanner?.pause()
           }, 500)
         }}
         onMouseLeave={() => {
@@ -77,6 +75,8 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
             hoverTimeout.current = null // Đặt lại ref về null để tránh rò rỉ bộ nhớ
           }
           setActive(false)
+          if (videoBanner?.ended || open) return
+          videoBanner?.play()
         }}
       >
         <Image
@@ -104,15 +104,26 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
                 alt=''
               />
               {active && (
-                <video
-                  src={inforMovie?.trailer}
-                  autoPlay
-                  muted
-                  poster={inforMovie?.image_url}
-                  className='object-cover h-[10.313rem] relative z-50'
-                  playsInline
-                  webkit-playsinline={true.toString()}
-                />
+                <Fragment>
+                  <video
+                    src={inforMovie?.trailer}
+                    autoPlay
+                    muted
+                    onPlay={() => videoBanner?.pause()}
+                    onPause={() => videoBanner?.pause()}
+                    ref={videoRef}
+                    poster={inforMovie?.image_url}
+                    className='object-cover h-[10.313rem] relative z-50'
+                    playsInline
+                    webkit-playsinline={true.toString()}
+                  />
+                  <Control_type
+                    isMuted={isMuted}
+                    setIsMuted={setIsMuted}
+                    videoRef={videoRef}
+                    cls='top-[5rem] z-[10000000]'
+                  />
+                </Fragment>
               )}
             </div>
             <div className='p-4  flex-col flex'>
@@ -175,7 +186,11 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
                     'bg-[rgba(42,42,42,.6)] border-[hsla(0,0%,100%,.5)] border-[0.1rem] rounded-full p-[0.5rem] flex items-center justify-center',
                     'hover:border-white border-[0.1rem]',
                   )}
-                  onClick={() => setOpent(true)}
+                  onClick={() => {
+                    setOpent(true)
+                    setActive(false)
+                    videoBanner?.pause()
+                  }}
                 >
                   <IcNextSlide className='size-4 rotate-[90deg]' />
                 </span>
