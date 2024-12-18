@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
 import Slider from 'react-slick'
 import style from './style.module.css'
 import IcNextSlide from '@/components/icons/IcNextSlide'
@@ -7,6 +8,7 @@ import {Fragment, useRef, useState} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
 import Link from 'next/link'
 import CardMovie from '@/components/movie/card/CardMovie'
+// import LoadingCard from '@/components/Loading/LoadingCard'
 interface SliderSettings {
   infinite: boolean
   speed: number

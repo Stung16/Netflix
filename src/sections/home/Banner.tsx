@@ -4,11 +4,14 @@ import Control_type from '@/components/banner/Control_type'
 import InfoMovie from '@/components/banner/InfoMovie'
 import {useEffect, useRef, useState} from 'react'
 import Image from 'next/image'
+import controlStore from '@/app/(store)/control'
 
 export default function Banner({dataBanner}: any) {
-  const [isVideoEnded, setIsVideoEnded] = useState<boolean>(false)
   const [isMuted, setIsMuted] = useState<boolean>(true) // Mặc định tắt tiếng
   const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  // Zustand store
+  const {setVideoBanner, setVideoEnd} = controlStore()
 
   // Lưu vị trí phát video
   const saveVideoPosition = () => {
@@ -20,16 +23,11 @@ export default function Banner({dataBanner}: any) {
     }
   }
 
-  // Xử lý khi video kết thúc
-  const handleVideoEnd = () => {
-    setIsVideoEnded(true)
-  }
-
   useEffect(() => {
     const video = videoRef.current
-
     // Khôi phục vị trí video
     if (video) {
+      setVideoBanner(video)
       const savedPosition = localStorage.getItem('videoPosition')
       if (savedPosition) {
         video.currentTime = parseFloat(savedPosition)
@@ -59,38 +57,36 @@ export default function Banner({dataBanner}: any) {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       saveVideoPosition()
       video?.pause()
+      localStorage.removeItem('videoPosition')
     }
-  }, [])
+  }, [setVideoBanner])
 
   return (
     <section className='overflow-hidden h-[56.25rem] relative'>
-      {isVideoEnded ? (
-        <Image
-          width={1500}
-          height={800}
-          src={dataBanner?.image_url}
-          alt=''
-          priority
-          className='size-full object-cover'
-        />
-      ) : (
-        <video
-          ref={videoRef}
-          src={dataBanner?.trailer}
-          autoPlay
-          muted={true} // Luôn tắt tiếng khi phát tự động
-          onCanPlay={() => {
-            videoRef.current?.play().catch(() => {
-              console.warn('User interaction required to autoplay video.')
-            })
-          }}
-          onEnded={handleVideoEnd}
-          poster={dataBanner?.image_url}
-          playsInline
-          webkit-playsinline={true.toString()}
-          className='object-cover size-full'
-        />
-      )}
+      <Image
+        width={1500}
+        height={800}
+        src={dataBanner?.image_url}
+        alt=''
+        priority
+        className='size-full object-cover absolute'
+      />
+      <video
+        ref={videoRef}
+        src={dataBanner?.trailer}
+        autoPlay
+        muted={isMuted} // Áp dụng trạng thái mute
+        onCanPlay={() => {
+          videoRef.current?.play().catch(() => {
+            console.warn('User interaction required to autoplay video.')
+          })
+        }}
+        onEnded={() => setVideoEnd(true)}
+        poster={dataBanner?.image_url}
+        playsInline
+        webkit-playsinline={true.toString()}
+        className='object-cover size-full absolute'
+      />
       {/* informationMovieBanner */}
       <InfoMovie dataBanner={dataBanner} />
       {/* control&type */}
@@ -98,8 +94,6 @@ export default function Banner({dataBanner}: any) {
         isMuted={isMuted}
         setIsMuted={setIsMuted}
         videoRef={videoRef}
-        isVideoEnded={isVideoEnded}
-        setIsVideoEnded={setIsVideoEnded}
         age_rating={dataBanner?.age_rating}
       />
     </section>

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import movieApiRequest from '@/apiRequest/movie'
-import Banner from '@/sections/home/Banner'
+import dynamic from 'next/dynamic'
 import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
 import {redirect} from 'next/navigation'
 import React, {Fragment} from 'react'
+const Banner = dynamic(() => import('@/sections/home/Banner'))
 
 export default async function HomePage({
   params,

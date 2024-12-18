@@ -1,54 +1,67 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {memo, useCallback} from 'react'
 import IcMutate from '@/components/icons/IcMutate'
 import IcRePlay from '@/components/icons/IcRePlay'
 import IcVolume from '@/components/icons/IcVolume'
-export default function Control_type({
-  isVideoEnded,
-  setIsVideoEnded,
+import {cn} from '@/lib/utils'
+import controlStore from '@/app/(store)/control'
+
+const Control_type = memo(function Control_type({
   age_rating,
   setIsMuted,
   videoRef,
   isMuted,
+  cls,
 }: {
-  isVideoEnded: boolean
-  setIsVideoEnded: (state: boolean) => void
   age_rating?: string
-  setIsMuted: any
-  videoRef: any
+  setIsMuted: (state: boolean) => void
+  videoRef: React.RefObject<HTMLVideoElement>
   isMuted: boolean
+  cls?: string
 }) {
   // Bật tiếng
-  const handleUnmute = () => {
+  const {videoBanner, isVideoEnd, setVideoEnd} = controlStore()
+
+  const handleUnmute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = false
       setIsMuted(false)
     }
-  }
+  }, [videoRef, setIsMuted])
 
   // Tắt tiếng
-  const handleMute = () => {
+  const handleMute = useCallback(() => {
     if (videoRef.current) {
       videoRef.current.muted = true
       setIsMuted(true)
     }
+  }, [videoRef, setIsMuted])
+
+  const handleReplay = () => {
+    if (isVideoEnd) {
+      if (videoBanner) {
+        setVideoEnd(false)
+        videoBanner?.play()
+        videoBanner.currentTime = 0 // Đặt video về thời điểm bắt đầu
+      }
+    }
+    return
   }
 
   return (
-    <div className='flex items-center absolute justify-end z-10 right-0 top-[34rem]'>
+    <div
+      className={cn(
+        'flex items-center absolute justify-end z-10 right-0 top-[34rem]',
+        cls,
+      )}
+    >
       <div>
         <div
           className='cursor-pointer flex justify-center items-center mr-[1.1rem] size-[2.4rem] bg-transparent border-[0.1rem] border-solid border-white rounded-full select-none'
-          onClick={() => {
-            if (isVideoEnded) {
-              return setIsVideoEnded(false)
-            }
-            // if (videoRef.current) {
-            //   videoRef.current.muted = !videoRef.current.muted
-            // }
-          }}
+          onClick={handleReplay}
         >
-          {isVideoEnded ? (
+          {isVideoEnd ? (
             <IcRePlay className='size-[1.4rem] text-white' />
           ) : !isMuted ? (
             <div onClick={handleMute}>
@@ -68,4 +81,6 @@ export default function Control_type({
       )}
     </div>
   )
-}
+})
+
+export default Control_type
