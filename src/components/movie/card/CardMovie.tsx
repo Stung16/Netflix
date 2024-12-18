@@ -84,8 +84,7 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
           width={800}
           height={400}
           src={inforMovie?.thumbnail_url}
-          alt=''
-          priority
+          alt='Image'
           onClick={() => setOpent(true)}
         />
         <div
@@ -101,7 +100,7 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
                 src={inforMovie?.thumbnail_url}
                 width={800}
                 height={400}
-                alt=''
+                alt='image'
               />
               {active && (
                 <Fragment>

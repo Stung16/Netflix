@@ -56,7 +56,7 @@ export default function PlayListMovie({
         <div className='flex items-end mb-2'>
           {!isLoading ? (
             <Link
-              href={''}
+              href={'/'}
               className={`${style.titlePlayList} text-[#e5e5e5] hover:text-white ml-[3.75rem] mr-4 text-2xl w-fit block`}
             >
               {dataPlaylist?.title}
