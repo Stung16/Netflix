@@ -76,7 +76,10 @@ export const checkAuthRefreshToken = async (param?: {
 }) => {
   const accessToken = getAccessFromLocalStorage()
   const refreshToken = getRefreshFromLocalStorage()
-  if (!accessToken || !refreshToken) return
+  if (!accessToken || !refreshToken) {
+    await authApiRequest.logout()
+    return param?.onError && param.onError()
+  }
   const decodeAccesstoken = jwt.decode(accessToken) as {
     exp: number
     iat: number
