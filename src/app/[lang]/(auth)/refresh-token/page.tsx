@@ -1,5 +1,4 @@
 'use client'
-import LoadingNetflix from '@/components/Loading/LoadingNetflix'
 import {getRefreshFromLocalStorage, checkAuthRefreshToken} from '@/lib/utils'
 import {useRouter, useSearchParams} from 'next/navigation'
 import React, {useEffect} from 'react'
@@ -19,5 +18,5 @@ export default function RefreshTokenPage() {
       })
     }
   }, [router, refreshForomUrl, redirectPath])
-  return <LoadingNetflix />
+  return <></>
 }

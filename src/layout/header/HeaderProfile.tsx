@@ -3,7 +3,7 @@
 'use client'
 import {usePathname, useRouter} from 'next/navigation'
 import {cn} from '@/lib/utils'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useTransition} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IcManager from '@/components/icons/IcManager'
@@ -14,14 +14,31 @@ import style from './style.module.css'
 import IcBackHistory from '@/components/icons/IcBackHistory'
 import IcLogo from '@/components/icons/IcLogo'
 import useStore from '@/app/(store)/profile'
+import authApiRequest from '@/apiRequest/auth'
+import {toast} from 'sonner'
 
 // import debounce from 'lodash/debounce'
 export default function HeaderProfile({profile}: any) {
   const router = useRouter()
+  const [isPending, setTransition] = useTransition()
+
   const {setProfile} = useStore((state) => state)
   useEffect(() => {
     setProfile(profile)
   }, [router, profile, setProfile])
+  function handleLogout() {
+    setTransition(async () => {
+      try {
+        await authApiRequest.logout()
+        toast.success(`đăng xuất thành công`)
+      } catch (error: any) {
+        console.log(error)
+        toast.success(`đăng xuất thành công`)
+      } finally {
+        router.push('/login')
+      }
+    })
+  }
   return (
     <header
       className={
@@ -99,9 +116,15 @@ export default function HeaderProfile({profile}: any) {
                   <p>Trung tâm trợ giúp</p>
                 </li>
                 <li
-                  className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t`}
+                  onClick={handleLogout}
+                  className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t ${isPending && 'pointer-events-none'}`}
                 >
                   <p>Đăng xuất khỏi Netflix</p>
+                  {isPending && (
+                    <div
+                      className={`border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid animate-spin`}
+                    />
+                  )}
                 </li>
               </ul>
             </div>

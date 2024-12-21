@@ -35,6 +35,15 @@ export function middleware(request: NextRequest) {
     url.searchParams.set('clearStorage', 'true')
     return NextResponse.redirect(url)
   }
+  if (
+    (isProtectedPath && !accessToken && refreshToken) ||
+    (pathname === '/' && !accessToken && refreshToken)
+  ) {
+    const url = new URL('/refresh-token', request.url)
+    url.searchParams.set('refreshToken', refreshToken)
+    url.searchParams.set('redirect', pathname)
+    return NextResponse.redirect(url)
+  }
 
   // Redirect to home if trying to access login while already logged in
   if (pathname.startsWith('/login') && refreshToken) {
@@ -42,12 +51,6 @@ export function middleware(request: NextRequest) {
   }
 
   // Redirect to refresh-token if access token is missing but refresh token is present
-  if (isProtectedPath && !accessToken && refreshToken) {
-    const url = new URL('/refresh-token', request.url)
-    url.searchParams.set('refreshToken', refreshToken)
-    url.searchParams.set('redirect', pathname)
-    return NextResponse.redirect(url)
-  }
 
   // Redirect to home if search query `q` is missing
   if (pathname === '/search') {

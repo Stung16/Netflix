@@ -13,22 +13,22 @@ export default async function DefaultLayout({
 }) {
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
-  try {
-    const [resAccount] = await Promise.all([acountApiRequest.Sme(accesstoken)])
-    const dataAcount = resAccount.payload?.data
-    if (!dataAcount?.subscriptions_id) {
-      return redirect('/signup/planform')
-    }
-    return (
-      <div className='bg-[#141414]'>
-        <Header profile={dataAcount} />
-        <main className='relative h-screen'>{children}</main>
-      </div>
-    )
-  } catch (error: any) {
-    console.log(error)
-    if (error.digest?.includes('NEXT_REDIRECT')) {
-      throw error
-    }
+  // try {
+  const [resAccount] = await Promise.all([acountApiRequest.Sme(accesstoken)])
+  const dataAcount = resAccount.payload?.data
+  if (!dataAcount?.subscriptions_id) {
+    redirect('/signup/planform')
   }
+  return (
+    <div className='bg-[#141414]'>
+      <Header profile={dataAcount} />
+      <main className='relative h-screen'>{children}</main>
+    </div>
+  )
+  // } catch (error: any) {
+  //   console.log(error)
+  //   if (error.digest?.includes('NEXT_REDIRECT')) {
+  //     throw error
+  //   }
+  // }
 }

@@ -4,7 +4,7 @@ import IcNotification from '@/components/icons/IcNotification'
 import IcSearch from '@/components/icons/IcSearch'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {cn} from '@/lib/utils'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useTransition} from 'react'
 import {Input} from '@/components/ui/input'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,12 +14,15 @@ import IcInforAcount from '@/components/icons/IcInforAcount'
 import IcAcount from '@/components/icons/IcAcount'
 import style from './style.module.css'
 import debounce from 'lodash/debounce'
+import authApiRequest from '@/apiRequest/auth'
+import {toast} from 'sonner'
 export default function Header({profile}: any) {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
   const router = useRouter()
   const pathname = usePathname()
   const [active, setActive] = useState<boolean>(false)
+  const [isPending, setTransition] = useTransition()
   const [search, setSearch] = useState<boolean>(false)
   const [searchValue, setSearchValue] = useState('')
   const handleSearch = debounce((value: string) => {
@@ -56,6 +59,20 @@ export default function Header({profile}: any) {
       setSearchValue('')
     }
   }, [q])
+
+  function handleLogout() {
+    setTransition(async () => {
+      try {
+        await authApiRequest.logout()
+        toast.success(`đăng xuất thành công`)
+      } catch (error: any) {
+        console.log(error)
+        toast.success(`đăng xuất thành công`)
+      } finally {
+        router.push('/login')
+      }
+    })
+  }
   return (
     <header
       className={cn(
@@ -242,9 +259,15 @@ export default function Header({profile}: any) {
                   <p>Trung tâm trợ giúp</p>
                 </li>
                 <li
-                  className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t`}
+                  onClick={handleLogout}
+                  className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t ${isPending && 'pointer-events-none'}`}
                 >
                   <p>Đăng xuất khỏi Netflix</p>
+                  {isPending && (
+                    <div
+                      className={`border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid animate-spin`}
+                    />
+                  )}
                 </li>
               </ul>
             </div>
