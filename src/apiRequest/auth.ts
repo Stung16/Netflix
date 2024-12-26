@@ -34,5 +34,6 @@ const authApiRequest = {
     return result
   },
   checkMail: (body: any) => http.post<any>('/check-mail', body),
+  UpdateActive: (body: any) => http.post<any>('/update-active', body),
 }
 export default authApiRequest

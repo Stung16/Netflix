@@ -1,8 +1,10 @@
 import IcNextSlide from '@/components/icons/IcNextSlide'
+import Link from 'next/link'
 import React from 'react'
 interface PrivacyAccess {
   heading: string
   label: string
+  link: string
   description: string
 }
 export default function page() {
@@ -10,11 +12,13 @@ export default function page() {
     {
       heading: 'Truy cập tài khoản',
       label: 'Truy cập và thiết bị',
+      link: '/account/manageaccountaccess',
       description: 'Quản lý thiết bị đã đăng nhập',
     },
     {
       heading: 'Tải xuống thiết bị di động',
       label: 'Chuyển hồ sơ',
+      link: '',
       description: 'Đang dùng 0/2 thiết bị tải xuống',
     },
   ]
@@ -30,7 +34,10 @@ export default function page() {
             className='cursor-pointer'
           >
             <p className='text-gray-600'>{item.heading}</p>
-            <div className='flex hover:bg-gray-100 px-4 py-2 items-center justify-between border rounded-lg'>
+            <Link
+              href={item.link}
+              className='flex hover:bg-gray-100 px-4 py-2 items-center justify-between border rounded-lg'
+            >
               <div>
                 <h2 className='font-medium'>{item.label}</h2>
                 <p className='text-gray-600 text-sm'>{item.description}</p>
@@ -38,7 +45,7 @@ export default function page() {
               <div className='flex items-center'>
                 <IcNextSlide className='size-4' />
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

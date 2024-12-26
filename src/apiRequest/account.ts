@@ -9,6 +9,12 @@ const acountApiRequest = {
         Authorization: `Bearer ${accessToken}`,
       },
     }),
+  Sdevice: (accessToken: string | undefined) =>
+    http.get<any>('/devices', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }),
   SChangePass: (body: {
     confirm_password: string
     new_password: string
