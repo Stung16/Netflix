@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import http, {EntityError} from '@/lib/http'
@@ -8,6 +9,7 @@ import {toast} from 'sonner'
 import {twMerge} from 'tailwind-merge'
 import authApiRequest from '@/apiRequest/auth'
 import Cookies from 'js-cookie'
+import {UAParser} from 'ua-parser-js'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -98,6 +100,9 @@ export const checkAuthRefreshToken = async (param?: {
     (decodeAccesstoken.exp - decodeAccesstoken.iat) / 3
   ) {
     try {
+      await authApiRequest.UpdateActive({
+        device: getDeviceInfo(),
+      })
       const res = await authApiRequest.refreshToken()
       setAccessFromToLocalStorage(res.payload.data.accessToken)
       setRefreshFromToLocalStorage(res.payload.data.refreshToken)
@@ -175,3 +180,177 @@ export function formatPhoneNumber(phoneNumber: string = '000000000') {
 
   return maskedPhoneNumber
 }
+export async function getIPAddress() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json')
+    const data = await response.json()
+    return data.ip
+  } catch (error) {
+    console.error('Lỗi khi lấy địa chỉ IP:', error)
+    return null
+  }
+}
+export function getDeviceInfo() {
+  const ua = navigator.userAgent
+  const parser = new UAParser(ua)
+  const {browser, os} = parser.getResult()
+
+  let deviceName = ''
+  let deviceType = ''
+
+  // Detect device type
+  if (ua.toLowerCase().includes('mobi')) {
+    // Mobile device
+    deviceType = 'mobile'
+
+    // Detect iOS or Android
+    if (ua.includes('iPhone') || ua.includes('iPad')) {
+      // iOS device
+      deviceName = getIosDeviceName(ua)
+    } else {
+      // Android device
+      deviceName = getAndroidDeviceName(ua)
+    }
+  } else {
+    // Desktop device
+    deviceType = 'desktop'
+
+    // Detect desktop device more accurately
+    if (os.name === 'Windows') {
+      // Windows desktop
+      deviceName = getWindowsDesktopName(browser.name ?? 'Unknown', ua)
+    } else if (os.name === 'Mac OS') {
+      // Mac desktop
+      deviceName = getMacDesktopName(browser.name ?? 'Unknown', ua)
+    } else {
+      // Other desktop
+      deviceName = getDesktopDeviceName(
+        os.name ?? 'Unknown',
+        navigator.platform,
+      )
+    }
+  }
+
+  return {
+    browser: {
+      name: browser.name,
+      version: browser.version,
+      engine: parser.getEngine().name,
+      engineVersion: parser.getEngine().version,
+    },
+    os: {
+      name: os.name,
+      version: os.version,
+    },
+    device: {
+      type: deviceType,
+      name: deviceName,
+    },
+  }
+}
+export function formatDateTime(isoDateTimeString: string) {
+  const date = new Date(isoDateTimeString)
+
+  // Lấy giờ và phút
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+
+  // Lấy ngày, tháng, năm
+  const day = date.getDate()
+  const month = date.getMonth() + 1 // Tháng trong JavaScript bắt đầu từ 0
+  const year = date.getFullYear()
+
+  // Chuyển đổi sang múi giờ GMT+7
+  const offsetHours = 7
+  const offsetMinutes = 0
+  const offsetMilliseconds = (offsetHours * 60 + offsetMinutes) * 60 * 1000
+  date.setTime(date.getTime() + offsetMilliseconds)
+
+  // Định dạng kết quả
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} GMT+7 ${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`
+}
+
+// Helper functions
+const getAndroidDeviceName = (ua: string): string => {
+  const androidDeviceNameMatch = ua
+    .slice(ua.indexOf('Android'))
+    .match(/; ([^;]+)\)/)
+  return androidDeviceNameMatch
+    ? androidDeviceNameMatch[1].trim().split(' ')[0]
+    : 'Android'
+}
+
+const getIosDeviceName = (ua: string) => {
+  const screenResolution = `${window.screen.width}x${window.screen.height}`
+  return iosDeviceMapping.get(screenResolution) || 'iPhone'
+}
+
+const getDesktopDeviceName = (osName: string, platform: string): string => {
+  return (
+    desktopDeviceMapping.get(osName) ||
+    desktopDeviceMapping.get(platform) ||
+    'Unknown'
+  )
+}
+
+const getWindowsDesktopName = (browserName: string, ua: string): string => {
+  const windowsVersionMap: {[key: string]: string} = {
+    '10.0': 'Windows 10',
+    '6.3': 'Windows 8.1',
+    '6.2': 'Windows 8',
+    '6.1': 'Windows 7',
+    '6.0': 'Windows Vista',
+    '5.1': 'Windows XP',
+    '5.0': 'Windows 2000',
+  }
+
+  const windowsVersion = ua.match(/Windows NT (\d+\.\d+)/)
+  return windowsVersion
+    ? windowsVersionMap[windowsVersion[1]] || 'Windows'
+    : 'Windows'
+}
+
+const getMacDesktopName = (browserName: string, ua: string): string => {
+  const macOSVersionMap: {[key: string]: string} = {
+    '10.15': 'macOS Catalina',
+    '10.14': 'macOS Mojave',
+    '10.13': 'macOS High Sierra',
+    '10.12': 'macOS Sierra',
+    '10.11': 'OS X El Capitan',
+    '10.10': 'OS X Yosemite',
+    '10.9': 'OS X Mavericks',
+    '10.8': 'OS X Mountain Lion',
+    '10.7': 'OS X Lion',
+    '10.6': 'OS X Snow Leopard',
+    '10.5': 'OS X Leopard',
+    '10.4': 'OS X Tiger',
+    '10.3': 'OS X Panther',
+    '10.2': 'OS X Jaguar',
+    '10.1': 'OS X Puma',
+    '10.0': 'OS X Cheetah',
+  }
+
+  const macOSVersion = ua.match(/Mac OS X (\d+\.\d+)/)
+  return macOSVersion ? macOSVersionMap[macOSVersion[1]] || 'macOS' : 'macOS'
+}
+
+// Device mapping
+const iosDeviceMapping = new Map([
+  ['320x480', 'iPhone 4S, 4, 3GS, 3G, 1st gen'],
+  ['320x568', 'iPhone 5, SE 1st Gen,5C, 5S'],
+  ['375x667', 'iPhone SE 2nd Gen, 6, 6S, 7, 8'],
+  ['375x812', 'iPhone X, XS, 11 Pro, 12 Mini, 13 Mini'],
+  ['390x844', 'iPhone 13, 13 Pro, 14, 14 Plus'],
+  [
+    '414x896',
+    'iPhone 11, 11 Pro Max, 12, 12 Pro, 13 Pro Max, 14 Pro, 14 Pro Max',
+  ],
+])
+
+const desktopDeviceMapping = new Map([
+  ['Windows', 'Windows'],
+  ['Linux', 'Linux'],
+  ['Macintosh', 'macOS'],
+  ['iPhone', 'iPhone'],
+  ['iPad', 'iPad'],
+])

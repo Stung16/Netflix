@@ -21,7 +21,11 @@ import Link from 'next/link'
 import authApiRequest from '@/apiRequest/auth'
 import {useRouter, useSearchParams} from 'next/navigation'
 import {toast} from 'sonner'
-import {getCookieLocal, removeTokenFromLocalStorage} from '@/lib/utils'
+import {
+  getCookieLocal,
+  getDeviceInfo,
+  removeTokenFromLocalStorage,
+} from '@/lib/utils'
 
 interface propsLogin {
   email: string
@@ -49,6 +53,9 @@ export default function FormLogin({lang}: any) {
             return router.push('/signup/planform')
           }
           if (payload?.data?.resultCode === 0) {
+            await authApiRequest.UpdateActive({
+              device: getDeviceInfo(),
+            })
             return router.push('/')
           }
         }
