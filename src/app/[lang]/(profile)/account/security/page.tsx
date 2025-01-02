@@ -15,6 +15,7 @@ interface AccountInfo {
 interface PrivacyAccess {
   label: string
   description: string
+  link?: string
   badge?: string
 }
 
@@ -47,6 +48,7 @@ export default function page() {
   const privacyAccess: PrivacyAccess[] = [
     {
       label: 'Truy cập và thiết bị',
+      link: '/account/manageaccountaccess',
       description: 'Quản lý thiết bị đã đăng nhập',
     },
     // {label: 'Chuyển hồ sơ', description: '', badge: 'Mới'},
@@ -68,7 +70,7 @@ export default function page() {
           {accountInfo.map((item, idx) => (
             <Link
               key={idx}
-              href={item.link}
+              href={item.link || ''}
               className='flex hover:bg-gray-100 items-center justify-between px-4 py-2 cursor-pointer'
             >
               <div className='flex items-center'>
@@ -92,7 +94,8 @@ export default function page() {
         <div className='p-4 space-y-4 border rounded-lg'>
           <h2 className='text-lg font-semibold'>Truy cập và quyền riêng tư</h2>
           {privacyAccess.map((item, idx) => (
-            <div
+            <Link
+              href={item.link || ''}
               key={idx}
               className='flex hover:bg-gray-100 px-4 py-2 items-center justify-between cursor-pointer'
             >
@@ -108,7 +111,7 @@ export default function page() {
                 )}
                 <IcNextSlide className='size-4' />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

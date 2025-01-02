@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {cn} from '@/lib/utils'
 import InforService from '@/sections/account/InforService'
 import Link from 'next/link'
 import React from 'react'
 const quickLinks = [
-  {link: '', title: 'Thay đổi gói dịch vụ'},
-  {link: '', title: 'Quản lý quyền truy cập và thiết bị'},
-  {link: '/account/password', title: 'Cập nhật mật khẩu'},
+  {link: '', title: 'Thay đổi gói dịch vụ', disabled: true},
+  {
+    link: '/account/manageaccountaccess',
+    title: 'Quản lý quyền truy cập và thiết bị',
+    disabled: false,
+  },
+  {link: '/account/password', title: 'Cập nhật mật khẩu', disabled: false},
   // {link: '', title: 'Chuyển hồ sơ'},
   // {link: '', title: 'Điều chỉnh tính năng kiểm soát của cha mẹ'},
 ]
@@ -35,11 +40,17 @@ export default function page() {
           <h2 className='text-lg font-semibold mb-2'>Liên kết nhanh</h2>
           <ul className='space-y-2'>
             {quickLinks.map(
-              (item: {link: string; title: string}, idx: number) => (
+              (
+                item: {link: string; title: string; disabled: boolean},
+                idx: number,
+              ) => (
                 <li key={idx}>
                   <Link
                     href={item.link}
-                    className='w-full block hover:bg-gray-100 text-gray-800 py-2 px-4 rounded-lg text-left'
+                    className={cn(
+                      'w-full block hover:bg-gray-100 text-gray-800 py-2 px-4 rounded-lg text-left',
+                      item.disabled && 'pointer-events-none',
+                    )}
                   >
                     {item.title}
                   </Link>

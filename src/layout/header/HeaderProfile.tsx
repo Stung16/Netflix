@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import {usePathname, useRouter} from 'next/navigation'
-import {cn} from '@/lib/utils'
+import {cn, getDeviceInfo} from '@/lib/utils'
 import {useEffect, useState, useTransition} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,7 +24,15 @@ export default function HeaderProfile({profile}: any) {
 
   const {setProfile} = useStore((state) => state)
   useEffect(() => {
-    setProfile(profile)
+    const updateActive = async () => {
+      setProfile(profile)
+      if (profile) {
+        await authApiRequest.UpdateActive({
+          device: getDeviceInfo(navigator.userAgent),
+        })
+      }
+    }
+    updateActive()
   }, [router, profile, setProfile])
   function handleLogout() {
     setTransition(async () => {
