@@ -1,10 +1,5 @@
 'use client'
-import authApiRequest from '@/apiRequest/auth'
-import {
-  getRefreshFromLocalStorage,
-  checkAuthRefreshToken,
-  getDeviceInfo,
-} from '@/lib/utils'
+import {getRefreshFromLocalStorage, checkAuthRefreshToken} from '@/lib/utils'
 import {useRouter, useSearchParams} from 'next/navigation'
 import React, {useEffect} from 'react'
 
@@ -18,9 +13,6 @@ export default function RefreshTokenPage() {
     if (refreshForomUrl && refreshForomUrl === getRefreshFromLocalStorage()) {
       checkAuthRefreshToken({
         onSuccess: async () => {
-          await authApiRequest.UpdateActive({
-            device: getDeviceInfo(),
-          })
           router.push(redirectPath || '/')
         },
       })

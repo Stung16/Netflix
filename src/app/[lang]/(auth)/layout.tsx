@@ -1,11 +1,16 @@
 import HeaderAuth from '@/layout/header/HeaderAuth'
 import Image from 'next/image'
 
-export default function LayoutAuth({children}: {children: React.ReactNode}) {
+export default async function LayoutAuth({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <div className='relative bg-[#141414]'>
       <Image
         src='/images/bg_main.jpg'
+        priority
         alt='bg'
         width={1400}
         height={1000}

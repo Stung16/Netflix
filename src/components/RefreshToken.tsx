@@ -3,22 +3,22 @@
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useEffect} from 'react'
 
-import {checkAuthRefreshToken, getDeviceInfo} from '@/lib/utils'
-import authApiRequest from '@/apiRequest/auth'
+import {checkAuthRefreshToken} from '@/lib/utils'
 
 const UNAUTHENTICATED_PATH = ['/login', '/logout', '/refresh-token']
 export default function RefreshToken() {
   const pathname = usePathname()
   const router = useRouter()
   useEffect(() => {
-    if (UNAUTHENTICATED_PATH.includes(pathname)) return
+    if (
+      UNAUTHENTICATED_PATH.includes(pathname) ||
+      pathname === '/signup' ||
+      pathname === '/signup/password' ||
+      pathname === '/signup/regform'
+    )
+      return
     let interval: any = null
     checkAuthRefreshToken({
-      onSuccess: async () => {
-        await authApiRequest.UpdateActive({
-          device: getDeviceInfo(),
-        })
-      },
       onError: () => {
         clearInterval(interval)
         router.push('/login')
@@ -28,11 +28,6 @@ export default function RefreshToken() {
     interval = setInterval(
       () =>
         checkAuthRefreshToken({
-          onSuccess: async () => {
-            await authApiRequest.UpdateActive({
-              device: getDeviceInfo(),
-            })
-          },
           onError: () => {
             clearInterval(interval)
             router.push('/login')

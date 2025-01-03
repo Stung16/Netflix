@@ -100,9 +100,6 @@ export const checkAuthRefreshToken = async (param?: {
     (decodeAccesstoken.exp - decodeAccesstoken.iat) / 3
   ) {
     try {
-      await authApiRequest.UpdateActive({
-        device: getDeviceInfo(),
-      })
       const res = await authApiRequest.refreshToken()
       setAccessFromToLocalStorage(res.payload.data.accessToken)
       setRefreshFromToLocalStorage(res.payload.data.refreshToken)
@@ -190,57 +187,54 @@ export async function getIPAddress() {
     return null
   }
 }
-export function getDeviceInfo() {
-  const ua = navigator.userAgent
-  const parser = new UAParser(ua)
+interface BrowserInfo {
+  name: string | null
+  version: string | null
+  engine: string | null
+  engineVersion: string | null
+}
+
+interface OSInfo {
+  name: string | null
+  version: string | null
+}
+
+interface DeviceInfo {
+  type: 'mobile' | 'desktop'
+  name: string
+}
+
+interface DeviceDetectionResult {
+  browser: BrowserInfo
+  os: OSInfo
+  device: DeviceInfo
+}
+export function getDeviceInfo(userAgent: string): DeviceDetectionResult {
+  const parser = new UAParser(userAgent)
   const {browser, os} = parser.getResult()
 
-  let deviceName = ''
-  let deviceType = ''
-
-  // Detect device type
-  if (ua.toLowerCase().includes('mobi')) {
-    // Mobile device
-    deviceType = 'mobile'
-
-    // Detect iOS or Android
-    if (ua.includes('iPhone') || ua.includes('iPad')) {
-      // iOS device
-      deviceName = getIosDeviceName(ua)
-    } else {
-      // Android device
-      deviceName = getAndroidDeviceName(ua)
-    }
-  } else {
-    // Desktop device
-    deviceType = 'desktop'
-
-    // Detect desktop device more accurately
-    if (os.name === 'Windows') {
-      // Windows desktop
-      deviceName = getWindowsDesktopName(browser.name ?? 'Unknown', ua)
-    } else if (os.name === 'Mac OS') {
-      // Mac desktop
-      deviceName = getMacDesktopName(browser.name ?? 'Unknown', ua)
-    } else {
-      // Other desktop
-      deviceName = getDesktopDeviceName(
-        os.name ?? 'Unknown',
-        navigator.platform,
-      )
-    }
-  }
+  const isMobile = userAgent.toLowerCase().includes('mobi')
+  const deviceType: DeviceInfo['type'] = isMobile ? 'mobile' : 'desktop'
+  const deviceName = isMobile
+    ? userAgent.includes('iPhone') || userAgent.includes('iPad')
+      ? 'iPhone'
+      : 'Samsung Galaxy S21'
+    : os.name === 'Windows'
+      ? 'Windows Desktop'
+      : os.name === 'Mac OS'
+        ? 'Mac Desktop'
+        : 'Desktop'
 
   return {
     browser: {
-      name: browser.name,
-      version: browser.version,
-      engine: parser.getEngine().name,
-      engineVersion: parser.getEngine().version,
+      name: browser.name ?? null,
+      version: browser.version ?? null,
+      engine: parser.getEngine().name ?? null,
+      engineVersion: parser.getEngine().version ?? null,
     },
     os: {
-      name: os.name,
-      version: os.version,
+      name: os.name ?? null,
+      version: os.version ?? null,
     },
     device: {
       type: deviceType,

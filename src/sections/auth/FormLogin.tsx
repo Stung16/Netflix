@@ -48,18 +48,19 @@ export default function FormLogin({lang}: any) {
     setTransition(async () => {
       try {
         const {payload, status} = await authApiRequest.login(values)
+
         if (status === 200) {
-          if (payload?.data?.resultCode === 500) {
-            return router.push('/signup/planform')
+          if (!payload?.data?.account?.subscriptions) {
+            router.push('/signup/planform')
           }
-          if (payload?.data?.resultCode === 0) {
+          if (payload?.data?.account?.subscriptions) {
+            router.push('/')
             await authApiRequest.UpdateActive({
-              device: getDeviceInfo(),
+              device: getDeviceInfo(navigator.userAgent),
             })
-            return router.push('/')
           }
+          toast.success(`đăng nhập thành công!`)
         }
-        toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
       } catch (error: any) {
         console.log(error)
         toast.error(`Tài khoản hoặc mật khẩu không đúng!`)

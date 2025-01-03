@@ -10,7 +10,6 @@ export default function CheckTransionStatus() {
     const fetch = async () => {
       try {
         const res = await paymentRequest.check_transaction()
-        console.log(res)
         if (res.status === 200) {
           if (res.payload?.data?.resultCode === 0) {
             return router.push('/')
