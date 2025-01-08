@@ -52,30 +52,30 @@ const Control_type = memo(function Control_type({
   return (
     <div
       className={cn(
-        'flex items-center absolute justify-end z-10 right-0 top-[34rem]',
+        'flex items-center absolute justify-end z-10 right-0 top-[34rem] xsm:top-[11.5rem]',
         cls,
       )}
     >
       <div>
         <div
-          className='cursor-pointer flex justify-center items-center mr-[1.1rem] size-[2.4rem] bg-transparent border-[0.1rem] border-solid border-white rounded-full select-none'
+          className='cursor-pointer flex justify-center items-center mr-[1.1rem] xsm:mr-2 size-[2.4rem] xsm:size-7 bg-transparent border-[0.1rem] border-solid border-white rounded-full select-none'
           onClick={handleReplay}
         >
           {isVideoEnd ? (
-            <IcRePlay className='size-[1.4rem] text-white' />
+            <IcRePlay className='size-[1.4rem] text-white xsm:size-4' />
           ) : !isMuted ? (
             <div onClick={handleMute}>
-              <IcVolume className='size-[1.4rem] text-white' />
+              <IcVolume className='size-[1.4rem] text-white xsm:size-4' />
             </div>
           ) : (
             <div onClick={handleUnmute}>
-              <IcMutate className='size-[1.4rem] text-white' />
+              <IcMutate className='size-[1.4rem] text-white xsm:size-4' />
             </div>
           )}
         </div>
       </div>
       {age_rating && (
-        <div className='cursor-default text-white items-center bg-[rgba(51,51,51,0.6)] box-border flex text-[1.1rem] h-[2.4rem] pl-[0.8rem] pr-[3.5rem] py-[0.5rem] border-l-[0.188rem]'>
+        <div className='cursor-default text-white items-center bg-[rgba(51,51,51,0.6)] box-border flex text-[1.1rem] xsm:text-[0.6rem] xsm:h-7 h-[2.4rem] pl-[0.8rem] xsm:pl-[0.2rem] pr-[3.5rem] py-[0.5rem] border-l-[0.188rem] xsm:pr-[2rem]'>
           <span>{age_rating}</span>
         </div>
       )}

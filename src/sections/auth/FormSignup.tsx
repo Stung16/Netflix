@@ -57,30 +57,30 @@ export default function FormSignup({lang}: any) {
     handleCheckMail(values)
   }
   return (
-    <div className='max-w-[40rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] z-30 text-white bg-[rgba(0,0,0,0.7)]'>
-      <h1>
+    <div className='max-w-[30rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] xsm:top-[4.5rem] z-30 text-white sm:bg-[rgba(0,0,0,0.7)] xsm:px-4 xsm:py-0'>
+      <h1 className='xsm:text-sm'>
         Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách
         thành viên của bạn.
       </h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='!space-y-[1.5rem]'
+          className='!space-y-[1.5rem] xsm:mt-4'
         >
           <FormField
             control={form.control}
             name='email'
             render={({field}) => (
               <FormItem className='space-y-[0.5rem] text-white'>
-                <FormLabel className='text-[#666] lining-nums proportional-nums text-[1rem] font-normal leading-[1.2] tracking-[0.0125rem] xsm:text-sm not-italic xsm:tracking-[0.01094rem]'>
+                <FormLabel className='xsm:hidden text-[#666] lining-nums proportional-nums text-[1rem] font-normal leading-[1.2] tracking-[0.0125rem] xsm:text-sm not-italic xsm:tracking-[0.01094rem]'>
                   Email address*
                 </FormLabel>
                 <FormControl>
                   <Input
                     tabIndex={1}
                     spellCheck='false'
-                    className='font-sackers text-white placeholder:text-[#A3A3A3] rounded-none text-[0.875rem] font-medium leading-[1.2] tracking-[-0.014rem] border-[#8c8c8c] h-[3rem] placeholder:lowercase'
-                    placeholder='EMAIL'
+                    className='text-white placeholder:text-[#A3A3A3] rounded-none text-[0.875rem] font-medium leading-[1.2] tracking-[-0.014rem] border-[#8c8c8c] h-[3rem]'
+                    placeholder='Email'
                     {...field}
                   />
                 </FormControl>
@@ -104,11 +104,11 @@ export default function FormSignup({lang}: any) {
         </form>
       </Form>
       <div className='flex items-center w-fit mx-auto space-x-[0.56rem] mt-[1.67rem] xsm:mt-8 xsm:mb-4'>
-        <span className='text-gray-400 text-[1rem] font-medium leading-normal tracking-[-0.016rem] font-helvetica xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'>
+        <span className='text-gray-400 text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'>
           Bạn đã có tài khoản Netflix?
         </span>
         <Link
-          className='text-white text-[1rem] font-medium leading-normal tracking-[-0.016rem] font-helvetica xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'
+          className='text-white text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'
           href={`/login`}
         >
           Đăng nhập

@@ -103,13 +103,13 @@ const PopUpInfoMovie = ({
         setOpen(e)
       }}
     >
-      <DialogContent className='font-netflix outline-none ring-0 max-w-[70rem] sm:w-[55rem] bg-[#181818] p-0 m-0 border-none text-white overflow-y-scroll max-h-[40rem] scrollCustom'>
+      <DialogContent className='font-netflix outline-none ring-0 max-w-[70rem] sm:w-[55rem] bg-[#181818] p-0 m-0 border-none text-white overflow-y-scroll max-h-[40rem] scrollCustom xsm:max-h-[35rem]'>
         <DialogDescription></DialogDescription>
         {/* videoTrailer */}
         {!dataBanner ? (
           <Skeleton className='w-full h-[30rem] bg-[#666]' />
         ) : (
-          <div className='w-full h-[30rem] bg-[linear-gradient(0deg,#181818,transparent_50%)] relative'>
+          <div className='w-full h-[30rem] xsm:h-[15rem] bg-[linear-gradient(0deg,#181818,transparent_50%)] relative'>
             {isVideoEnded ? (
               <Image
                 width={1000}
@@ -143,35 +143,37 @@ const PopUpInfoMovie = ({
                   setIsMuted={setIsMuted}
                   videoRef={videoRef}
                   age_rating={dataBanner?.age_rating}
-                  cls='top-[25rem]'
+                  cls='top-[25rem] xsm:top-[10rem]'
                 />
               </Fragment>
             )}
             {/* control&infoIntro */}
             <Link
               href={`/watch/${dataBanner?.id}?trackId=${trackId}`}
-              className='absolute bottom-12 z-30 left-12 flex items-center bg-white text-black pl-4 pr-[1.4rem] py-[0.4rem] rounded-sm cursor-pointer'
+              className='absolute bottom-12 z-30 left-12 flex items-center bg-white text-black pl-4 pr-[1.4rem] py-[0.4rem] xsm:py-0 xsm:px-4 rounded-sm cursor-pointer'
             >
-              <IcPlay className='size-[1.8rem] mr-4' />
-              <span className='font-medium leading-8 text-[1.2rem]'>Phát</span>
+              <IcPlay className='size-[1.8rem] mr-4 xsm:size-4' />
+              <span className='font-medium leading-8 text-[1.2rem] xsm:text-[0.8rem]'>
+                Phát
+              </span>
             </Link>
             <div className='bg-[linear-gradient(0deg,#181818,transparent_50%)] absolute top-0 w-full h-[101%]' />
           </div>
         )}
 
         {/* infor */}
-        <div className='px-12'>
+        <div className='px-12 xsm:px-4'>
           {/* introduce */}
           <div
-            className='grid gap-x-8'
+            className='grid gap-x-8 xsm:gap-x-6'
             style={{gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)'}}
           >
-            <div className='flex flex-col'>
-              <div className='flex text-[#bcbcbc] flex-wrap space-x-2 items-center font-normal text-lg'>
+            <div className='flex flex-col xsm:text-[0.6rem]'>
+              <div className='flex xsm:flex-col text-[#bcbcbc] flex-wrap sm:space-x-2 sm:items-center font-normal text-lg xsm:text-sm'>
                 <DialogTitle>{getYear(dataBanner?.created_at)}</DialogTitle>
 
                 {/* <span className='leading-[1.2]'></span> */}
-                <span className='leading-[1.2]'>
+                <span className='leading-[1.2] xsm:text-base'>
                   {dataBanner?.type !== 'single' ? (
                     `${dataBanner?.seasons?.length} mùa`
                   ) : (
@@ -182,34 +184,38 @@ const PopUpInfoMovie = ({
                     </div>
                   )}
                 </span>
-                <span className='flex leading-[1.2] justify-center items-end border border-solid border-[hsla(0,0%,100%,.4)] text-[0.7rem] h-fit px-1 rounded-sm'>
+                <span className='flex xsm:w-fit leading-[1.2] justify-center items-end border border-solid border-[hsla(0,0%,100%,.4)] text-[0.7rem] xsm:text-[0.5rem] h-fit px-1 rounded-sm'>
                   HD
                 </span>
               </div>
-              <span className='uppercase mt-[0.1rem] line-clamp-2  border border-solid border-[hsla(0,0%,100%,.4)] px-[0.5rem] w-fit bg-transparent text-sm leading-[1.5]'>
+              <span className='uppercase mt-[0.1rem] xsm:mt-2 line-clamp-2  border border-solid border-[hsla(0,0%,100%,.4)] px-[0.5rem] w-fit bg-transparent text-sm leading-[1.5]'>
                 {dataBanner?.age_rating}
               </span>
               {/* desc commintsoon */}
               {/* <span className='inline-block mt-[0.8rem] font-medium text-xl'>Tập mới ra mắt vào Thứ Tư</span> */}
-              <p className='leading-[1.5rem] mt-[0.875rem]'>
+              <p className='leading-[1.5rem] xsm:leading-4 mt-[0.875rem]'>
                 {dataBanner?.desc}
               </p>
             </div>
-            <div className='flex flex-col text-[0.875rem] leading-[1.25rem]'>
-              <div className='break-words m-2 ml-0'>
-                <span className='text-[#777]'>Diễn viên:</span>
+            <div className='flex flex-col text-[0.875rem] leading-[1.25rem] xsm:text-[0.6rem]'>
+              <div className='break-words sm:m-2 ml-0'>
+                <span className='text-[#777] xsm:text-[0.7rem]'>
+                  Diễn viên:
+                </span>
                 {dataBanner?.actors?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
                 })}
               </div>
-              <div className='break-words m-2 ml-0'>
-                <span className='text-[#777]'>Thể loại:</span>
+              <div className='break-words sm:m-2 ml-0'>
+                <span className='text-[#777] xsm:text-[0.7rem]'>Thể loại:</span>
                 {dataBanner?.genres?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
                 })}
               </div>
-              <div className='break-words m-2 ml-0'>
-                <span className='text-[#777]'>Bộ phim này:</span>
+              <div className='break-words sm:m-2 ml-0'>
+                <span className='text-[#777] xsm:text-[0.7rem]'>
+                  Bộ phim này:
+                </span>
                 {dataBanner?.tags?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
                 })}

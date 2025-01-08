@@ -7,7 +7,7 @@ import {Suspense} from 'react'
 export default function ListMovieType({idGenre, dataGenre: dataHome}: any) {
   return (
     <div>
-      <div className=' min-h-screen overflow-hidden pt-[5rem]'>
+      <div className='min-h-screen overflow-hidden pt-[5rem] xsm:pt-4'>
         {dataHome?.dataGenre?.map((playList: any, index: number) => {
           return (
             <Fragment key={index}>

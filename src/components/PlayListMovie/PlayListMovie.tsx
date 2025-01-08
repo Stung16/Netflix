@@ -17,6 +17,7 @@ interface SliderSettings {
   draggable?: boolean
   onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void
   initialSlide?: number
+  responsive?: any
 }
 
 export default function PlayListMovie({
@@ -26,7 +27,6 @@ export default function PlayListMovie({
 }: any) {
   const isLoading = false
   const sliderRef = useRef<Slider | null>(null)
-  const [show, setShow] = useState<boolean>(false)
   const [loop, setLoop] = useState<boolean>(false)
   const settings: SliderSettings = {
     infinite: loop,
@@ -35,6 +35,16 @@ export default function PlayListMovie({
     slidesToScroll: 6,
     draggable: false,
     initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 0,
+        },
+      },
+    ],
   }
   const goToNextSlide = () => {
     if (sliderRef.current) {
@@ -57,14 +67,16 @@ export default function PlayListMovie({
           {!isLoading ? (
             <Link
               href={'/'}
-              className={`${style.titlePlayList} text-[#e5e5e5] hover:text-white ml-[3.75rem] mr-4 text-2xl w-fit block`}
+              className={`${style.titlePlayList} text-[#e5e5e5] hover:text-white ml-[3.75rem] xsm:ml-4 mr-4 text-2xl xsm:text-base w-fit block`}
             >
               {dataPlaylist?.title}
             </Link>
           ) : (
-            <Skeleton className='w-[20vw] h-6 bg-[#666] ml-[3.75rem] ' />
+            <Skeleton className='w-[20vw] xsm:h-4 h-6 bg-[#666] ml-[3.75rem] xsm:ml-4' />
           )}
-          <div className={`flex items-center ${style.groupBtnSeeAll}`}>
+          <div
+            className={`xsm:hidden flex items-center ${style.groupBtnSeeAll}`}
+          >
             <p
               className={`${style.btnSeeAll} origin-left font-medium text-base whitespace-nowrap text-[#54b9c5] cursor-pointer mr-1`}
             >
@@ -78,13 +90,11 @@ export default function PlayListMovie({
       </h2>
       <div
         className={`slider-container hover:z-50 no-scrollbar ${style.listMovieSlide} relative`}
-        onMouseMove={() => setShow(true)}
-        onMouseOut={() => setShow(false)}
       >
         <Slider
           ref={sliderRef}
           {...settings}
-          className='px-10 overflow-visible'
+          className='px-10 overflow-visible xsm:px-4'
         >
           {dataPlaylist?.movies?.map((movie: any) => {
             return (
@@ -101,13 +111,12 @@ export default function PlayListMovie({
         {/* prev */}
         {loop ? (
           <div
-            className='group absolute bg-[hsla(0,0%,8%,0.5)] left-0 w-10 top-0 bottom-0 flex justify-center items-center cursor-pointer'
+            className='group absolute bg-[hsla(0,0%,8%,0.7)] left-0 w-10 xsm:w-6 top-0 bottom-0 flex justify-center items-center cursor-pointer'
             onClick={goToPrevSlide}
           >
             <IcNextSlide
               className={cn(
-                'transition-["scale"] group-hover:scale-125 text-white size-8 rotate-180 invisible',
-                show && 'visible',
+                'transition-["scale"] group-hover:scale-125 text-white size-8 rotate-180 ',
               )}
             />
           </div>
@@ -117,13 +126,12 @@ export default function PlayListMovie({
 
         {/* next */}
         <div
-          className='group absolute bg-[hsla(0,0%,8%,0.5)] right-0 w-10 top-0 bottom-0 flex justify-center items-center cursor-pointer'
+          className='group absolute bg-[hsla(0,0%,8%,0.7)] right-0 w-10 xsm:w-6 top-0 bottom-0 flex justify-center items-center cursor-pointer'
           onClick={goToNextSlide}
         >
           <IcNextSlide
             className={cn(
-              'transition-["scale"] group-hover:scale-125 text-white size-8 invisible',
-              show && 'visible',
+              'transition-["scale"] group-hover:scale-125 text-white size-8 ',
             )}
           />
         </div>

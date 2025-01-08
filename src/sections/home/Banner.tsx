@@ -62,7 +62,7 @@ export default function Banner({dataBanner}: any) {
   }, [setVideoBanner])
 
   return (
-    <section className='overflow-hidden h-[56.25rem] relative'>
+    <section className='overflow-hidden h-[56.25rem] relative xsm:h-[15rem]'>
       <Image
         width={1500}
         height={800}
