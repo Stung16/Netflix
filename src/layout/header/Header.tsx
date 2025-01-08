@@ -16,6 +16,7 @@ import style from './style.module.css'
 import debounce from 'lodash/debounce'
 import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
+import MenuBarMobile from '@/components/navBar/MenuBarMobile'
 export default function Header({profile}: any) {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
@@ -76,7 +77,7 @@ export default function Header({profile}: any) {
   return (
     <header
       className={cn(
-        'flex items-center bg-black fixed left-0 right-0 h-auto min-h-[4.25rem] z-[100] top-0 transition-["background-color"] duration-400 bg-transparent text-sm bg-[linear-gradient(180deg,rgba(0,0,0,.7)_10%,transparent)] px-[3.75rem] [&.active]:bg-[rgb(20,20,20)]',
+        'flex items-center bg-black fixed left-0 right-0 h-auto min-h-[4.25rem] xsm:min-h-[3.25rem] z-[100] top-0 transition-["background-color"] duration-400 bg-transparent text-sm xsm:text-xs bg-[linear-gradient(180deg,rgba(0,0,0,.7)_10%,transparent)] px-[3.75rem] xsm:px-4 [&.active]:bg-[rgb(20,20,20)]',
         active && 'active',
       )}
     >
@@ -94,7 +95,8 @@ export default function Header({profile}: any) {
         />
       </Link>
       {/* menuTab */}
-      <ul className='text-sm leading-[1.063rem] flex items-center font-normal'>
+      <MenuBarMobile />
+      <ul className='xsm:hidden text-sm leading-[1.063rem] flex items-center font-normal'>
         <li className='ml-[1.25rem] list-none'>
           <Link
             className={cn(
@@ -169,9 +171,9 @@ export default function Header({profile}: any) {
         </li> */}
       </ul>
       {/* infor */}
-      <div className='items-center flex grow h-full justify-end absolute right-[3.75rem] text-sm top-0'>
+      <div className='items-center flex grow h-full justify-end absolute right-[3.75rem] xsm:right-4 text-sm top-0'>
         <div
-          className='mr-[0.938rem]'
+          className='mr-[0.938rem] xsm:hidden'
           onClick={() => setSearch(true)}
         >
           <div
@@ -202,7 +204,7 @@ export default function Header({profile}: any) {
         </div>
         <div className='mr-[0.938rem]'>
           <div className='bg-transparent text-[1.5em] cursor-pointer leading-none relative mt-[0.2em] pt-[0.125rem] pb-[0.188rem]  border-[none]'>
-            <IcNotification className='text-white size-6' />
+            <IcNotification className='text-white size-6 xsm:size-4' />
           </div>
         </div>
         <div>
@@ -211,11 +213,12 @@ export default function Header({profile}: any) {
               <Image
                 width={50}
                 height={50}
-                className='rounded size-8 align-middle'
+                className='rounded size-8 xsm:size-6 align-middle'
                 src={profile?.avatar || '/images/avatar.png'}
                 alt='avatar'
+                onClick={() => router.push('/account')}
               />
-              <span className='group-hover:rotate-180 transition-all border-[#fff_transparent_transparent] border-solid border-t-[0.313rem] border-x-[0.313rem] border-b-0 size-0 ml-[0.625rem]'></span>
+              <span className='group-hover:rotate-180 xsm:hidden transition-all border-[#fff_transparent_transparent] border-solid border-t-[0.313rem] border-x-[0.313rem] border-b-0 size-0 ml-[0.625rem]'></span>
             </div>
             {/* Dropdown */}
             <div
@@ -230,7 +233,7 @@ export default function Header({profile}: any) {
                 'group-hover:opacity-100 group-hover:visible',
               )}
             >
-              <ul className='flex px-2 flex-col text-[#b3b3b3] py-3'>
+              <ul className='flex px-2 flex-col text-[#b3b3b3] py-3 xsm:hidden'>
                 {/* <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >

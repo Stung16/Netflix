@@ -23,7 +23,7 @@ export default async function AccountLayout({
     return (
       <div className='bg-white'>
         <HeaderProfile profile={dataAcount} />
-        <main className='relative min-h-screen mx-[20.75rem] mt-[4.25rem] flex pt-8 space-x-8'>
+        <main className='relative min-h-screen xsm:mx-4 mx-[20.75rem] mt-[4.25rem] xsm:mt-[3rem] flex pt-8 sm:space-x-8'>
           <NavBarAccount />
           {children}
         </main>

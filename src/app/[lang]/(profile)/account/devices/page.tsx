@@ -25,22 +25,24 @@ export default function page() {
   return (
     <div className='w-full'>
       <div>
-        <h1 className='text-2xl font-semibold'>Thiết bị</h1>
+        <h1 className='text-2xl xsm:text-base font-semibold'>Thiết bị</h1>
       </div>
-      <div className='flex flex-col space-y-4 mt-4'>
+      <div className='flex flex-col space-y-4 xsm:mt-2 mt-4 xsm:text-[0.6rem]'>
         {privacyAccess.map((item, idx) => (
           <div
             key={idx}
             className='cursor-pointer'
           >
-            <p className='text-gray-600'>{item.heading}</p>
+            <p className='text-gray-600 xsm:hidden'>{item.heading}</p>
             <Link
               href={item.link}
               className='flex hover:bg-gray-100 px-4 py-2 items-center justify-between border rounded-lg'
             >
               <div>
-                <h2 className='font-medium'>{item.label}</h2>
-                <p className='text-gray-600 text-sm'>{item.description}</p>
+                <h2 className='font-medium xsm:text-[0.6rem]'>{item.label}</h2>
+                <p className='text-gray-600 text-sm xsm:text-[0.6rem]'>
+                  {item.description}
+                </p>
               </div>
               <div className='flex items-center'>
                 <IcNextSlide className='size-4' />
