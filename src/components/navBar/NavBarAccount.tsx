@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import {usePathname} from 'next/navigation'
 import Link from 'next/link'
@@ -17,7 +18,7 @@ const showbar = [
   '/account/profiles',
 ]
 
-export default function NavBarAccount() {
+export default function NavBarAccount({t}: {t: any}) {
   const pathname = usePathname()
   const isshowbar =
     showbar.some((path: string) => pathname.startsWith(path)) ||
@@ -30,10 +31,10 @@ export default function NavBarAccount() {
             <li>
               <Link
                 href={'/'}
-                className='flex items-center space-x-3 xsm:text-[0.5rem]'
+                className='flex items-center space-x-1 xsm:text-[0.5rem]'
               >
                 <IcBackHistory className='size-6 xsm:size-3 text-black' />
-                Quay lại Netflix
+                <span>{t.navBar.backNetflix}</span>
               </Link>
             </li>
             <li>
@@ -52,7 +53,7 @@ export default function NavBarAccount() {
                     pathname === '/account' && 'text-black'
                   }`}
                 >
-                  Tổng quan
+                  {t.navBar.overview}
                 </span>
               </Link>
             </li>
@@ -72,7 +73,7 @@ export default function NavBarAccount() {
                     pathname.startsWith('/account/membership') && 'text-black'
                   }`}
                 >
-                  Tư cách thành viên
+                  {t.navBar.memberShip}
                 </span>
               </Link>
             </li>
@@ -92,7 +93,7 @@ export default function NavBarAccount() {
                     pathname.startsWith('/account/security') && 'text-black'
                   }`}
                 >
-                  Bảo mật
+                  {t.navBar.security}
                 </span>
               </Link>
             </li>
@@ -113,7 +114,7 @@ export default function NavBarAccount() {
                     pathname.startsWith('/account/devices') && 'text-black'
                   }`}
                 >
-                  Thiết bị
+                  {t.navBar.devices}
                 </span>
               </Link>
             </li>

@@ -17,7 +17,16 @@ import debounce from 'lodash/debounce'
 import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
 import MenuBarMobile from '@/components/navBar/MenuBarMobile'
-export default function Header({profile}: any) {
+import ChooseLang from '@/components/ChooseLang'
+export default function Header({
+  profile,
+  lang,
+  t,
+}: {
+  profile: any
+  lang: string
+  t: any
+}) {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
   const router = useRouter()
@@ -95,7 +104,7 @@ export default function Header({profile}: any) {
         />
       </Link>
       {/* menuTab */}
-      <MenuBarMobile />
+      <MenuBarMobile t={t} />
       <ul className='xsm:hidden text-sm leading-[1.063rem] flex items-center font-normal'>
         <li className='ml-[1.25rem] list-none'>
           <Link
@@ -106,7 +115,7 @@ export default function Header({profile}: any) {
             )}
             href={'/'}
           >
-            Trang chủ
+            {t.headerNav.home}
           </Link>
         </li>
         <li className='ml-[1.25rem] list-none'>
@@ -118,7 +127,7 @@ export default function Header({profile}: any) {
             )}
             href={'/genre/genres2'}
           >
-            Phim T.hình
+            {t.headerNav.tvShows}
           </Link>
         </li>
         <li className='ml-[1.25rem] list-none'>
@@ -130,7 +139,7 @@ export default function Header({profile}: any) {
             )}
             href={'/genre/genres3'}
           >
-            Phim
+            {t.headerNav.movies}
           </Link>
         </li>
         <li className='ml-[1.25rem] list-none'>
@@ -142,7 +151,7 @@ export default function Header({profile}: any) {
             )}
             href={'/latest'}
           >
-            Mới & Phổ biến
+            {t.headerNav.newAndPopular}
           </Link>
         </li>
         <li className='ml-[1.25rem] list-none'>
@@ -154,7 +163,7 @@ export default function Header({profile}: any) {
             )}
             href={'/my-list'}
           >
-            Danh sách của tôi
+            {t.headerNav.myList}
           </Link>
         </li>
         {/* <li className='ml-[1.25rem] list-none'>
@@ -202,12 +211,15 @@ export default function Header({profile}: any) {
             />
           </div>
         </div>
+
         <div className='mr-[0.938rem]'>
           <div className='bg-transparent text-[1.5em] cursor-pointer leading-none relative mt-[0.2em] pt-[0.125rem] pb-[0.188rem]  border-[none]'>
             <IcNotification className='text-white size-6 xsm:size-4' />
           </div>
         </div>
-        <div>
+        <ChooseLang lang={lang} />
+
+        <div className='ml-2'>
           <div className='text-xs relative z-0 group'>
             <div className='flex items-center cursor-pointer'>
               <Image
@@ -252,20 +264,20 @@ export default function Header({profile}: any) {
                     className={`${style.itemListProfile} flex items-center space-x-3`}
                   >
                     <IcAcount className='size-6 text-white' />
-                    <p>Tài khoản</p>
+                    <p> {t.headerNav.profile.account}</p>
                   </Link>
                 </li>
                 <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >
                   <IcInforAcount className='size-6 text-white' />
-                  <p>Trung tâm trợ giúp</p>
+                  <p> {t.headerNav.profile.helpCenter}</p>
                 </li>
                 <li
                   onClick={handleLogout}
                   className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t ${isPending && 'pointer-events-none'}`}
                 >
-                  <p>Đăng xuất khỏi Netflix</p>
+                  <p> {t.headerNav.profile.signOut}</p>
                   {isPending && (
                     <div
                       className={`border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid animate-spin`}

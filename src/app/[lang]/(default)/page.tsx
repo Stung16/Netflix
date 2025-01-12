@@ -6,6 +6,7 @@ import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
 import {redirect} from 'next/navigation'
 import React, {Fragment} from 'react'
+import getDictionary from '@/app/dictionaries'
 const Banner = dynamic(() => import('@/sections/home/Banner'))
 
 export default async function HomePage({
@@ -27,7 +28,8 @@ export default async function HomePage({
 
   try {
     // Fetch dữ liệu song song từ API
-    const [resGenreId, resBanner] = await Promise.all([
+    const [t, resGenreId, resBanner] = await Promise.all([
+      getDictionary(params.lang),
       movieApiRequest.SgenreID('genres2', accessToken),
       movieApiRequest.Sbanner(accessToken),
     ])
@@ -48,10 +50,13 @@ export default async function HomePage({
     return (
       <Fragment>
         {/* Component Banner */}
-        <Banner dataBanner={dataBanner} />
-
+        <Banner
+          dataBanner={dataBanner}
+          t={t}
+        />
         {/* Component ListMovieType */}
         <ListMovieType
+          t={t}
           idGenre='home'
           dataGenre={dataGenre}
         />

@@ -21,10 +21,12 @@ const PopUpInfoMovie = ({
   open,
   setOpen,
   dataBanner,
+  t,
 }: {
   open: boolean
   setOpen: (state: boolean) => void
   dataBanner: any
+  t: any
 }) => {
   const {videoBanner} = controlStore()
   const [isVideoEnded, setIsVideoEnded] = useState<boolean>(false)
@@ -154,7 +156,7 @@ const PopUpInfoMovie = ({
             >
               <IcPlay className='size-[1.8rem] mr-4 xsm:size-4' />
               <span className='font-medium leading-8 text-[1.2rem] xsm:text-[0.8rem]'>
-                Phát
+                {t.button.play}
               </span>
             </Link>
             <div className='bg-[linear-gradient(0deg,#181818,transparent_50%)] absolute top-0 w-full h-[101%]' />
@@ -173,11 +175,11 @@ const PopUpInfoMovie = ({
                 <DialogTitle>{getYear(dataBanner?.created_at)}</DialogTitle>
 
                 {/* <span className='leading-[1.2]'></span> */}
-                <span className='leading-[1.2] xsm:text-base'>
+                <span className='leading-[1.2] text-sm'>
                   {dataBanner?.type !== 'single' ? (
-                    `${dataBanner?.seasons?.length} mùa`
+                    `- ${+dataBanner?.seasons?.length - 1} ${t.movie.seasons}`
                   ) : (
-                    <div className='break-words m-2 ml-0'>
+                    <div className='break-words m-2 ml-0 text-sm xsm:text-[0.7rem]'>
                       {dataBanner?.contentWarnings?.map((item: any) => {
                         return <span key={item?.id}>{item?.content}, </span>
                       })}
@@ -200,21 +202,23 @@ const PopUpInfoMovie = ({
             <div className='flex flex-col text-[0.875rem] leading-[1.25rem] xsm:text-[0.6rem]'>
               <div className='break-words sm:m-2 ml-0'>
                 <span className='text-[#777] xsm:text-[0.7rem]'>
-                  Diễn viên:
+                  {`${t.movie.cast}: `}
                 </span>
                 {dataBanner?.actors?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
                 })}
               </div>
               <div className='break-words sm:m-2 ml-0'>
-                <span className='text-[#777] xsm:text-[0.7rem]'>Thể loại:</span>
+                <span className='text-[#777] xsm:text-[0.7rem]'>
+                  {`${t.movie.genres}: `}
+                </span>
                 {dataBanner?.genres?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
                 })}
               </div>
               <div className='break-words sm:m-2 ml-0'>
                 <span className='text-[#777] xsm:text-[0.7rem]'>
-                  Bộ phim này:
+                  {`${t.movie.thisMovieIs}: `}
                 </span>
                 {dataBanner?.tags?.map((item: any) => {
                   return <span key={item?.id}>{item?.name}, </span>
@@ -222,7 +226,10 @@ const PopUpInfoMovie = ({
               </div>
             </div>
           </div>
-          <ListEpisode dataMovie={dataBanner} />
+          <ListEpisode
+            dataMovie={dataBanner}
+            t={t}
+          />
           {/* introduce footer*/}
         </div>
         {/* closeBtn */}

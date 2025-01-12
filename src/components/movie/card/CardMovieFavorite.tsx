@@ -13,7 +13,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
 
-export default function CardMovieFavorite({inforMovie}: any) {
+export default function CardMovieFavorite({inforMovie, t}: any) {
   const [isPending, setTransition] = useTransition()
   const trackId = inforMovie?.seasons
     .find((item: any) => item.season_number === '1')
@@ -154,15 +154,25 @@ export default function CardMovieFavorite({inforMovie}: any) {
                   <IcNextSlide className='size-4 rotate-[90deg]' />
                 </span>
               </div>
-              <div className='flex items-center'>
-                <span>xúc động</span>
-                <span>lãng mạn</span>
+              <div className='flex items-center mt-2'>
+                {inforMovie?.tags?.map((item: any, index: number) => {
+                  return (
+                    <span
+                      key={index}
+                      className='text-xs'
+                    >
+                      {item?.name}
+                      {index + 1 !== inforMovie?.tags?.length && ', '}
+                    </span>
+                  )
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
       <PopUpInfoMovie
+        t={t}
         open={open}
         setOpen={setOpent}
         dataBanner={inforMovie}

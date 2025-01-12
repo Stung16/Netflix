@@ -16,7 +16,14 @@ import controlStore from '@/app/(store)/control'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
 import Control_type from '@/components/banner/Control_type'
 
-export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
+export default function CardMovie({
+  inforMovie,
+  favoriteMovies,
+  idGenre,
+  t,
+}: any) {
+  console.log(inforMovie)
+
   const {videoBanner} = controlStore()
   const [isMuted, setIsMuted] = useState<boolean>(true)
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -120,7 +127,8 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
                     isMuted={isMuted}
                     setIsMuted={setIsMuted}
                     videoRef={videoRef}
-                    cls='top-[5rem] z-[10000000]'
+                    cls='top-[8rem] z-[10000000]'
+                    clsIcon='size-3'
                   />
                 </Fragment>
               )}
@@ -194,15 +202,25 @@ export default function CardMovie({inforMovie, favoriteMovies, idGenre}: any) {
                   <IcNextSlide className='size-4 rotate-[90deg]' />
                 </span>
               </div>
-              <div className='flex items-center'>
-                <span>xúc động</span>
-                <span>lãng mạn</span>
+              <div className='flex items-center mt-1'>
+                {inforMovie?.tags?.map((item: any, index: number) => {
+                  return (
+                    <span
+                      key={index}
+                      className='text-xs'
+                    >
+                      {item?.name}
+                      {index + 1 !== inforMovie?.tags?.length && ', '}
+                    </span>
+                  )
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
       <PopUpInfoMovie
+        t={t}
         open={open}
         setOpen={setOpent}
         dataBanner={inforMovie}

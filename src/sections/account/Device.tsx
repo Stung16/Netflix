@@ -5,7 +5,7 @@ import {formatDateTime} from '@/lib/utils'
 import React from 'react'
 import useStore from '@/app/(store)/profile'
 
-export default function Device({device}: any) {
+export default function Device({device, t}: any) {
   const {profile} = useStore((state) => state)
 
   const deviceData = JSON.parse(device.device_info)
@@ -16,8 +16,8 @@ export default function Device({device}: any) {
           {`${deviceData?.device?.type && deviceData?.device?.type} ${deviceData?.browser?.name && deviceData?.browser?.name} - Trình duyệt web`}
         </span>
         {profile?.id === device?.user_id && (
-          <span className='bg-blue-400 text-xs xsm:text-[0.5rem] p-1'>
-            Thiết bị hiện tại
+          <span className='bg-blue-400 text-xs xsm:text-[0.5rem] p-1 uppercase'>
+            {t.button.deviceCurrent}
           </span>
         )}
       </div>

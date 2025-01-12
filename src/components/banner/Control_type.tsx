@@ -13,12 +13,14 @@ const Control_type = memo(function Control_type({
   videoRef,
   isMuted,
   cls,
+  clsIcon,
 }: {
   age_rating?: string
   setIsMuted: (state: boolean) => void
   videoRef: React.RefObject<HTMLVideoElement>
   isMuted: boolean
   cls?: string
+  clsIcon?: string
 }) {
   // Bật tiếng
   const {videoBanner, isVideoEnd, setVideoEnd} = controlStore()
@@ -58,18 +60,27 @@ const Control_type = memo(function Control_type({
     >
       <div>
         <div
-          className='cursor-pointer flex justify-center items-center mr-[1.1rem] xsm:mr-2 size-[2.4rem] xsm:size-7 bg-transparent border-[0.1rem] border-solid border-white rounded-full select-none'
+          className={cn(
+            'cursor-pointer flex justify-center items-center mr-[1.1rem] xsm:mr-2 size-[2.4rem] xsm:size-7 bg-transparent border-[0.1rem] border-solid border-white rounded-full select-none',
+            clsIcon && 'size-6',
+          )}
           onClick={handleReplay}
         >
           {isVideoEnd ? (
-            <IcRePlay className='size-[1.4rem] text-white xsm:size-4' />
+            <IcRePlay
+              className={cn('size-[1.4rem] text-white xsm:size-4', clsIcon)}
+            />
           ) : !isMuted ? (
             <div onClick={handleMute}>
-              <IcVolume className='size-[1.4rem] text-white xsm:size-4' />
+              <IcVolume
+                className={cn('size-[1.4rem] text-white xsm:size-4', clsIcon)}
+              />
             </div>
           ) : (
             <div onClick={handleUnmute}>
-              <IcMutate className='size-[1.4rem] text-white xsm:size-4' />
+              <IcMutate
+                className={cn('size-[1.4rem] text-white xsm:size-4', clsIcon)}
+              />
             </div>
           )}
         </div>

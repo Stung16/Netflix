@@ -130,13 +130,12 @@ export const getYear = (dateString: string) => {
   return new Date(dateString).getFullYear()
 }
 
-export function convertDateToMembership(dateString: string) {
+export function convertDateToMembership(dateString: string, t: any) {
   const date = new Date(dateString)
   const year = date.getFullYear()
   const month = date.getMonth() + 1 // Tháng bắt đầu từ 0
 
-  // Chuyển đổi tháng thành chuỗi
-  return `Thành viên từ tháng ${month} năm ${year}`
+  return `${t.orther.memberForm} ${month} ${t.orther.year} ${year}`
 }
 export interface propService {
   premium: string

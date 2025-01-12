@@ -12,13 +12,14 @@ import {cn} from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import {useState} from 'react'
-export default function ListEpisode({dataMovie}: any) {
+export default function ListEpisode({dataMovie, t}: any) {
   const [seasion, setSeasion] = useState('1')
+
   return (
     <div>
       {/* header */}
       <div className='flex items-center justify-between xsm:mt-2'>
-        <h3 className='text-2xl xsm:text-lg'>Tập</h3>
+        <h3 className='text-2xl xsm:text-lg'>{t.movie.episodes}</h3>
         {(dataMovie?.type as any) !== 'single' && (
           <Select
             defaultValue={seasion}
@@ -36,7 +37,7 @@ export default function ListEpisode({dataMovie}: any) {
                     <SelectItem
                       value={`${item?.season_number}`}
                       key={item?.id}
-                    >{`Mùa ${item?.season_number}`}</SelectItem>
+                    >{`${t.movie.seasons} ${item?.season_number}`}</SelectItem>
                   )
                 })}
               </SelectGroup>
@@ -47,11 +48,10 @@ export default function ListEpisode({dataMovie}: any) {
       {(dataMovie?.type as any) !== 'single' && (
         <>
           <p className='xsm:mt-2'>
-            Mùa {seasion}:
-            <span>{dataMovie?.seasons?.[+seasion - 1]?.title}</span>
-          </p>
-          <p>
-            {dataMovie?.age_rating}
+            {t.movie.seasons} {seasion}:{' '}
+            <span className='border p-[0.1rem] text-sm mr-1'>
+              {dataMovie?.age_rating}
+            </span>
             {dataMovie?.contentWarnings
               ?.map((item: any) => item?.content)
               .join(', ')}
@@ -91,12 +91,12 @@ export default function ListEpisode({dataMovie}: any) {
                   </div>
                   <div className='flex flex-col xsm:text-[0.6rem]'>
                     <div className='flex items-center justify-between font-semibold xsm:text-xs'>
-                      <span>Tập {item?.episode_number}</span>
-                      <span>52ph</span>
+                      <span>
+                        {t.movie.episodes} {item?.episode_number}
+                      </span>
                     </div>
                     <p className='text-sm line-clamp-3 xsm:text-[0.5rem] xsm:leading-3'>
                       {item?.desc}
-                      vậy.
                     </p>
                   </div>
                 </div>

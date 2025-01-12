@@ -54,3 +54,13 @@ export const plans = [
     isPopular: true,
   },
 ]
+export const langList = [
+  {
+    title: 'EN',
+    value: 'en',
+  },
+  {
+    title: 'VI',
+    value: 'vi',
+  },
+]

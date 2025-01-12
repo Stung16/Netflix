@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import movieApiRequest from '@/apiRequest/movie'
+import getDictionary from '@/app/dictionaries'
 import Banner from '@/sections/home/Banner'
 import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
@@ -15,17 +16,22 @@ export default async function page({
 }) {
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
-  const [resGenreId, resBanner] = await Promise.all([
+  const [resGenreId, resBanner, t] = await Promise.all([
     movieApiRequest.SgenreID(params.id, accesstoken),
     movieApiRequest.Sbanner(accesstoken),
+    getDictionary(params.lang),
   ])
   const dataBanner = resBanner.payload?.data
   const dataGenre = resGenreId.payload?.data
 
   return (
     <Fragment>
-      <Banner dataBanner={dataBanner} />
+      <Banner
+        dataBanner={dataBanner}
+        t={t}
+      />
       <ListMovieType
+        t={t}
         idGenre={params.id}
         dataGenre={dataGenre}
       />

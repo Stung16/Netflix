@@ -6,7 +6,7 @@ import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
 import Link from 'next/link'
 import {useState} from 'react'
 
-export default function InfoMovie({dataBanner}: any) {
+export default function InfoMovie({dataBanner, t}: any) {
   // const {isPlayBanner, setIsPlayBanner} = controlStore()
 
   const trackId = dataBanner?.seasons
@@ -20,7 +20,7 @@ export default function InfoMovie({dataBanner}: any) {
   //   }
   // }, [open])
   return (
-    <div className='absolute bottom-[35%] left-[3.75rem] w-[36.188rem] xsm:bottom-[10%] xsm:left-[1rem] xsm:w-[21.5rem]'>
+    <div className='absolute bottom-[35%] left-[3.75rem] w-[36.188rem] xsm:bottom-[10%] xsm:left-[1rem] xsm:w-[21.5rem] z-10'>
       {/* <img className='h-[15.2rem] w-full mb-[1.2rem]' src='/images/banner/titleMovie.webp' alt='' /> */}
       <h1 className='font-sackers text-white text-8xl xsm:text-2xl'>
         {dataBanner?.title}
@@ -36,7 +36,7 @@ export default function InfoMovie({dataBanner}: any) {
         >
           <IcPlay className='size-[1.8rem] mr-4 xsm:size-4 xsm:mr-2' />
           <span className='font-medium leading-6 text-[1.2rem] xsm:text-[0.6rem]'>
-            Phát
+            {t.button.play}
           </span>
         </Link>
         <div
@@ -45,11 +45,12 @@ export default function InfoMovie({dataBanner}: any) {
         >
           <IcInfor className='size-[1.8rem] mr-4 xsm:size-4 xsm:mr-2' />
           <span className='font-medium leading-6 text-[1.2rem] xsm:text-[0.6rem]'>
-            Thông tin khác
+            {t.button.inforOther}
           </span>
         </div>
       </div>
       <PopUpInfoMovie
+        t={t}
         open={open}
         setOpen={setOpent}
         dataBanner={dataBanner}

@@ -18,7 +18,7 @@ import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
 
 // import debounce from 'lodash/debounce'
-export default function HeaderProfile({profile}: any) {
+export default function HeaderProfile({profile, t}: any) {
   const router = useRouter()
   const [isPending, setTransition] = useTransition()
 
@@ -93,20 +93,20 @@ export default function HeaderProfile({profile}: any) {
                     className={`${style.itemListProfile} flex items-center space-x-3 border-b`}
                   >
                     <IcBackHistory className='size-6 text-white' />
-                    <p>Quay lại Netflix</p>
+                    <p>{t.navBar.backNetflix}</p>
                   </Link>
                 </li>
                 <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >
                   <IcManager className='size-6 text-white' />
-                  <p>Quản lý hồ sơ</p>
+                  <p>{t.headerNav.profile.manageProfiles}</p>
                 </li>
                 <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >
                   <IcChangeProfile className='size-6 text-white' />
-                  <p>Chuyển hồ sơ</p>
+                  <p>{t.headerNav.profile.switchProfiles}</p>
                 </li>
                 <li>
                   <Link
@@ -114,20 +114,20 @@ export default function HeaderProfile({profile}: any) {
                     className={`${style.itemListProfile} flex items-center space-x-3`}
                   >
                     <IcAcount className='size-6 text-white' />
-                    <p>Tài khoản</p>
+                    <p>{t.headerNav.profile.account}</p>
                   </Link>
                 </li>
                 <li
                   className={`${style.itemListProfile} flex items-center space-x-3`}
                 >
                   <IcInforAcount className='size-6 text-white' />
-                  <p>Trung tâm trợ giúp</p>
+                  <p>{t.headerNav.profile.helpCenter}</p>
                 </li>
                 <li
                   onClick={handleLogout}
                   className={`${style.itemListProfile} flex justify-center items-center space-x-3 border-t ${isPending && 'pointer-events-none'}`}
                 >
-                  <p>Đăng xuất khỏi Netflix</p>
+                  <p>{t.headerNav.profile.signOut}</p>
                   {isPending && (
                     <div
                       className={`border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid animate-spin`}

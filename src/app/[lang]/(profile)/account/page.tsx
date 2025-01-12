@@ -1,42 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import getDictionary from '@/app/dictionaries'
 import {cn} from '@/lib/utils'
 import InforService from '@/sections/account/InforService'
 import Link from 'next/link'
 import React from 'react'
-const quickLinks = [
-  {link: '', title: 'Thay đổi gói dịch vụ', disabled: true},
-  {
-    link: '/account/manageaccountaccess',
-    title: 'Quản lý quyền truy cập và thiết bị',
-    disabled: false,
-  },
-  {link: '/account/password', title: 'Cập nhật mật khẩu', disabled: false},
-  // {link: '', title: 'Chuyển hồ sơ'},
-  // {link: '', title: 'Điều chỉnh tính năng kiểm soát của cha mẹ'},
-]
-export default function page() {
+export default async function page({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+  const quickLinks = [
+    {
+      link: '/account/manageaccountaccess',
+      title: t.title.ManageAccess_devices,
+      disabled: false,
+    },
+    {link: '/account/password', title: t.title.updatePassword, disabled: false},
+  ]
   return (
     <div className='w-full'>
       <div className='px-4 xsm:px-0 xsm:text-[0.6rem]'>
-        <h1 className='text-2xl xsm:text-base font-semibold'>Tài khoản</h1>
-        <p className='text-gray-600'>Thông tin tư cách thành viên</p>
+        <h1 className='text-2xl xsm:text-base font-semibold'>
+          {t.headerNav.profile.account}
+        </h1>
+        <p className='text-gray-600'>{t.headerNav.profile.inforMemberShip}</p>
       </div>
       <div className='mx-auto bg-white rounded-lg flex flex-col space-y-6'>
         {/* Membership Info */}
         <div className='p-4 xsm:p-2 border rounded-lg xsm:text-[0.6rem] xsm:mt-2'>
-          <InforService />
+          <InforService t={t} />
           <Link
             href={'/account/membership'}
             className='block mt-4 w-full hover:bg-gray-100 text-gray-800 py-2 xsm:py-1 xsm:px-2 px-4 rounded-lg text-left xsm:mt-2'
           >
-            Quản lý tư cách thành viên
+            {t.headerNav.profile.Manage_membership}
           </Link>
         </div>
 
         {/* Quick Links */}
         <div className='p-4 border rounded-lg xsm:p-2 xsm:text-[0.6rem]'>
           <h2 className='text-lg font-semibold mb-2 xsm:text-sm'>
-            Liên kết nhanh
+            {t.title.quickLinks}
           </h2>
           <ul className='sm:space-y-2'>
             {quickLinks.map(

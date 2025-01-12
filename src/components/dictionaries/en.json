@@ -1,0 +1,85 @@
+{
+	"headerNav": {
+		"home": "Home",
+		"tvShows": "TV Shows",
+		"movies": "Movies",
+		"newAndPopular": "New & Popular",
+		"myList": "My List",
+		"Browse": "Browse",
+		"profile": {
+			"password": "Password",
+			"account": "Account",
+			"manageProfiles": "Manage Profiles",
+			"switchProfiles": "Switch Profiles",
+			"helpCenter": "Help Center",
+			"signOut": "Sign out of Netflix",
+			"inforMemberShip": "Membership Details",
+			"Manage_membership": "Manage Membership"
+		}
+	},
+	"navBar": {
+		"backNetflix": "Back to Netflix",
+		"overview": "Overview",
+		"memberShip": "Membership",
+		"security": "Security",
+		"devices": "Devices"
+	},
+	"button": {
+		"seeAll": "Explore All",
+		"play": "Play",
+		"inforOther": "More Info",
+		"destroyMemberShip": "Cancel Membership",
+		"deviceCurrent": "Current device",
+		"cancel": "Cancel",
+		"save": "Save"
+	},
+	"movie": {
+		"seasons": "Seasons",
+		"cast": "Cast",
+		"genres": "genres",
+		"thisMovieIs": "This movie is",
+		"episodes": "Episodes"
+	},
+	"title": {
+		"myList": "My List",
+		"quickLinks": "Quick Links",
+		"ManageAccess_devices": "Manage Access Devices",
+		"updatePassword": "Update Password",
+		"inforAccount": "Account Details",
+		"Access_Privacy": "Access and Privacy",
+		"Access_device": "Access and devices",
+		"ManageDevice_logined": "Manage signed-in devices",
+		"accountAccess": "Account Access",
+		"dowloadDeviceMobile": "Mobile Downloads",
+		"changePass": "Change password"
+	},
+	"orther": {
+		"phone": "Mobile phone",
+		"memberForm": "Member since",
+		"month": "month",
+		"year": "year",
+		"day": "Day",
+		"nextPayment": "Next payment",
+		"viewPaymentHistory": "View payment history",
+		"inforService": "Plan Details",
+		"inforPayment": "Payment info",
+		"inforQuality": "1080p video resolution, ad-free viewing, and more.",
+		"usedDevice": "Using 0 of 2 download devices",
+		"plans": {
+			"mobile": "Mobile",
+			"basic": "Basic",
+			"standard": "Standard",
+			"premium": "Premium"
+		},
+		"changePass": "change your password",
+		"NewPass": "New Password",
+		"res_Pass": "Re-enter new Password",
+		"currentPass": "Current Password",
+		"strongSecurity": "for added security.",
+		"pleaseWaite": "Please wait"
+	},
+	"desc": {
+		"manageaccountaccess": "These signed-in devices have recently been active on this account. You can sign out any unfamiliar devices or",
+		"changePass": "Protect your account with a unique password at least 6 characters long."
+	}
+}
