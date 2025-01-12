@@ -6,25 +6,34 @@ import 'slick-carousel/slick/slick-theme.css'
 import HeaderProfile from '@/layout/header/HeaderProfile'
 import {redirect} from 'next/navigation'
 import NavBarAccount from '@/components/navBar/NavBarAccount'
+import getDictionary from '@/app/dictionaries'
 
 export default async function AccountLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: {lang: string}
 }) {
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
   try {
-    const [resAccount] = await Promise.all([acountApiRequest.Sme(accesstoken)])
+    const [resAccount, t] = await Promise.all([
+      acountApiRequest.Sme(accesstoken),
+      getDictionary(params.lang),
+    ])
     const dataAcount = resAccount.payload?.data
     if (!dataAcount?.subscriptions_id) {
       return redirect('/signup/planform')
     }
     return (
       <div className='bg-white'>
-        <HeaderProfile profile={dataAcount} />
+        <HeaderProfile
+          profile={dataAcount}
+          t={t}
+        />
         <main className='relative min-h-screen xsm:mx-4 mx-[20.75rem] mt-[4.25rem] xsm:mt-[3rem] flex pt-8 sm:space-x-8'>
-          <NavBarAccount />
+          <NavBarAccount t={t} />
           {children}
         </main>
       </div>

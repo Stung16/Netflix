@@ -24,6 +24,7 @@ export default function PlayListMovie({
   dataPlaylist,
   favoriteMovies,
   idGenre,
+  t,
 }: any) {
   const isLoading = false
   const sliderRef = useRef<Slider | null>(null)
@@ -100,6 +101,7 @@ export default function PlayListMovie({
             return (
               <Fragment key={movie?.id}>
                 <CardMovie
+                  t={t}
                   inforMovie={movie}
                   idGenre={`genreID/${idGenre}`}
                   favoriteMovies={favoriteMovies}

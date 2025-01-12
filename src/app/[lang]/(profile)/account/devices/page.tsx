@@ -1,3 +1,4 @@
+import getDictionary from '@/app/dictionaries'
 import IcNextSlide from '@/components/icons/IcNextSlide'
 import Link from 'next/link'
 import React from 'react'
@@ -7,19 +8,21 @@ interface PrivacyAccess {
   link: string
   description: string
 }
-export default function page() {
+export default async function page({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+
   const privacyAccess: PrivacyAccess[] = [
     {
-      heading: 'Truy cập tài khoản',
-      label: 'Truy cập và thiết bị',
+      heading: t.title.accountAccess,
+      label: t.title.Access_device,
       link: '/account/manageaccountaccess',
-      description: 'Quản lý thiết bị đã đăng nhập',
+      description: t.title.ManageDevice_logined,
     },
     {
-      heading: 'Tải xuống thiết bị di động',
-      label: 'Chuyển hồ sơ',
+      heading: t.title.dowloadDeviceMobile,
+      label: t.headerNav.profile.switchProfiles,
       link: '',
-      description: 'Đang dùng 0/2 thiết bị tải xuống',
+      description: t.orther.usedDevice,
     },
   ]
   return (

@@ -5,12 +5,17 @@ import movieApiRequest from '@/apiRequest/movie'
 import {cookies} from 'next/headers'
 import React, {Fragment} from 'react'
 import ListSearch from '@/components/movie/listSearch/page'
+import getDictionary from '@/app/dictionaries'
 
 export default async function page({
   searchParams,
+  params,
 }: {
   searchParams: {
     q: string
+  }
+  params: {
+    lang: string
   }
 }) {
   const cookieStore = cookies()
@@ -20,8 +25,9 @@ export default async function page({
   }
 
   try {
-    const [resSearch] = await Promise.all([
+    const [resSearch, t] = await Promise.all([
       movieApiRequest.Ssearch(accesstoken, searchParams.q),
+      getDictionary(params.lang),
     ])
     const dataSearch = resSearch.payload?.data
 
@@ -30,6 +36,7 @@ export default async function page({
         {/* listFavorite */}
         <div className='pt-[5rem]'>
           <ListSearch
+            t={t}
             dataPlaylist={dataSearch?.movies}
             favoriteMovies={dataSearch?.idMovieFavorite}
           />

@@ -5,13 +5,15 @@ import InfoMovie from '@/components/banner/InfoMovie'
 import {useEffect, useRef, useState} from 'react'
 import Image from 'next/image'
 import controlStore from '@/app/(store)/control'
+import {cn} from '@/lib/utils'
 
-export default function Banner({dataBanner}: any) {
+export default function Banner({dataBanner, t}: any) {
   const [isMuted, setIsMuted] = useState<boolean>(true) // Mặc định tắt tiếng
+
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   // Zustand store
-  const {setVideoBanner, setVideoEnd} = controlStore()
+  const {setVideoBanner, setVideoEnd, isVideoEnd} = controlStore()
 
   // Lưu vị trí phát video
   const saveVideoPosition = () => {
@@ -69,7 +71,7 @@ export default function Banner({dataBanner}: any) {
         src={dataBanner?.image_url}
         alt=''
         priority
-        className='size-full object-cover absolute'
+        className={cn('size-full object-cover absolute', isVideoEnd && 'z-[9]')}
       />
       <video
         ref={videoRef}
@@ -85,10 +87,13 @@ export default function Banner({dataBanner}: any) {
         poster={dataBanner?.image_url}
         playsInline
         webkit-playsinline={true.toString()}
-        className='object-cover size-full absolute'
+        className={cn('object-cover size-full absolute', isVideoEnd && 'z-0')}
       />
       {/* informationMovieBanner */}
-      <InfoMovie dataBanner={dataBanner} />
+      <InfoMovie
+        dataBanner={dataBanner}
+        t={t}
+      />
       {/* control&type */}
       <Control_type
         isMuted={isMuted}
