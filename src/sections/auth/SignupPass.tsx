@@ -14,7 +14,7 @@ type FormData = {
   password: string
 }
 
-export default function SignupPass() {
+export default function SignupPass({t}: any) {
   const [email, setEmail] = useState<string | null>(null)
   const [isPending, setTransition] = useTransition()
   const router = useRouter()
@@ -35,10 +35,10 @@ export default function SignupPass() {
             return router.push('/')
           }
         }
-        toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
+        toast.error(t.alerts.accountNotMatch)
       } catch (error: any) {
         console.log(error)
-        toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
+        toast.error(t.alerts.accountNotMatch)
       }
     })
   }
@@ -66,19 +66,17 @@ export default function SignupPass() {
     <div className='max-w-md mx-auto p-4 space-y-4 top-[8rem] border rounded-md shadow-md relative bg-white z-50'>
       {/* Tiêu đề */}
       <h1 className='text-2xl font-bold text-gray-900'>
-        Chào mừng bạn quay lại!
+        {t.orther.WelcomeBack}
         <br />
-        Tham gia Netflix thật đơn giản.
+        {t.orther.JoinEz}
       </h1>
 
       {/* Phụ đề */}
-      <p className='text-sm text-gray-700'>
-        Chỉ cần nhập mật khẩu và bạn sẽ được xem ngay lập tức.
-      </p>
+      <p className='text-sm text-gray-700'>{t.orther.enterPassAndSeeNow}</p>
 
       {/* Email */}
       <p className='text-sm text-gray-800 font-semibold'>
-        Email: <span>{email}</span>
+        {t.AuthLayout.login.email}: <span>{email}</span>
       </p>
 
       {/* Form */}
@@ -88,13 +86,13 @@ export default function SignupPass() {
       >
         {/* Nhập mật khẩu */}
         <div>
-          <Label htmlFor='password'>Mật khẩu</Label>
+          <Label htmlFor='password'>{t.AuthLayout.login.password}</Label>
           <Input
             id='password'
             type='password'
-            placeholder='Nhập mật khẩu'
+            placeholder={t.AuthLayout.login.placephoder.passLogin}
             {...register('password', {
-              required: 'Mật khẩu không được để trống',
+              required: t.schema.requied,
             })}
           />
           {errors.password && (
@@ -108,7 +106,7 @@ export default function SignupPass() {
             href='#'
             className='text-sm text-blue-600 hover:underline'
           >
-            Bạn quên mật khẩu?
+            {t.AuthLayout.login.forgotPas}
           </a>
         </div>
 
@@ -120,7 +118,7 @@ export default function SignupPass() {
           {isPending && (
             <div className='border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid  mr-[0.5rem] animate-spin' />
           )}
-          Tiếp theo
+          {t.button.continue}
         </Button>
       </form>
     </div>

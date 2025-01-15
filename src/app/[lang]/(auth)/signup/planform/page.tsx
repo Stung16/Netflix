@@ -1,11 +1,14 @@
+import getDictionary from '@/app/dictionaries'
 import Plans from '@/sections/auth/Plans'
 import React from 'react'
 
-export default function page() {
+export default async function page({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+
   return (
     <div>
-      <h1>Chọn gói dịch vụ phù hợp với bạn</h1>
-      <Plans />
+      <h1>{t.title.ChooseService}</h1>
+      <Plans t={t} />
     </div>
   )
 }

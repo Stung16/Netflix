@@ -24,12 +24,12 @@ function getAllEpisodes(data: any) {
 }
 
 export default function Watch({
-  lang,
+  t,
   movieId,
   trackId,
   dataMovie,
 }: {
-  lang: string
+  t: any
   movieId: string | number
   trackId: string | number
   dataMovie: any
@@ -75,6 +75,7 @@ export default function Watch({
 
   return (
     <VideoPlayer
+      t={t}
       options={videoJsOptions}
       onReady={handlePlayerReady}
       inforEpisodes={EpisodeCurrent}

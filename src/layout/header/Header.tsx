@@ -8,6 +8,7 @@ import {useEffect, useState, useTransition} from 'react'
 import {Input} from '@/components/ui/input'
 import Image from 'next/image'
 import Link from 'next/link'
+
 // import IcManager from '@/components/icons/IcManager'
 // import IcChangeProfile from '@/components/icons/IcChangeProfile'
 import IcInforAcount from '@/components/icons/IcInforAcount'
@@ -74,10 +75,10 @@ export default function Header({
     setTransition(async () => {
       try {
         await authApiRequest.logout()
-        toast.success(`đăng xuất thành công`)
+        toast.success(t.alerts.logoutSuccess)
       } catch (error: any) {
         console.log(error)
-        toast.success(`đăng xuất thành công`)
+        toast.success(t.alerts.logoutSuccess)
       } finally {
         router.push('/login')
       }

@@ -1,5 +1,7 @@
+import getDictionary from '@/app/dictionaries'
 import FormLogin from '@/sections/auth/FormLogin'
 
-export default function page({params}: {params: {lang: string}}) {
-  return <FormLogin lang={params.lang} />
+export default async function page({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+  return <FormLogin t={t} />
 }

@@ -5,6 +5,7 @@ import Watch from '@/sections/wath/Watch'
 import {cookies} from 'next/headers'
 import React from 'react'
 import {redirect} from 'next/navigation'
+import getDictionary from '@/app/dictionaries'
 
 export default async function WatchPage({
   params,
@@ -21,12 +22,13 @@ export default async function WatchPage({
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
   try {
-    const [resMovie, resAccount] = await Promise.all([
+    const [resMovie, resAccount, t] = await Promise.all([
       movieApiRequest.Smovie(
         accesstoken,
         `${params.id}?trackId=${searchParams.trackId}`,
       ),
       acountApiRequest.Sme(accesstoken),
+      getDictionary(params.lang),
     ])
     const dataAcount = resAccount.payload?.data
     const dataMovie = resMovie.payload?.data
@@ -35,7 +37,7 @@ export default async function WatchPage({
     }
     return (
       <Watch
-        lang={params.lang}
+        t={t}
         movieId={params.id}
         trackId={searchParams.trackId}
         dataMovie={dataMovie}

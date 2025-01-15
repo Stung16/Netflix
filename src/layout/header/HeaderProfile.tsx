@@ -38,10 +38,10 @@ export default function HeaderProfile({profile, t}: any) {
     setTransition(async () => {
       try {
         await authApiRequest.logout()
-        toast.success(`đăng xuất thành công`)
+        toast.success(t.alerts.logoutSuccess)
       } catch (error: any) {
         console.log(error)
-        toast.success(`đăng xuất thành công`)
+        toast.success(t.alerts.logoutSuccess)
       } finally {
         router.push('/login')
       }

@@ -1,7 +1,8 @@
-'use client'
+import getDictionary from '@/app/dictionaries'
 import FormSignup from '@/sections/auth/FormSignup'
 import React from 'react'
 
-export default function Singup({params}: {params: {lang: string}}) {
-  return <FormSignup lang={params.lang} />
+export default async function Singup({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+  return <FormSignup t={t} />
 }

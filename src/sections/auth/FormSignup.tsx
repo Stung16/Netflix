@@ -25,7 +25,7 @@ import {setCookieLocal} from '@/lib/utils'
 interface propsLogin {
   email: string
 }
-export default function FormSignup({lang}: any) {
+export default function FormSignup({t}: any) {
   const router = useRouter()
   const [isPending, setTransition] = useTransition()
 
@@ -46,10 +46,10 @@ export default function FormSignup({lang}: any) {
           }
           return router.push('/login')
         }
-        toast.error(`Email không hợp lệ`)
+        toast.error(t.alerts.emailNotMatch)
       } catch (error: any) {
         console.log(error)
-        toast.error(`Email không hợp lệ`)
+        toast.error(t.alerts.emailNotMatch)
       }
     })
   }
@@ -84,7 +84,7 @@ export default function FormSignup({lang}: any) {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
+                <FormMessage className='xsm:text-[0.6rem text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
               </FormItem>
             )}
           />

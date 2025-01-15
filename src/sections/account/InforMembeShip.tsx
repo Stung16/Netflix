@@ -1,13 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React from 'react'
+import React, {useState, useTransition} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
-import {formatPhoneNumber, getNextPaymentDate, propService} from '@/lib/utils'
+import {
+  cn,
+  formatPhoneNumber,
+  getNextPaymentDate,
+  propService,
+} from '@/lib/utils'
 import useStore from '@/app/(store)/profile'
 import Image from 'next/image'
+import PopUpAlert from '@/components/popUps/PopUpAlert'
+import authApiRequest from '@/apiRequest/auth'
+import {toast} from 'sonner'
 
 export default function InforMembeShip({t}: any) {
   const {profile} = useStore((state) => state)
+  const [open, setOpent] = useState<boolean>(false)
+  const [isPending, setTransition] = useTransition()
+
   const getServiceTitle = (subscriptionId: keyof propService) => {
     switch (subscriptionId) {
       case 'premium':
@@ -21,6 +32,23 @@ export default function InforMembeShip({t}: any) {
       default:
         return ''
     }
+  }
+  const handleDestroySubs = () => {
+    setTransition(async () => {
+      try {
+        const {status} = await authApiRequest.destroySubscription()
+        if (status === 200) {
+          await authApiRequest.logout()
+          toast.success(t.alerts.success)
+          toast.warning(t.alerts.LoginAgain)
+        }
+      } catch (error: any) {
+        console.log(error)
+        toast.error(t.alerts.someThingErr)
+      } finally {
+        setOpent(false)
+      }
+    })
   }
   return (
     <div className='mt-4 flex flex-col space-y-4'>
@@ -94,10 +122,25 @@ export default function InforMembeShip({t}: any) {
 
       {/* Cancel Membership */}
       <div className='sm:p-4'>
-        <button className='w-full bg-red-100 text-red-600 py-2 px-4 rounded-lg font-medium hover:bg-red-200 xsm:text-[0.6rem]'>
+        <button
+          onClick={() => setOpent(true)}
+          disabled={isPending}
+          className={cn(
+            'w-full bg-red-100 text-red-600 py-2 px-4 rounded-lg font-medium hover:bg-red-200 xsm:text-[0.6rem]',
+            isPending && 'pointer-events-none',
+          )}
+        >
           {t.button.destroyMemberShip}
         </button>
       </div>
+      <PopUpAlert
+        t={t}
+        open={open}
+        setOpen={setOpent}
+        text={{title: t.alerts.title, subTitle: t.alerts.subTitle}}
+        isPending={isPending}
+        handleContinue={handleDestroySubs}
+      />
     </div>
   )
 }

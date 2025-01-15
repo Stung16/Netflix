@@ -41,7 +41,6 @@ export default function CardMovieFavorite({inforMovie, t}: any) {
       setActive(false)
     }
   }, [open])
-  // console.log(inforMovie);
   const handleDeleteFavorite = (id: string | number) => {
     setTransition(async () => {
       const res = await movieApiRequest.deleteFavorite(id)

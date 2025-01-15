@@ -16,7 +16,6 @@ import {Input} from '@/components/ui/input'
 import {useEffect, useState, useTransition} from 'react'
 import ICHidePass from '@/components/icons/ICHidePass'
 import {Button} from '@/components/ui/button'
-import {LoginSchema} from '@/lib/schemas'
 import Link from 'next/link'
 import authApiRequest from '@/apiRequest/auth'
 import {useRouter, useSearchParams} from 'next/navigation'
@@ -31,7 +30,21 @@ interface propsLogin {
   email: string
   password: string
 }
-export default function FormLogin({lang}: any) {
+export default function FormLogin({t}: any) {
+  const LoginSchema = z.object({
+    email: z.string().email({
+      message: t.schema.email,
+    }),
+    password: z
+      .string({
+        message: t.schema.requied,
+      })
+      .min(8, {
+        message: t.schema.password,
+      }),
+    toastError: z.string().optional(),
+  })
+
   const searchParams = useSearchParams()
   const clearStorage = searchParams.get('clearStorage')
   const router = useRouter()
@@ -59,11 +72,11 @@ export default function FormLogin({lang}: any) {
               device: getDeviceInfo(navigator.userAgent),
             })
           }
-          toast.success(`đăng nhập thành công!`)
+          toast.success(t.alerts.loginSuccess)
         }
       } catch (error: any) {
         console.log(error)
-        toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
+        toast.error(t.alerts.someThingErr)
       }
     })
   }
@@ -79,7 +92,7 @@ export default function FormLogin({lang}: any) {
   return (
     <div className='max-w-[30rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] xsm:top-[4.5rem] z-30 text-white sm:bg-[rgba(0,0,0,0.7)] xsm:px-4 xsm:py-0'>
       <h1 className='text-2xl xsm:text-[2rem] text-white font-medium'>
-        Đăng nhập
+        {t.AuthLayout.Login.login}
       </h1>
       <Form {...form}>
         <form
@@ -92,18 +105,18 @@ export default function FormLogin({lang}: any) {
             render={({field}) => (
               <FormItem className='space-y-[0.5rem] text-white'>
                 <FormLabel className='text-[#666] xsm:hidden lining-nums proportional-nums text-[1rem] font-normal leading-[1.2] tracking-[0.0125rem] xsm:text-sm not-italic xsm:tracking-[0.01094rem]'>
-                  Email address*
+                  {t.AuthLayout.Login.email}
                 </FormLabel>
                 <FormControl>
                   <Input
                     tabIndex={1}
                     spellCheck='false'
                     className='text-white placeholder:text-[#A3A3A3] rounded-none text-[0.875rem] font-medium leading-[1.2] tracking-[-0.014rem] border-[#8c8c8c] h-[3rem]'
-                    placeholder='Email hoặc số điện thoại'
+                    placeholder={t.AuthLayout.Login.placephoder.emailLogin}
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className='text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
+                <FormMessage className='text-[0.875rem] xsm:text-[0.6rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
               </FormItem>
             )}
           />
@@ -113,7 +126,7 @@ export default function FormLogin({lang}: any) {
             render={({field}) => (
               <FormItem className='space-y-[0.5rem] !mb-[2.5rem]'>
                 <FormLabel className='text-[#666] xsm:hidden lining-nums proportional-nums text-[1rem] font-normal leading-[1.2] tracking-[0.0125rem] xsm:text-sm not-italic xsm:tracking-[0.01094rem]'>
-                  Password*
+                  {t.AuthLayout.Login.password}
                 </FormLabel>
                 <FormControl>
                   <div className='relative'>
@@ -122,7 +135,7 @@ export default function FormLogin({lang}: any) {
                       spellCheck='false'
                       type={`${show ? 'text' : 'password'}`}
                       className='text-white placeholder:text-[#A3A3A3] rounded-none text-[0.875rem] font-medium leading-[1.2] tracking-[-0.014rem] border-[#8c8c8c] h-[3rem]'
-                      placeholder='Mât khẩu'
+                      placeholder={t.AuthLayout.Login.placephoder.passLogin}
                       {...field}
                     />
                     <span
@@ -138,7 +151,7 @@ export default function FormLogin({lang}: any) {
                     </span>
                   </div>
                 </FormControl>
-                <FormMessage className='text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
+                <FormMessage className='text-[0.875rem] xsm:text-[0.6rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
               </FormItem>
             )}
           />
@@ -147,7 +160,7 @@ export default function FormLogin({lang}: any) {
               // onClick={() => setOpent(true)}
               className='text-greyscaletext-5 cursor-pointer text-[0.875rem] font-medium leading-[1.2] tracking-[-0.014rem] underline xsm:text-[0.625rem] not-italic xsm:tracking-[0.00313rem]'
             >
-              Forgot your password?
+              {t.AuthLayout.Login.forgotPas}
             </div>
             {/* <FormField
                 control={form.control}
@@ -173,7 +186,7 @@ export default function FormLogin({lang}: any) {
               {isPending && (
                 <div className='border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid text-white mr-[0.5rem] animate-spin' />
               )}
-              Đăng nhập
+              {t.AuthLayout.Login.login}
             </Button>
           </div>
           {form.formState.errors.toastError && (
@@ -185,13 +198,13 @@ export default function FormLogin({lang}: any) {
       </Form>
       <div className='flex items-center w-fit mx-auto space-x-[0.56rem] mt-[1.67rem] xsm:mt-8 xsm:mb-4'>
         <span className='text-gray-400 text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'>
-          Bạn mới tham gia Netflix?
+          {t.AuthLayout.Login.newJoin}
         </span>
         <Link
           className='text-white text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'
           href={`/signup`}
         >
-          Đăng ký ngay.
+          {t.AuthLayout.Login.resgiternow}
         </Link>
       </div>
     </div>

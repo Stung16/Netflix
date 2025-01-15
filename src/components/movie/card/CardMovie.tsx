@@ -14,7 +14,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import controlStore from '@/app/(store)/control'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
-import Control_type from '@/components/banner/Control_type'
 
 export default function CardMovie({
   inforMovie,
@@ -22,10 +21,7 @@ export default function CardMovie({
   idGenre,
   t,
 }: any) {
-  console.log(inforMovie)
-
   const {videoBanner} = controlStore()
-  const [isMuted, setIsMuted] = useState<boolean>(true)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isPending, setTransition] = useTransition()
   const trackId = inforMovie?.seasons
@@ -122,13 +118,6 @@ export default function CardMovie({
                     className='object-cover h-[10.313rem] relative z-50'
                     playsInline
                     webkit-playsinline={true.toString()}
-                  />
-                  <Control_type
-                    isMuted={isMuted}
-                    setIsMuted={setIsMuted}
-                    videoRef={videoRef}
-                    cls='top-[8rem] z-[10000000]'
-                    clsIcon='size-3'
                   />
                 </Fragment>
               )}

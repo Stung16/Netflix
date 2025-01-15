@@ -39,11 +39,11 @@ export default function FormUpdatePass({t}: any) {
       try {
         const {payload, status} = await acountApiRequest.SChangePass(data)
         if (status === 200) {
-          toast.success(`Cập nhật mật khẩu thành công!`)
+          toast.success(t.alerts.success)
         }
       } catch (error: any) {
         console.log(error)
-        toast.error('Đã có lỗi xảy ra. Vui lòng thử lại!')
+        toast.error(t.alerts.someThingErr)
       }
     })
   }
@@ -65,7 +65,7 @@ export default function FormUpdatePass({t}: any) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='text-red-500' />
+              <FormMessage className='xsm:text-[0.6rem] text-red-500' />
             </FormItem>
           )}
         />
@@ -86,7 +86,7 @@ export default function FormUpdatePass({t}: any) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='text-red-500' />
+              <FormMessage className='xsm:text-[0.6rem] text-red-500' />
             </FormItem>
           )}
         />
@@ -107,7 +107,7 @@ export default function FormUpdatePass({t}: any) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className='text-red-500' />
+              <FormMessage className='xsm:text-[0.6rem] text-red-500' />
             </FormItem>
           )}
         />

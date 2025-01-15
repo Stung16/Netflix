@@ -35,5 +35,7 @@ const authApiRequest = {
   },
   checkMail: (body: any) => http.post<any>('/check-mail', body),
   UpdateActive: (body: any) => http.post<any>('/update-active', body),
+  destroySubscription: (body?: any) =>
+    http.post<any>('/destroy-subscription', body),
 }
 export default authApiRequest
