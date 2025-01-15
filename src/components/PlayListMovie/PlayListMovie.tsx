@@ -62,7 +62,7 @@ export default function PlayListMovie({
     }
   }
   return (
-    <div className='bg-transparent mb-12'>
+    <div className='bg-transparent pb-12'>
       <h2 className={`font-medium leading-[1.3] ${style.titleSub}`}>
         <div className='flex items-end mb-2'>
           {!isLoading ? (

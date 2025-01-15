@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LoadingCard from '@/components/Loading/LoadingCard'
 import PlayListMovie from '@/components/PlayListMovie/PlayListMovie'
-import React, {Fragment} from 'react'
+import React from 'react'
 import {Suspense} from 'react'
 
 export default function ListMovieType({idGenre, dataGenre: dataHome, t}: any) {
   return (
     <div>
-      <div className='min-h-screen overflow-hidden pt-[5rem] xsm:pt-4'>
+      <div className='overflow-hidden pt-[5rem] xsm:pt-4 h-full '>
         {dataHome?.dataGenre?.map((playList: any, index: number) => {
           return (
-            <Fragment key={index}>
+            <section key={index}>
               <Suspense fallback={<LoadingCard />}>
                 <PlayListMovie
                   t={t}
@@ -19,7 +19,7 @@ export default function ListMovieType({idGenre, dataGenre: dataHome, t}: any) {
                   idGenre={idGenre}
                 />
               </Suspense>
-            </Fragment>
+            </section>
           )
         })}
       </div>
