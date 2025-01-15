@@ -16,11 +16,13 @@ interface VideoPlayerProps {
   onReady: any
   inforEpisodes: any
   inforMovie: any
+  t: any
 }
 
 export default function VideoPlayer({
   options,
   onReady,
+  t,
   inforEpisodes,
   inforMovie,
 }: VideoPlayerProps) {
@@ -105,7 +107,10 @@ export default function VideoPlayer({
           )}
         >
           <IcListEipoints className='size-8 cursor-pointer text-white group-hover:scale-125' />
-          <PopupListEpsiode listEpsiode={inforMovie?.seasons} />
+          <PopupListEpsiode
+            listEpsiode={inforMovie?.seasons}
+            t={t}
+          />
         </div>
       )}
     </div>

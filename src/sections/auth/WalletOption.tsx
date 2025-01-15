@@ -27,16 +27,16 @@ const momoSchema = z.object({
     .string()
     .regex(
       /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
-      'Số điện thoại không hợp lệ. Vui lòng nhập từ 9-11 chữ số.',
+      'Invalid phone number. Please enter 9 to 11 digits.',
     ),
   isAgreed: z.boolean().refine((val) => val === true, {
-    message: 'Bạn cần đồng ý với điều khoản để tiếp tục.',
+    message: 'You need to agree to the terms to continue.',
   }),
 })
 
 type MomoFormValues = z.infer<typeof momoSchema>
 
-export default function WalletOption() {
+export default function WalletOption({t}: any) {
   const router = useRouter()
   const [option, setOption] = useState<any>(null)
   const [isPending, setTransition] = useTransition()
@@ -80,16 +80,14 @@ export default function WalletOption() {
       return router.push('/signup/planform')
     }
   }, [router])
-  console.log(option)
 
   return (
     <div className='max-w-[30rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] z-30 bg-white'>
       <div className='max-w-md mx-auto px-4'>
-        <h2 className='text-2xl font-bold text-center mb-4'>Thiết lập MoMo</h2>
-        <p className='text-gray-600 mb-6'>
-          Nhập số điện thoại di động MoMo của bạn. Chúng tôi sẽ dùng số điện
-          thoại này để gửi các thông báo và xử lý thanh toán.
-        </p>
+        <h2 className='text-2xl font-bold text-center mb-4'>
+          {t.desc.WalletOptionMOMO}
+        </h2>
+        <p className='text-gray-600 mb-6'>{t.title.establishMOMO}</p>
 
         {/* Form */}
         <Form {...form}>
@@ -103,7 +101,7 @@ export default function WalletOption() {
               name='phoneNumber'
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>Số điện thoại di động</FormLabel>
+                  <FormLabel>{t.orther.phone}</FormLabel>
                   <div className='flex items-center border rounded-lg overflow-hidden'>
                     <span className='bg-gray-200 px-3 py-2 text-gray-700'>
                       +84
@@ -112,7 +110,7 @@ export default function WalletOption() {
                       <Input
                         {...field}
                         type='number'
-                        placeholder='Số điện thoại di động'
+                        placeholder={t.orther.phone}
                         className='flex-1 px-3 py-2 border-none ring-0 focus-visible:ring-0 focus-visible:ring-transparent'
                       />
                     </FormControl>
@@ -128,7 +126,7 @@ export default function WalletOption() {
                   {option?.price
                     ? `${option?.price.toLocaleString('vi-VN')} đ`
                     : 'loading...'}
-                  /tháng
+                  /{t.orther.month}
                 </p>
                 <p className='text-sm text-gray-600'>
                   {option?.title ? option?.title : 'loading...'}
@@ -138,7 +136,7 @@ export default function WalletOption() {
                 href={'planform'}
                 className='text-blue-500 underline text-sm'
               >
-                Thay đổi
+                {t.orther.change}
               </Link>
             </div>
 
@@ -156,21 +154,21 @@ export default function WalletOption() {
                       />
                     </FormControl>
                     <span className='text-sm text-gray-600'>
-                      Tôi đồng ý với{' '}
+                      {t.orther.i_argee}{' '}
                       <a
                         href='#'
                         className='text-blue-500 underline'
                         onClick={() => alert('Mở điều khoản sử dụng')}
                       >
-                        Điều khoản sử dụng
+                        {t.orther.clause_use}
                       </a>{' '}
-                      và{' '}
+                      {t.orther.and}{' '}
                       <a
                         href='#'
                         className='text-blue-500 underline'
                         onClick={() => alert('Mở chính sách quyền riêng tư')}
                       >
-                        Chính sách quyền riêng tư
+                        {t.orther.privacyPolicy}
                       </a>
                       .
                     </span>
@@ -188,14 +186,14 @@ export default function WalletOption() {
               {isPending && (
                 <div className='border-[#666] size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid  mr-[0.5rem] animate-spin' />
               )}
-              Kích hoạt tư cách thành viên
+              {t.button.createMemberShip}
             </Button>
           </form>
         </Form>
 
         {/* Ghi chú */}
         <p className='text-sm text-gray-600 text-center mt-4'>
-          Bạn sẽ được chuyển đến MoMo để hoàn tất việc thanh toán.
+          {t.desc.notificationMoMo}
         </p>
       </div>
     </div>

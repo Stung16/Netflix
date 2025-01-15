@@ -14,8 +14,6 @@ export default async function DefaultLayout({
   params: {lang: string}
   children: React.ReactNode
 }) {
-  console.log(params)
-
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
   // try {
@@ -28,7 +26,7 @@ export default async function DefaultLayout({
     redirect('/signup/planform')
   }
   return (
-    <div className='bg-[#141414]'>
+    <div className=''>
       <Header
         profile={dataAcount}
         lang={params?.lang}
@@ -37,10 +35,4 @@ export default async function DefaultLayout({
       <main className='relative h-screen'>{children}</main>
     </div>
   )
-  // } catch (error: any) {
-  //   console.log(error)
-  //   if (error.digest?.includes('NEXT_REDIRECT')) {
-  //     throw error
-  //   }
-  // }
 }

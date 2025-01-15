@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {useState} from 'react'
 import Image from 'next/image'
 
-export default function PopupListEpsiode({listEpsiode}: any) {
-  console.log(listEpsiode)
-
+export default function PopupListEpsiode({t}: any) {
   const [activeEpisode, setActiveEpisode] = useState<null | number>(null)
   const episodes = [
     {
@@ -65,7 +64,7 @@ export default function PopupListEpsiode({listEpsiode}: any) {
   return (
     <div className='text-white absolute top-full bg-[#606060] min-w-[35rem] right-0 flex flex-col'>
       <h3 className='px-2 tracking-[0.01rem] text-3xl leading-[3rem] font-medium py-2'>
-        Loạt phim truyền hình ngắn
+        {t.title.TvShortShow}
       </h3>
       <ul className='flex flex-col max-h-[25rem] overflow-y-scroll'>
         {episodes.map((episode) => (

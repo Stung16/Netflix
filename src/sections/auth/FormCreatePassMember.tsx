@@ -13,7 +13,7 @@ import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import {Input} from '@/components/ui/input'
-import {Fragment, useEffect, useState, useTransition} from 'react'
+import {Fragment, useTransition} from 'react'
 import {Button} from '@/components/ui/button'
 import {LoginSchema} from '@/lib/schemas'
 import authApiRequest from '@/apiRequest/auth'
@@ -26,7 +26,7 @@ interface propsLogin {
   email: string
   password: string
 }
-export default function FormCreatePassMember({lang}: any) {
+export default function FormCreatePassMember({t}: any) {
   const {profile} = useStore((state) => state)
 
   const router = useRouter()
@@ -53,13 +53,12 @@ export default function FormCreatePassMember({lang}: any) {
           } catch (error: any) {
             console.log(error)
 
-            toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
+            toast.error(t.alerts.accountNotMatch)
           }
         })
       } catch (error: any) {
         console.log(error)
-
-        toast.error(`Tài khoản hoặc mật khẩu không đúng!`)
+        toast.error(t.alerts.accountNotMatch)
       }
     })
   }
@@ -111,7 +110,7 @@ export default function FormCreatePassMember({lang}: any) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className='text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
+                    <FormMessage className='text-[0.875rem] xsm:text-[0.6rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
                   </FormItem>
                 )}
               />
@@ -135,7 +134,7 @@ export default function FormCreatePassMember({lang}: any) {
                         />
                       </div>
                     </FormControl>
-                    <FormMessage className='text-[0.875rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
+                    <FormMessage className='text-[0.875rem] xsm:text-[0.6rem] font-medium leading-[1.2] -tracking-[0.014rem]' />
                   </FormItem>
                 )}
               />

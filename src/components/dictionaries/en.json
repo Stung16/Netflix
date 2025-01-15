@@ -31,7 +31,9 @@
 		"destroyMemberShip": "Cancel Membership",
 		"deviceCurrent": "Current device",
 		"cancel": "Cancel",
-		"save": "Save"
+		"save": "Save",
+		"continue": "Continue",
+		"createMemberShip": "Activate Membership"
 	},
 	"movie": {
 		"seasons": "Seasons",
@@ -51,7 +53,15 @@
 		"ManageDevice_logined": "Manage signed-in devices",
 		"accountAccess": "Account Access",
 		"dowloadDeviceMobile": "Mobile Downloads",
-		"changePass": "Change password"
+		"changePass": "Change password",
+		"establishMOMO": "Set up MoMo",
+		"choosePayment": "Choose a payment method",
+		"ChooseService": "Choose the plan that’s right for you",
+		"popularMost": "Most popular",
+		"qualityAndImage": "Chất lượng hình và âm",
+		"Resolution": "Resolution",
+		"deviceSupport": "Supported devices",
+		"TvShortShow": "Miniseries"
 	},
 	"orther": {
 		"phone": "Mobile phone",
@@ -76,10 +86,54 @@
 		"res_Pass": "Re-enter new Password",
 		"currentPass": "Current Password",
 		"strongSecurity": "for added security.",
-		"pleaseWaite": "Please wait"
+		"pleaseWaite": "Please wait",
+		"change": "Change",
+		"i_argee": "I agree",
+		"clause_use": "Terms of Use",
+		"privacyPolicy": "Privacy Policy",
+		"and": "and",
+		"WelcomeBack": "Welcome back!",
+		"JoinEz": "Joining Netflix is so simple.",
+		"enterPassAndSeeNow": "Joining Netflix is so simple.",
+		"e_wallet": "E-wallet"
 	},
 	"desc": {
 		"manageaccountaccess": "These signed-in devices have recently been active on this account. You can sign out any unfamiliar devices or",
-		"changePass": "Protect your account with a unique password at least 6 characters long."
+		"changePass": "Protect your account with a unique password at least 6 characters long.",
+		"WalletOptionMOMO": " Enter your MoMo mobile number. We will use this number to send notifications and process payments.",
+		"notificationMoMo": "You will be redirected to MoMo to complete the payment.",
+		"progressPayment": "Your payment process is encrypted, and you can change your payment method at any time."
+	},
+	"alerts": {
+		"title": "Are you absolutely sure?",
+		"subTitle": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+		"loginSuccess": "Login success!",
+		"LoginAgain": "Please Login again!",
+		"logoutSuccess": "Logout success!",
+		"destroyMemberShip": "Delete memberShip success!",
+		"success": "Successfully!",
+		"someThingErr": "something went wrong!",
+		"accountNotMatch": "Email or password incorrect!",
+		"emailNotMatch": "Invalid email!"
+	},
+	"AuthLayout": {
+		"Login": {
+			"login": "Login",
+			"resgiter": "Resgiter",
+			"resgiternow": "Resgiter now!",
+			"email": "Email*",
+			"password": "Password*",
+			"forgotPas": "Forgot your password?",
+			"newJoin": "You just joined Netflix?",
+			"placephoder": {
+				"emailLogin": "Email or phone number",
+				"passLogin": "password"
+			}
+		}
+	},
+	"schema": {
+		"requied": "Requied!",
+		"email": "Please enter a valid email address!",
+		"password": "Password must be at least 8 characters long!"
 	}
 }

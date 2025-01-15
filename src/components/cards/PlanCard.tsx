@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 interface Plan {
   title: string
@@ -6,6 +7,7 @@ interface Plan {
   resolution: string
   devices: string
   isPopular: boolean
+  t: any
 }
 interface PlanCardProps extends Plan {
   isSelected: boolean
@@ -20,6 +22,7 @@ export default function PlanCard({
   isPopular,
   isSelected,
   onClick,
+  t,
 }: PlanCardProps) {
   return (
     <div
@@ -30,14 +33,20 @@ export default function PlanCard({
     >
       {isPopular && (
         <div className='bg-red-500 text-white text-sm px-2 py-1 rounded-full inline-block mb-2'>
-          Phổ biến nhất
+          {t.title.popularMost}
         </div>
       )}
       <h3 className='text-xl font-bold mb-2'>{title}</h3>
       <p className='text-gray-700 mb-1'>{`Giá hàng tháng: ${price.toLocaleString('vi-VN')} đ`}</p>
-      <p className='text-gray-700 mb-1'>Chất lượng hình và âm: {quality}</p>
-      <p className='text-gray-700 mb-1'>Độ phân giải: {resolution}</p>
-      <p className='text-gray-700'>Thiết bị hỗ trợ: {devices}</p>
+      <p className='text-gray-700 mb-1'>
+        {t.title.qualityAndImage}: {quality}
+      </p>
+      <p className='text-gray-700 mb-1'>
+        {t.title.Resolution}: {resolution}
+      </p>
+      <p className='text-gray-700'>
+        {t.title.deviceSupport}: {devices}
+      </p>
     </div>
   )
 }

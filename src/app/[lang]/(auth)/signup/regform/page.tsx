@@ -1,6 +1,8 @@
+import getDictionary from '@/app/dictionaries'
 import FormCreatePassMember from '@/sections/auth/FormCreatePassMember'
 import React from 'react'
 
-export default function page({params}: {params: {lang: string}}) {
-  return <FormCreatePassMember lang={params.lang} />
+export default async function page({params}: {params: {lang: string}}) {
+  const [t] = await Promise.all([getDictionary(params.lang)])
+  return <FormCreatePassMember t={t} />
 }
