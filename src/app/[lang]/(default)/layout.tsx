@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import {redirect} from 'next/navigation'
 import getDictionary from '@/app/dictionaries'
+import Footer from '@/layout/footer/Footer'
 
 export default async function DefaultLayout({
   children,
@@ -32,7 +33,8 @@ export default async function DefaultLayout({
         lang={params?.lang}
         t={t}
       />
-      <main className='relative h-screen'>{children}</main>
+      <main className='relative'>{children}</main>
+      <Footer t={t} />
     </div>
   )
 }
