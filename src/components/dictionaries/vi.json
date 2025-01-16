@@ -33,7 +33,8 @@
 		"cancel": "Huỷ",
 		"save": "Lưu",
 		"continue": "Tiếp tục",
-		"createMemberShip": "Kích hoạt tư cách thành viên"
+		"createMemberShip": "Kích hoạt tư cách thành viên",
+		"sendMail": "Gửi email cho tôi"
 	},
 	"movie": {
 		"seasons": "Mùa",
@@ -61,7 +62,9 @@
 		"qualityAndImage": "Chất lượng hình và âm",
 		"Resolution": "Độ phân giải",
 		"deviceSupport": "Thiết bị hỗ trợ",
-		"TvShortShow": "Loạt phim truyền hình ngắn"
+		"TvShortShow": "Loạt phim truyền hình ngắn",
+		"forgotPas": "Hãy nhập email của bạn để kích hoạt mật khẩu mới!!!",
+		"HasAccountNetflix": "Bạn đã có tài khoản Netflix?"
 	},
 	"orther": {
 		"phone": "Điện thoại di động",
@@ -102,7 +105,8 @@
 		"changePass": "Bảo vệ tài khoản của bạn bằng một mật khẩu duy nhất dài ít nhất 6 ký tự.",
 		"WalletOptionMOMO": " Nhập số điện thoại di động MoMo của bạn. Chúng tôi sẽ dùng số điện thoại này để gửi các thông báo và xử lý thanh toán.",
 		"notificationMoMo": "Bạn sẽ được chuyển đến MoMo để hoàn tất việc thanh toán.",
-		"progressPayment": "Quá trình thanh toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào."
+		"progressPayment": "Quá trình thanh toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào.",
+		"readyCrateMembership": "Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn."
 	},
 	"alerts": {
 		"title": "Bạn có chắc chắn hoàn toàn không?",
@@ -134,6 +138,8 @@
 	"schema": {
 		"requied": "Trường này không được để trống!",
 		"email": "Vui lòng nhập địa chỉ email hợp lệ!",
-		"password": "Mật khẩu phải dài ít nhất 8 ký tự!"
+		"password": "Mật khẩu phải dài ít nhất 8 ký tự!",
+		"emailNotExit": "Email không tồn tại!",
+		"checkmail": "Vui lòng kiểm tra email!"
 	}
 }

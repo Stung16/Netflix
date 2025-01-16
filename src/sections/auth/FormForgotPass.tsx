@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+import React from 'react'
 import {
   Form,
   FormControl,
@@ -13,52 +13,47 @@ import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import {Input} from '@/components/ui/input'
+import {SignupSchema} from '@/lib/schemas'
 import {useTransition} from 'react'
 import {Button} from '@/components/ui/button'
-import {SignupSchema} from '@/lib/schemas'
-import Link from 'next/link'
 import authApiRequest from '@/apiRequest/auth'
 import {useRouter} from 'next/navigation'
 import {toast} from 'sonner'
-import {setCookieLocal} from '@/lib/utils'
 
-interface propsLogin {
+interface propsForgot {
   email: string
 }
-export default function FormSignup({t}: any) {
+
+export default function FormForgotPass({t}: any) {
   const router = useRouter()
   const [isPending, setTransition] = useTransition()
-
   const form = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
   })
-  function handleCheckMail(values: propsLogin) {
+  function handleForgot(values: propsForgot) {
     setTransition(async () => {
       try {
-        const {payload, status} = await authApiRequest.checkMail(values)
+        const {status} = await authApiRequest.forgotPass(values)
         if (status === 200) {
-          setCookieLocal('emailSignup', values.email)
-          if (payload?.data?.resultCode === 500) {
-            return router.push('/signup/password')
-          }
-          if (payload?.data?.resultCode === 100) {
-            return router.push('/signup/regform')
-          }
+          toast.success(t.schema.checkmail)
           return router.push('/login')
+        } else {
+          toast.error(t.schema.emailNotExit)
         }
-        toast.error(t.alerts.emailNotMatch)
       } catch (error: any) {
         console.log(error)
-        toast.error(t.alerts.emailNotMatch)
+        toast.error(t.schema.emailNotExit)
       }
     })
   }
-  async function onSubmit(values: z.infer<typeof SignupSchema>) {
-    handleCheckMail(values)
+
+  function onSubmit(values: propsForgot) {
+    handleForgot(values)
   }
+
   return (
     <div className='max-w-[30rem] w-full mx-auto flex justify-center py-12 px-[4.25rem] flex-col relative top-[6rem] xsm:top-[4.5rem] z-30 text-white sm:bg-[rgba(0,0,0,0.7)] xsm:px-4 xsm:py-0'>
-      <h1 className='xsm:text-sm'>{t.desc.readyCrateMembership}</h1>
+      <h1 className='xsm:text-sm'>{t.title.forgotPas}</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -95,22 +90,11 @@ export default function FormSignup({t}: any) {
               {isPending && (
                 <div className='border-white size-[1rem] rounded-[50%] border-[2px] border-r-0 border-solid  mr-[0.5rem] animate-spin' />
               )}
-              {t.AuthLayout.Login.resgiter}
+              {t.button.sendMail}
             </Button>
           </div>
         </form>
       </Form>
-      <div className='flex items-center w-fit mx-auto space-x-[0.56rem] mt-[1.67rem] xsm:mt-8 xsm:mb-4'>
-        <span className='text-gray-400 text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'>
-          {t.title.HasAccountNetflix}
-        </span>
-        <Link
-          className='text-white text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'
-          href={`/login`}
-        >
-          {t.AuthLayout.Login.login}
-        </Link>
-      </div>
     </div>
   )
 }
