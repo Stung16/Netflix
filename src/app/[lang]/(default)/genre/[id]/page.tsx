@@ -29,10 +29,12 @@ export default async function page({
       <Banner
         dataBanner={dataBanner}
         t={t}
+        lang={params.lang}
       />
       <ListMovieType
         t={t}
         idGenre={params.id}
+        lang={params.lang}
         dataGenre={dataGenre}
       />
     </Fragment>

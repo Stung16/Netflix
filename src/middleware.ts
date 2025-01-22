@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {NextResponse, userAgent} from 'next/server'
 import type {NextRequest} from 'next/server'
-
 const defaultLocale = 'en'
 const locales = ['en', 'vi']
 const protectedPaths = [
@@ -94,12 +93,16 @@ export function middleware(request: NextRequest) {
   )
 
   if (pathnameIsMissingLocale) {
-    const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url)
-    newUrl.search = nextUrl.searchParams.toString()
-    return NextResponse.rewrite(newUrl)
-  }
+    if (nextUrl.searchParams) {
+      const newUrl = new URL(`/${defaultLocale}${pathname}`, request.url)
+      newUrl.search = nextUrl.searchParams.toString()
+      return NextResponse.rewrite(newUrl)
+    }
 
-  // Final rewrite with updated search parameters
+    return NextResponse.rewrite(
+      new URL(`/${defaultLocale}${pathname}`, request.url),
+    )
+  }
   const newUrl = new URL(`${pathname}`, request.url)
   newUrl.search = nextUrl.searchParams.toString()
   return NextResponse.rewrite(newUrl)

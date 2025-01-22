@@ -22,7 +22,7 @@ export default async function page({params}: {params: {lang: string}}) {
         {t.desc.manageaccountaccess}{' '}
         <Link
           className='underline'
-          href={'/account/password'}
+          href={`${params.lang}/account/password`}
         >
           {t.orther.changePass}
         </Link>{' '}

@@ -53,10 +53,12 @@ export default async function HomePage({
         <Banner
           dataBanner={dataBanner}
           t={t}
+          lang={params.lang}
         />
         {/* Component ListMovieType */}
         <ListMovieType
           t={t}
+          lang={params.lang}
           idGenre='home'
           dataGenre={dataGenre}
         />

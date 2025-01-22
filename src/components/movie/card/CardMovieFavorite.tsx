@@ -8,12 +8,12 @@ import IcLike from '@/components/icons/IcLike'
 import IcNextSlide from '@/components/icons/IcNextSlide'
 import IcPlay from '@/components/icons/IcPlay'
 import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
 
-export default function CardMovieFavorite({inforMovie, t}: any) {
+export default function CardMovieFavorite({inforMovie, t, lang}: any) {
   const [isPending, setTransition] = useTransition()
   const trackId = inforMovie?.seasons
     .find((item: any) => item.season_number === '1')
@@ -107,7 +107,10 @@ export default function CardMovieFavorite({inforMovie, t}: any) {
               <div className='flex items-center justify-between'>
                 <div className='flex items-center space-x-4'>
                   <Link
-                    href={`/watch/${inforMovie?.id}?trackId=${trackId}`}
+                    href={redirectLinkWithLang(
+                      lang,
+                      `watch/${inforMovie?.id}?trackId=${trackId}`,
+                    )}
                     className='inline-block bg-white p-2 rounded-full'
                   >
                     <IcPlay className='text-black size-4' />
@@ -172,6 +175,7 @@ export default function CardMovieFavorite({inforMovie, t}: any) {
       </div>
       <PopUpInfoMovie
         t={t}
+        lang={lang}
         open={open}
         setOpen={setOpent}
         dataBanner={inforMovie}

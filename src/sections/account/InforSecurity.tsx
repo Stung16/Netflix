@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React from 'react'
 import useStore from '@/app/(store)/profile'
 import {Skeleton} from '@/components/ui/skeleton'
+import {redirectLinkWithLang} from '@/lib/utils'
 interface PrivacyAccess {
   label: string
   description: string
@@ -12,12 +13,12 @@ interface PrivacyAccess {
   badge?: string
 }
 
-export default function InforSecurity({t}: any) {
+export default function InforSecurity({t, lang}: {t: any; lang: string}) {
   const {profile} = useStore((state) => state)
   const privacyAccess: PrivacyAccess[] = [
     {
       label: t.title.Access_device,
-      link: '/account/manageaccountaccess',
+      link: redirectLinkWithLang(lang, 'account/manageaccountaccess'),
       description: t.title.ManageDevice_logined,
     },
     // {label: 'Chuyển hồ sơ', description: '', badge: 'Mới'},
@@ -32,7 +33,7 @@ export default function InforSecurity({t}: any) {
       {/* Account Information */}
       <div className='p-4 xsm:p-2 sm:space-y-4 border rounded-lg xsm:text-[0.6rem]'>
         <Link
-          href={'/account/password'}
+          href={redirectLinkWithLang(lang, 'account/password')}
           className='flex hover:bg-gray-100 items-center justify-between px-4 py-2 cursor-pointer'
         >
           <div className='flex items-center'>

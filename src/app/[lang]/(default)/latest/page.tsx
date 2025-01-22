@@ -29,9 +29,11 @@ export default async function page({
       <Banner
         dataBanner={dataBanner}
         t={t}
+        lang={params.lang}
       />
       <ListMovieType
         t={t}
+        lang={params.lang}
         idGenre={'genres3'}
         dataGenre={dataGenre}
       />

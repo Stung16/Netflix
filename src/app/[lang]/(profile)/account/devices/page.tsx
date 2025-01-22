@@ -1,5 +1,6 @@
 import getDictionary from '@/app/dictionaries'
 import IcNextSlide from '@/components/icons/IcNextSlide'
+import {redirectLinkWithLang} from '@/lib/utils'
 import Link from 'next/link'
 import React from 'react'
 interface PrivacyAccess {
@@ -15,7 +16,10 @@ export default async function page({params}: {params: {lang: string}}) {
     {
       heading: t.title.accountAccess,
       label: t.title.Access_device,
-      link: '/account/manageaccountaccess',
+      link: redirectLinkWithLang(
+        params.lang,
+        'account/dmanageaccountaccessevices',
+      ),
       description: t.title.ManageDevice_logined,
     },
     {
@@ -28,7 +32,9 @@ export default async function page({params}: {params: {lang: string}}) {
   return (
     <div className='w-full'>
       <div>
-        <h1 className='text-2xl xsm:text-base font-semibold'>Thiết bị</h1>
+        <h1 className='text-2xl xsm:text-base font-semibold'>
+          {t.navBar.devices}
+        </h1>
       </div>
       <div className='flex flex-col space-y-4 xsm:mt-2 mt-4 xsm:text-[0.6rem]'>
         {privacyAccess.map((item, idx) => (

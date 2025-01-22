@@ -3,7 +3,12 @@
 import CardMovie from '@/components/movie/card/CardMovie'
 import React, {Fragment} from 'react'
 
-export default function ListSearch({dataPlaylist, favoriteMovies, t}: any) {
+export default function ListSearch({
+  dataPlaylist,
+  favoriteMovies,
+  t,
+  lang,
+}: any) {
   return (
     <div className='grid grid-cols-5 items-center gap-x-4 gap-y-[5rem]'>
       {dataPlaylist?.map((movie: any) => {
@@ -12,6 +17,7 @@ export default function ListSearch({dataPlaylist, favoriteMovies, t}: any) {
             <CardMovie
               t={t}
               inforMovie={movie}
+              lang={lang}
               idGenre={'search'}
               favoriteMovies={favoriteMovies}
             />

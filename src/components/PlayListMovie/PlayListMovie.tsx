@@ -3,7 +3,7 @@
 import Slider from 'react-slick'
 import style from './style.module.css'
 import IcNextSlide from '@/components/icons/IcNextSlide'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import {Fragment, useRef, useState} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
 import Link from 'next/link'
@@ -19,13 +19,21 @@ interface SliderSettings {
   initialSlide?: number
   responsive?: any
 }
+interface PlayListMovieProps {
+  dataPlaylist: any
+  favoriteMovies: any
+  idGenre: any
+  lang: string
+  t: any
+}
 
 export default function PlayListMovie({
   dataPlaylist,
   favoriteMovies,
   idGenre,
+  lang,
   t,
-}: any) {
+}: PlayListMovieProps) {
   const isLoading = false
   const sliderRef = useRef<Slider | null>(null)
   const [loop, setLoop] = useState<boolean>(false)
@@ -67,7 +75,7 @@ export default function PlayListMovie({
         <div className='flex items-end mb-2'>
           {!isLoading ? (
             <Link
-              href={'/'}
+              href={redirectLinkWithLang(lang)}
               className={`${style.titlePlayList} text-[#e5e5e5] hover:text-white ml-[3.75rem] xsm:ml-4 mr-4 text-2xl xsm:text-base w-fit block`}
             >
               {dataPlaylist?.title}
@@ -102,6 +110,7 @@ export default function PlayListMovie({
               <Fragment key={movie?.id}>
                 <CardMovie
                   t={t}
+                  lang={lang}
                   inforMovie={movie}
                   idGenre={`genreID/${idGenre}`}
                   favoriteMovies={favoriteMovies}

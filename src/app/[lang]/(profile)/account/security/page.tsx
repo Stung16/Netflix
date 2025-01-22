@@ -13,7 +13,10 @@ export default async function page({params}: {params: {lang: string}}) {
         </h1>
         <p className='text-gray-600'>{t.title.inforAccount}</p>
       </div>
-      <InforSecurity t={t} />
+      <InforSecurity
+        t={t}
+        lang={params.lang}
+      />
     </div>
   )
 }

@@ -8,11 +8,16 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import IcPlay from '@/components/icons/IcPlay'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import {useState} from 'react'
-export default function ListEpisode({dataMovie, t}: any) {
+interface ListEpisodeProps {
+  dataMovie: any
+  t: any
+  lang: string
+}
+export default function ListEpisode({dataMovie, t, lang}: ListEpisodeProps) {
   const [seasion, setSeasion] = useState('1')
 
   return (
@@ -64,7 +69,10 @@ export default function ListEpisode({dataMovie, t}: any) {
           (item: any, index: number) => {
             return (
               <Link
-                href={`/watch/${dataMovie?.id}?trackId=${item.id}`}
+                href={redirectLinkWithLang(
+                  lang,
+                  `watch/${dataMovie?.id}?trackId=${item.id}`,
+                )}
                 key={item?.id}
                 className={`cursor-pointer flex items-center group min-h-[9rem] xsm:min-h-[5rem] border-b border-solid border-[#404040] overflow-hidden p-4 xsm:p-2 rounded-lg ${index + 1 === 1 && 'bg-[#333]'}`}
               >

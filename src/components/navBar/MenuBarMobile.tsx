@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {redirectLinkWithLang} from '@/lib/utils'
 import Link from 'next/link'
 import React, {memo, useState, useEffect, useRef} from 'react'
 
-const MenuBarMobile = ({t}: any) => {
+const MenuBarMobile = ({t, lang}: {t: any; lang: string}) => {
   const [active, setActive] = useState<boolean>(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -36,19 +37,27 @@ const MenuBarMobile = ({t}: any) => {
       {active && (
         <ul className='absolute bg-[rgb(20,20,20)] top-full left-4 p-1 z-20 w-[5rem] flex flex-col space-y-1'>
           <li onClick={() => setActive(false)}>
-            <Link href={'/'}> {t.headerNav.home}</Link>
+            <Link href={redirectLinkWithLang(lang)}>{t.headerNav.home}</Link>
           </li>
           <li onClick={() => setActive(false)}>
-            <Link href={'/genre/genres2'}> {t.headerNav.tvShows}</Link>
+            <Link href={redirectLinkWithLang(lang, 'genre/genres2')}>
+              {t.headerNav.tvShows}
+            </Link>
           </li>
           <li onClick={() => setActive(false)}>
-            <Link href={'/genre/genres3'}> {t.headerNav.movies}</Link>
+            <Link href={redirectLinkWithLang(lang, 'genre/genres3')}>
+              {t.headerNav.movies}
+            </Link>
           </li>
           <li onClick={() => setActive(false)}>
-            <Link href={'/latest'}> {t.headerNav.newAndPopular}</Link>
+            <Link href={redirectLinkWithLang(lang, 'latest')}>
+              {t.headerNav.newAndPopular}
+            </Link>
           </li>
           <li onClick={() => setActive(false)}>
-            <Link href={'/my-list'}> {t.headerNav.myList}</Link>
+            <Link href={redirectLinkWithLang(lang, 'my-list')}>
+              {t.headerNav.myList}
+            </Link>
           </li>
         </ul>
       )}
