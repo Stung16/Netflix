@@ -9,18 +9,26 @@ import IcNextSlide from '@/components/icons/IcNextSlide'
 import IcPlay from '@/components/icons/IcPlay'
 import IcPlus from '@/components/icons/IcPlus'
 import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import controlStore from '@/app/(store)/control'
 import {Fragment, useEffect, useRef, useState, useTransition} from 'react'
+interface CardMovieProps {
+  inforMovie: any
+  favoriteMovies: any
+  idGenre: any
+  t: any
+  lang: string
+}
 
 export default function CardMovie({
   inforMovie,
   favoriteMovies,
   idGenre,
   t,
-}: any) {
+  lang,
+}: CardMovieProps) {
   const {videoBanner} = controlStore()
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isPending, setTransition] = useTransition()
@@ -122,11 +130,14 @@ export default function CardMovie({
                 </Fragment>
               )}
             </div>
-            <div className='p-4  flex-col flex'>
+            <div className='p-4 flex-col flex'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center space-x-4'>
                   <Link
-                    href={`/watch/${inforMovie?.id}?trackId=${trackId}`}
+                    href={redirectLinkWithLang(
+                      lang,
+                      `watch/${inforMovie?.id}?trackId=${trackId}`,
+                    )}
                     className='inline-block bg-white p-2 rounded-full'
                   >
                     <IcPlay className='text-black size-4' />
@@ -211,6 +222,7 @@ export default function CardMovie({
       <PopUpInfoMovie
         t={t}
         open={open}
+        lang={lang}
         setOpen={setOpent}
         dataBanner={inforMovie}
       />

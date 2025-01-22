@@ -36,6 +36,7 @@ export default async function page({
         {/* listFavorite */}
         <div className='pt-[5rem]'>
           <ListSearch
+            lang={params.lang}
             t={t}
             dataPlaylist={dataSearch?.movies}
             favoriteMovies={dataSearch?.idMovieFavorite}

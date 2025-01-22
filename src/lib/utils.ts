@@ -347,3 +347,10 @@ const desktopDeviceMapping = new Map([
   ['iPhone', 'iPhone'],
   ['iPad', 'iPad'],
 ])
+
+export const redirectLinkWithLang = (lang: string, link: string = '') => {
+  if (lang === 'en') {
+    return `/${link}`.trim()
+  }
+  return `/${lang}/${link}`.trim()
+}

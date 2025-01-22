@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import {usePathname, useRouter} from 'next/navigation'
-import {cn, getDeviceInfo} from '@/lib/utils'
+import {cn, getDeviceInfo, redirectLinkWithLang} from '@/lib/utils'
 import {useEffect, useState, useTransition} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,7 +18,15 @@ import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
 
 // import debounce from 'lodash/debounce'
-export default function HeaderProfile({profile, t}: any) {
+export default function HeaderProfile({
+  profile,
+  t,
+  lang,
+}: {
+  profile: any
+  t: any
+  lang: string
+}) {
   const router = useRouter()
   const [isPending, setTransition] = useTransition()
 
@@ -54,7 +62,7 @@ export default function HeaderProfile({profile, t}: any) {
       }
     >
       {/* logo */}
-      <Link href='/'>
+      <Link href={redirectLinkWithLang(lang)}>
         <IcLogo className='w-[5rem] xsm:w-[3rem] text-[rgb(229,9,20)]' />
       </Link>
       {/* menuTab */}
@@ -89,7 +97,7 @@ export default function HeaderProfile({profile, t}: any) {
               <ul className='flex px-2 flex-col text-[#b3b3b3] py-3 xsm:hidden'>
                 <li>
                   <Link
-                    href={'/'}
+                    href={redirectLinkWithLang(lang)}
                     className={`${style.itemListProfile} flex items-center space-x-3 border-b`}
                   >
                     <IcBackHistory className='size-6 text-white' />
@@ -110,7 +118,7 @@ export default function HeaderProfile({profile, t}: any) {
                 </li>
                 <li>
                   <Link
-                    href={'/account'}
+                    href={redirectLinkWithLang(lang, 'account')}
                     className={`${style.itemListProfile} flex items-center space-x-3`}
                   >
                     <IcAcount className='size-6 text-white' />

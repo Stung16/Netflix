@@ -3,10 +3,19 @@
 import IcInfor from '@/components/icons/IcInfor'
 import IcPlay from '@/components/icons/IcPlay'
 import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
+import {redirectLinkWithLang} from '@/lib/utils'
 import Link from 'next/link'
 import {useState} from 'react'
 
-export default function InfoMovie({dataBanner, t}: any) {
+export default function InfoMovie({
+  dataBanner,
+  t,
+  lang,
+}: {
+  dataBanner: any
+  t: any
+  lang: string
+}) {
   // const {isPlayBanner, setIsPlayBanner} = controlStore()
 
   const trackId = dataBanner?.seasons
@@ -31,7 +40,10 @@ export default function InfoMovie({dataBanner, t}: any) {
       {/* billboard */}
       <div className='mt-6 flex mb-4 xsm:mb-0'>
         <Link
-          href={`/watch/${dataBanner?.id}?trackId=${trackId}`}
+          href={redirectLinkWithLang(
+            lang,
+            `watch/${dataBanner?.id}?trackId=${trackId}`,
+          )}
           className='mr-4 flex items-center bg-white text-black pl-4 pr-[1.4rem] py-[0.6rem] rounded-sm cursor-pointer xsm:px-2 xsm:py-0'
         >
           <IcPlay className='size-[1.8rem] mr-4 xsm:size-4 xsm:mr-2' />
@@ -50,6 +62,7 @@ export default function InfoMovie({dataBanner, t}: any) {
         </div>
       </div>
       <PopUpInfoMovie
+        lang={lang}
         t={t}
         open={open}
         setOpen={setOpent}

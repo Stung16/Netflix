@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import getDictionary from '@/app/dictionaries'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import InforService from '@/sections/account/InforService'
 import Link from 'next/link'
 import React from 'react'
@@ -8,11 +8,15 @@ export default async function page({params}: {params: {lang: string}}) {
   const [t] = await Promise.all([getDictionary(params.lang)])
   const quickLinks = [
     {
-      link: '/account/manageaccountaccess',
+      link: redirectLinkWithLang(params.lang, 'account/manageaccountaccess'),
       title: t.title.ManageAccess_devices,
       disabled: false,
     },
-    {link: '/account/password', title: t.title.updatePassword, disabled: false},
+    {
+      link: redirectLinkWithLang(params.lang, 'account/password'),
+      title: t.title.updatePassword,
+      disabled: false,
+    },
   ]
   return (
     <div className='w-full'>
@@ -27,7 +31,7 @@ export default async function page({params}: {params: {lang: string}}) {
         <div className='p-4 xsm:p-2 border rounded-lg xsm:text-[0.6rem] xsm:mt-2'>
           <InforService t={t} />
           <Link
-            href={'/account/membership'}
+            href={redirectLinkWithLang(params.lang, 'account/membership')}
             className='block mt-4 w-full hover:bg-gray-100 text-gray-800 py-2 xsm:py-1 xsm:px-2 px-4 rounded-lg text-left xsm:mt-2'
           >
             {t.headerNav.profile.Manage_membership}

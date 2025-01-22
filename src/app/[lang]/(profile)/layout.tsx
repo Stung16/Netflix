@@ -31,9 +31,13 @@ export default async function AccountLayout({
         <HeaderProfile
           profile={dataAcount}
           t={t}
+          lang={params.lang}
         />
         <main className='relative min-h-screen xsm:mx-4 mx-[20.75rem] mt-[4.25rem] xsm:mt-[3rem] flex pt-8 sm:space-x-8'>
-          <NavBarAccount t={t} />
+          <NavBarAccount
+            t={t}
+            lang={params.lang}
+          />
           {children}
         </main>
       </div>

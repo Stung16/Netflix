@@ -7,7 +7,15 @@ import Image from 'next/image'
 import controlStore from '@/app/(store)/control'
 import {cn} from '@/lib/utils'
 
-export default function Banner({dataBanner, t}: any) {
+export default function Banner({
+  dataBanner,
+  t,
+  lang,
+}: {
+  dataBanner: any
+  t: any
+  lang: string
+}) {
   const [isMuted, setIsMuted] = useState<boolean>(true) // Mặc định tắt tiếng
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -93,6 +101,7 @@ export default function Banner({dataBanner, t}: any) {
       <InfoMovie
         dataBanner={dataBanner}
         t={t}
+        lang={lang}
       />
       {/* control&type */}
       <Control_type

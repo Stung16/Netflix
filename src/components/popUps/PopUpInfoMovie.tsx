@@ -9,7 +9,7 @@ import {
 import {Cross2Icon} from '@radix-ui/react-icons'
 import {Fragment, useEffect, useState, useRef, memo} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
-import {getYear} from '@/lib/utils'
+import {getYear, redirectLinkWithLang} from '@/lib/utils'
 import IcPlay from '@/components/icons/IcPlay'
 import ListEpisode from '@/components/movie/ListEpisode/ListEpisode'
 import Link from 'next/link'
@@ -22,11 +22,13 @@ const PopUpInfoMovie = ({
   setOpen,
   dataBanner,
   t,
+  lang,
 }: {
   open: boolean
   setOpen: (state: boolean) => void
   dataBanner: any
   t: any
+  lang: string
 }) => {
   const {videoBanner} = controlStore()
   const [isVideoEnded, setIsVideoEnded] = useState<boolean>(false)
@@ -151,7 +153,10 @@ const PopUpInfoMovie = ({
             )}
             {/* control&infoIntro */}
             <Link
-              href={`/watch/${dataBanner?.id}?trackId=${trackId}`}
+              href={redirectLinkWithLang(
+                lang,
+                `watch/${dataBanner?.id}?trackId=${trackId}`,
+              )}
               className='absolute bottom-12 z-30 left-12 flex items-center bg-white text-black pl-4 pr-[1.4rem] py-[0.4rem] xsm:py-0 xsm:px-4 rounded-sm cursor-pointer'
             >
               <IcPlay className='size-[1.8rem] mr-4 xsm:size-4' />
@@ -229,6 +234,7 @@ const PopUpInfoMovie = ({
           <ListEpisode
             dataMovie={dataBanner}
             t={t}
+            lang={lang}
           />
           {/* introduce footer*/}
         </div>

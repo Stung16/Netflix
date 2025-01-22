@@ -3,7 +3,7 @@
 import IcNotification from '@/components/icons/IcNotification'
 import IcSearch from '@/components/icons/IcSearch'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
-import {cn} from '@/lib/utils'
+import {cn, redirectLinkWithLang} from '@/lib/utils'
 import {useEffect, useState, useTransition} from 'react'
 import {Input} from '@/components/ui/input'
 import Image from 'next/image'
@@ -37,7 +37,9 @@ export default function Header({
   const [search, setSearch] = useState<boolean>(false)
   const [searchValue, setSearchValue] = useState('')
   const handleSearch = debounce((value: string) => {
-    router.push(`/search?q=${encodeURIComponent(value)}`)
+    router.push(
+      `${redirectLinkWithLang(lang, `search?q=${encodeURIComponent(value)}`)}`,
+    )
   }, 300) // Debounce 300ms
 
   // Xử lý khi người dùng nhập vào ô tìm kiếm
@@ -92,10 +94,7 @@ export default function Header({
       )}
     >
       {/* logo */}
-      <Link
-        href='/'
-        className=''
-      >
+      <Link href={redirectLinkWithLang(lang)}>
         <Image
           alt=''
           src={'/images/logo.png'}
@@ -105,16 +104,19 @@ export default function Header({
         />
       </Link>
       {/* menuTab */}
-      <MenuBarMobile t={t} />
+      <MenuBarMobile
+        lang={lang}
+        t={t}
+      />
       <ul className='xsm:hidden text-sm leading-[1.063rem] flex items-center font-normal'>
         <li className='ml-[1.25rem] list-none'>
           <Link
             className={cn(
               'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname === '/' &&
+              pathname === redirectLinkWithLang(lang) &&
                 'font-medium hover:text-white cursor-default text-white',
             )}
-            href={'/'}
+            href={redirectLinkWithLang(lang)}
           >
             {t.headerNav.home}
           </Link>
@@ -123,10 +125,10 @@ export default function Header({
           <Link
             className={cn(
               'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname === '/genre/genres2' &&
+              pathname === redirectLinkWithLang(lang, 'genre/genres2') &&
                 'font-medium hover:text-white cursor-default text-white',
             )}
-            href={'/genre/genres2'}
+            href={redirectLinkWithLang(lang, 'genre/genres2')}
           >
             {t.headerNav.tvShows}
           </Link>
@@ -135,10 +137,10 @@ export default function Header({
           <Link
             className={cn(
               'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname === '/genre/genres3' &&
+              pathname === redirectLinkWithLang(lang, 'genre/genres3') &&
                 'font-medium hover:text-white cursor-default text-white',
             )}
-            href={'/genre/genres3'}
+            href={redirectLinkWithLang(lang, 'genre/genres3')}
           >
             {t.headerNav.movies}
           </Link>
@@ -147,10 +149,10 @@ export default function Header({
           <Link
             className={cn(
               'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname.startsWith(`/latest`) &&
+              pathname === redirectLinkWithLang(lang, 'latest') &&
                 'font-medium hover:text-white cursor-default text-white',
             )}
-            href={'/latest'}
+            href={redirectLinkWithLang(lang, 'latest')}
           >
             {t.headerNav.newAndPopular}
           </Link>
@@ -159,26 +161,14 @@ export default function Header({
           <Link
             className={cn(
               'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname.startsWith(`/my-list`) &&
+              pathname.startsWith(redirectLinkWithLang(lang, 'my-list')) &&
                 'font-medium hover:text-white cursor-default text-white',
             )}
-            href={'/my-list'}
+            href={redirectLinkWithLang(lang, 'my-list')}
           >
             {t.headerNav.myList}
           </Link>
         </li>
-        {/* <li className='ml-[1.25rem] list-none'>
-          <Link
-            className={cn(
-              'items-center text-neutral-200 leading-[1.063rem] hover:text-[#b3b3b3] flex h-full relative transition-[color] duration-400 cursor-pointer bg-transparent',
-              pathname.startsWith(`/original-audio`) &&
-                'font-medium hover:text-white cursor-default text-white',
-            )}
-            href={'/original-audio'}
-          >
-            Duyệt tìm theo ngôn ngữ
-          </Link>
-        </li> */}
       </ul>
       {/* infor */}
       <div className='items-center flex grow h-full justify-end absolute right-[3.75rem] xsm:right-4 text-sm top-0'>
@@ -229,7 +219,9 @@ export default function Header({
                 className='rounded size-8 xsm:size-6 align-middle'
                 src={profile?.avatar || '/images/avatar.png'}
                 alt='avatar'
-                onClick={() => router.push('/account')}
+                onClick={() =>
+                  router.push(redirectLinkWithLang(lang, 'account'))
+                }
               />
               <span className='group-hover:rotate-180 xsm:hidden transition-all border-[#fff_transparent_transparent] border-solid border-t-[0.313rem] border-x-[0.313rem] border-b-0 size-0 ml-[0.625rem]'></span>
             </div>
@@ -247,21 +239,9 @@ export default function Header({
               )}
             >
               <ul className='flex px-2 flex-col text-[#b3b3b3] py-3 xsm:hidden'>
-                {/* <li
-                  className={`${style.itemListProfile} flex items-center space-x-3`}
-                >
-                  <IcManager className='size-6 text-white' />
-                  <p>Quản lý hồ sơ</p>
-                </li>
-                <li
-                  className={`${style.itemListProfile} flex items-center space-x-3`}
-                >
-                  <IcChangeProfile className='size-6 text-white' />
-                  <p>Chuyển hồ sơ</p>
-                </li> */}
                 <li>
                   <Link
-                    href={'/account'}
+                    href={redirectLinkWithLang(lang, 'account')}
                     className={`${style.itemListProfile} flex items-center space-x-3`}
                   >
                     <IcAcount className='size-6 text-white' />

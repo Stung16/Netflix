@@ -25,6 +25,7 @@ export default async function page({
       <ListFavorite
         dataFavorites={dataFavorites}
         t={t}
+        lang={params.lang}
       />
     </section>
   )
