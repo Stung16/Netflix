@@ -9,14 +9,18 @@ const movieApiRequest = {
         Authorization: `Bearer ${accessToken}`,
       },
     }),
-  SgenreID: (id: string | number, accessToken: string | undefined) =>
-    http.get<any>(`/genre/${id}`, {
+  SgenreID: (
+    id: string | number,
+    accessToken: string | undefined,
+    lang: string | undefined,
+  ) =>
+    http.get<any>(`/genre/${id}/${lang}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'no-store',
       next: {
-        tags: [`genreID/${id}`],
+        tags: [`genreID/${id}/${lang}`],
       },
     }),
   home: () => http.get<any>('/home'),

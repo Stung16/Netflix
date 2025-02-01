@@ -30,7 +30,7 @@ export default async function HomePage({
     // Fetch dữ liệu song song từ API
     const [t, resGenreId, resBanner] = await Promise.all([
       getDictionary(params.lang),
-      movieApiRequest.SgenreID('genres2', accessToken),
+      movieApiRequest.SgenreID('genres2', accessToken, params.lang),
       movieApiRequest.Sbanner(accessToken),
     ])
 
