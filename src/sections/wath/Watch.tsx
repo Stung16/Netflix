@@ -34,6 +34,8 @@ export default function Watch({
   trackId: string | number
   dataMovie: any
 }) {
+  console.log(dataMovie)
+
   const Episodes = getAllEpisodes(dataMovie)
   const EpisodeCurrent = Episodes.find((item: any) => item.id === trackId)
   //
@@ -57,7 +59,7 @@ export default function Watch({
         type: 'video/mp4',
       },
     ],
-    // poster: 'https://your-storage.com/path/to/poster.jpg'
+    poster: dataMovie?.image_url,
   }
 
   const handlePlayerReady = (player: typeof videojs.players) => {
