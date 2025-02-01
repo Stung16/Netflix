@@ -17,7 +17,7 @@ export default async function page({
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
   const [resGenreId, resBanner, t] = await Promise.all([
-    movieApiRequest.SgenreID('genres3', accesstoken),
+    movieApiRequest.SgenreID('genres3', accesstoken, params.lang),
     movieApiRequest.Sbanner(accesstoken),
     getDictionary(params.lang),
   ])
