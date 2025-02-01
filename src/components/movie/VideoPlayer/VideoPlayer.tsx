@@ -106,7 +106,6 @@ export default function VideoPlayer({
             userActive && 'opacity-100 z-50',
           )}
         >
-          <IcListEipoints className='size-8 cursor-pointer text-white group-hover:scale-125' />
           <PopupListEpsiode
             listEpsiode={inforMovie?.seasons}
             t={t}
