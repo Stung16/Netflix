@@ -1,6 +1,6 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-'use client'
 import VideoPlayer from '@/components/movie/VideoPlayer/VideoPlayer'
 import {useRef} from 'react'
 import videojs from 'video.js' // Import types from video.js

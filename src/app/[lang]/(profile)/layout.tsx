@@ -7,6 +7,7 @@ import HeaderProfile from '@/layout/header/HeaderProfile'
 import {redirect} from 'next/navigation'
 import NavBarAccount from '@/components/navBar/NavBarAccount'
 import getDictionary from '@/app/dictionaries'
+import {Suspense} from 'react'
 
 export default async function AccountLayout({
   children,
@@ -27,20 +28,22 @@ export default async function AccountLayout({
       return redirect('/signup/planform')
     }
     return (
-      <div className='bg-white'>
-        <HeaderProfile
-          profile={dataAcount}
-          t={t}
-          lang={params.lang}
-        />
-        <main className='relative min-h-screen xsm:mx-4 mx-[20.75rem] mt-[4.25rem] xsm:mt-[3rem] flex pt-8 sm:space-x-8'>
-          <NavBarAccount
+      <Suspense fallback={<div>..loading</div>}>
+        <div className='bg-white'>
+          <HeaderProfile
+            profile={dataAcount}
             t={t}
             lang={params.lang}
           />
-          {children}
-        </main>
-      </div>
+          <main className='relative min-h-screen xsm:mx-4 mx-[20.75rem] mt-[4.25rem] xsm:mt-[3rem] flex pt-8 sm:space-x-8'>
+            <NavBarAccount
+              t={t}
+              lang={params.lang}
+            />
+            {children}
+          </main>
+        </div>
+      </Suspense>
     )
   } catch (error: any) {
     console.log(error)

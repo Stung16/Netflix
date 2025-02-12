@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CardMovieFavorite from '@/components/movie/card/CardMovieFavorite'
 import React, {Fragment} from 'react'
 

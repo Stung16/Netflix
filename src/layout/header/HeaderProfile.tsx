@@ -1,9 +1,9 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
-import {usePathname, useRouter} from 'next/navigation'
+import {useRouter} from 'next/navigation'
 import {cn, getDeviceInfo, redirectLinkWithLang} from '@/lib/utils'
-import {useEffect, useState, useTransition} from 'react'
+import {useEffect, useTransition} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import IcManager from '@/components/icons/IcManager'

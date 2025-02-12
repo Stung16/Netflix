@@ -5,7 +5,6 @@ import Device from '@/sections/account/Device'
 import {cookies} from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
-
 export default async function page({params}: {params: {lang: string}}) {
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value

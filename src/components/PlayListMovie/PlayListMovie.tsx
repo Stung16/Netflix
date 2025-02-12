@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Slider from 'react-slick'
 import style from './style.module.css'
 import IcNextSlide from '@/components/icons/IcNextSlide'

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Control_type from '@/components/banner/Control_type'
 import InfoMovie from '@/components/banner/InfoMovie'
 import {useEffect, useRef, useState} from 'react'

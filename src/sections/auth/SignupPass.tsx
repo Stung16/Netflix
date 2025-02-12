@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {useLayoutEffect, useState, useTransition} from 'react'
 import {useForm} from 'react-hook-form'
 import {Label} from '@/components/ui/label'

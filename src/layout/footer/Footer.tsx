@@ -4,7 +4,6 @@ import IcFB from '@/components/icons/IcFB'
 import IcIG from '@/components/icons/IcIG'
 import IcTw from '@/components/icons/IcTw'
 import IcYT from '@/components/icons/IcYT'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 

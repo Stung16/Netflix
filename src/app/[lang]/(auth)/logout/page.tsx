@@ -1,6 +1,6 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
 import authApiRequest from '@/apiRequest/auth'
 import LoadingNetflix from '@/components/Loading/LoadingNetflix'
 import {

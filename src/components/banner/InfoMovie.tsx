@@ -1,9 +1,13 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import controlStore from '@/app/(store)/control'
 import IcInfor from '@/components/icons/IcInfor'
 import IcPlay from '@/components/icons/IcPlay'
-import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
 import {redirectLinkWithLang} from '@/lib/utils'
+import dynamic from 'next/dynamic'
+const PopUpInfoMovie = dynamic(
+  () => import('@/components/popUps/PopUpInfoMovie'),
+)
 import Link from 'next/link'
 import {useState} from 'react'
 

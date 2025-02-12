@@ -3,7 +3,6 @@ import movieApiRequest from '@/apiRequest/movie'
 import getDictionary from '@/app/dictionaries'
 import ListFavorite from '@/components/movie/listFavorite/page'
 import {cookies} from 'next/headers'
-
 export default async function page({
   params,
 }: {

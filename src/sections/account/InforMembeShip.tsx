@@ -1,7 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {useState, useTransition} from 'react'
 import {Skeleton} from '@/components/ui/skeleton'
+import dynamic from 'next/dynamic'
+const PopUpAlert = dynamic(() => import('@/components/popUps/PopUpAlert'))
 import {
   cn,
   formatPhoneNumber,
@@ -10,7 +12,6 @@ import {
 } from '@/lib/utils'
 import useStore from '@/app/(store)/profile'
 import Image from 'next/image'
-import PopUpAlert from '@/components/popUps/PopUpAlert'
 import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
 
