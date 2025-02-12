@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import IcBackHistory from '@/components/icons/IcBackHistory'
-import IcListEipoints from '@/components/icons/IcListEipoints'
-import PopupListEpsiode from '@/components/movie/ListEpisode/PopupListEpsiode'
+import dynamic from 'next/dynamic'
+const PopupListEpsiode = dynamic(
+  () => import('@/components/movie/ListEpisode/PopupListEpsiode'),
+)
 import {cn} from '@/lib/utils'
-import Image from 'next/image'
 import {useRouter} from 'next/navigation'
 import {useEffect, useRef, useState} from 'react'
 import videojs from 'video.js'
@@ -23,7 +23,6 @@ export default function VideoPlayer({
   options,
   onReady,
   t,
-  inforEpisodes,
   inforMovie,
 }: VideoPlayerProps) {
   const router = useRouter()

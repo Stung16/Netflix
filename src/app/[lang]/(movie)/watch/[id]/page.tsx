@@ -6,7 +6,6 @@ import {cookies} from 'next/headers'
 import React from 'react'
 import {redirect} from 'next/navigation'
 import getDictionary from '@/app/dictionaries'
-
 export default async function WatchPage({
   params,
   searchParams,

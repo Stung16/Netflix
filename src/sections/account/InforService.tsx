@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import useStore from '@/app/(store)/profile'
 import {Skeleton} from '@/components/ui/skeleton'

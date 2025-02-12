@@ -5,7 +5,6 @@ import Banner from '@/sections/home/Banner'
 import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
 import React, {Fragment} from 'react'
-
 export default async function page({
   params,
 }: {

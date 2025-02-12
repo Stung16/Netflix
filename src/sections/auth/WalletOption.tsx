@@ -1,6 +1,6 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-'use client'
 import React, {useEffect, useLayoutEffect, useState, useTransition} from 'react'
 import {z} from 'zod'
 import {useForm} from 'react-hook-form'

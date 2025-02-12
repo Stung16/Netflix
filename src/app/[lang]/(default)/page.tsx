@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import movieApiRequest from '@/apiRequest/movie'
 import dynamic from 'next/dynamic'
-import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
 import {redirect} from 'next/navigation'
-import React, {Fragment} from 'react'
+import React from 'react'
 import getDictionary from '@/app/dictionaries'
-const Banner = dynamic(() => import('@/sections/home/Banner'))
+import Banner from '@/sections/home/Banner'
+import {Suspense} from 'react'
+
+// const Banner = dynamic(() => import('@/sections/home/Banner'))
+const ListMovieType = dynamic(() => import('@/sections/home/ListMovieType'))
 
 export default async function HomePage({
   params,
@@ -40,7 +41,7 @@ export default async function HomePage({
         genreError: resGenreId.status,
         bannerError: resBanner.status,
       })
-      redirect('/login') // Redirect về login nếu lỗi xác thực
+      return redirect('/login') // Redirect về login nếu lỗi xác thực
     }
 
     // Lấy dữ liệu payload
@@ -48,7 +49,7 @@ export default async function HomePage({
     const dataGenre = resGenreId?.payload?.data || []
 
     return (
-      <Fragment>
+      <Suspense fallback={<div>..loading</div>}>
         {/* Component Banner */}
         <Banner
           dataBanner={dataBanner}
@@ -62,10 +63,11 @@ export default async function HomePage({
           idGenre='home'
           dataGenre={dataGenre}
         />
-      </Fragment>
+      </Suspense>
     )
   } catch (error) {
     console.error('Error fetching data:', error)
+
     // Redirect về login nếu xảy ra lỗi bất ngờ
     return (
       <div className='error-container'>

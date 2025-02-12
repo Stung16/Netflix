@@ -7,6 +7,8 @@ import 'slick-carousel/slick/slick-theme.css'
 import {redirect} from 'next/navigation'
 import getDictionary from '@/app/dictionaries'
 import Footer from '@/layout/footer/Footer'
+export const dynamic = 'force-dynamic'
+import {Suspense} from 'react'
 
 export default async function DefaultLayout({
   children,
@@ -18,16 +20,20 @@ export default async function DefaultLayout({
   const cookieStore = cookies()
   const accesstoken = cookieStore.get('accessToken')?.value
   // try {
+  // Nếu không có token, chuyển hướng về login trước khi gọi API
+  if (!accesstoken) {
+    return redirect('/login')
+  }
   const [resAccount, t] = await Promise.all([
     acountApiRequest.Sme(accesstoken),
     getDictionary(params.lang),
   ])
   const dataAcount = resAccount.payload?.data
   if (!dataAcount?.subscriptions_id) {
-    redirect('/signup/planform')
+    return redirect('/signup/planform')
   }
   return (
-    <div className=''>
+    <Suspense fallback={<div>..loading</div>}>
       <Header
         profile={dataAcount}
         lang={params?.lang}
@@ -35,6 +41,6 @@ export default async function DefaultLayout({
       />
       <main className='relative'>{children}</main>
       <Footer t={t} />
-    </div>
+    </Suspense>
   )
 }

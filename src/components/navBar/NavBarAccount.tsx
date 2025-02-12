@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {usePathname} from 'next/navigation'
 import Link from 'next/link'
 import React from 'react'
@@ -9,7 +9,6 @@ import IcHome from '@/components/icons/IcHome'
 import IcPayment from '@/components/icons/IcPayment'
 import IcSecurity from '@/components/icons/IcSecurity'
 import IcDevice from '@/components/icons/IcDevice'
-// import IcProfile from '@/components/icons/IcProfile'
 
 export default function NavBarAccount({t, lang}: {t: any; lang: string}) {
   const showbar = [

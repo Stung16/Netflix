@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {redirectLinkWithLang} from '@/lib/utils'
 import Link from 'next/link'

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import IcNextSlide from '@/components/icons/IcNextSlide'
 import Link from 'next/link'
 import React from 'react'

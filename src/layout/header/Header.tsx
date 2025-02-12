@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import IcNotification from '@/components/icons/IcNotification'
 import IcSearch from '@/components/icons/IcSearch'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'

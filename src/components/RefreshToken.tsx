@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {usePathname, useRouter} from 'next/navigation'
 import React, {useEffect} from 'react'
 

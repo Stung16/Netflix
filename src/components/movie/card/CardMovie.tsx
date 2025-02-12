@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -8,7 +9,10 @@ import IcLike from '@/components/icons/IcLike'
 import IcNextSlide from '@/components/icons/IcNextSlide'
 import IcPlay from '@/components/icons/IcPlay'
 import IcPlus from '@/components/icons/IcPlus'
-import PopUpInfoMovie from '@/components/popUps/PopUpInfoMovie'
+import dynamic from 'next/dynamic'
+const PopUpInfoMovie = dynamic(
+  () => import('@/components/popUps/PopUpInfoMovie'),
+)
 import {cn, redirectLinkWithLang} from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'

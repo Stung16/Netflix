@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ListFavorite from '@/components/movie/listFavorite/page'
 import movieApiRequest from '@/apiRequest/movie'
 import {cookies} from 'next/headers'
-import React, {Fragment} from 'react'
+import React from 'react'
 import ListSearch from '@/components/movie/listSearch/page'
 import getDictionary from '@/app/dictionaries'
-
 export default async function page({
   searchParams,
   params,
