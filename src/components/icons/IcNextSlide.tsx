@@ -1,4 +1,4 @@
-export default function IcNextSlide({ className = '' }: { className?: string }) {
+export default function IcNextSlide({className = ''}: {className?: string}) {
   return (
     <svg
       stroke='currentColor'
@@ -10,7 +10,11 @@ export default function IcNextSlide({ className = '' }: { className?: string }) 
       className={className}
       xmlns='http://www.w3.org/2000/svg'
     >
-      <polyline fill='none' strokeWidth='2' points='9 6 15 12 9 18'></polyline>
+      <polyline
+        fill='none'
+        strokeWidth='2'
+        points='9 6 15 12 9 18'
+      ></polyline>
     </svg>
   )
 }

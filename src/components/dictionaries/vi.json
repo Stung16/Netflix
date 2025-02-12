@@ -1,145 +1,145 @@
 {
-	"headerNav": {
-		"home": "Trang chủ",
-		"tvShows": "Phim T.hình",
-		"movies": "Phim",
-		"newAndPopular": "Mới & Phổ biến",
-		"myList": "Danh sách của tôi",
-		"Browse": "Duyệt tìm",
-		"profile": {
-			"password": "Mật khẩu",
-			"account": "Tài khoản",
-			"manageProfiles": "Quản lý hồ sơ",
-			"switchProfiles": "Chuyển hồ sơ",
-			"helpCenter": "Trung tâm trợ giúp",
-			"signOut": "Đăng xuất khỏi Netflix",
-			"inforMemberShip": "Thông tin tư cách thành viên",
-			"Manage_membership": "Quản lý tư cách thành viên"
-		}
-	},
-	"navBar": {
-		"backNetflix": "Quay lại Netflix",
-		"overview": "Tổng quan",
-		"memberShip": "Tư cách thành viên",
-		"security": "Bảo mật",
-		"devices": "Thiết bị"
-	},
-	"button": {
-		"seeAll": "Xem tất cả",
-		"play": "Phát",
-		"inforOther": "Thông tin khác",
-		"destroyMemberShip": "Huỷ tư cách thành viên",
-		"deviceCurrent": "Thiết bị hiện tại",
-		"cancel": "Huỷ",
-		"save": "Lưu",
-		"continue": "Tiếp tục",
-		"createMemberShip": "Kích hoạt tư cách thành viên",
-		"sendMail": "Gửi email cho tôi"
-	},
-	"movie": {
-		"seasons": "Mùa",
-		"cast": "Diễn viên",
-		"genres": "Thể loại",
-		"thisMovieIs": "Phim này là",
-		"episodes": "Tập"
-	},
-	"title": {
-		"myList": "Danh sách của tôi",
-		"quickLinks": "Liên kết nhanh",
-		"ManageAccess_devices": "Quản lý thiết bị truy cập",
-		"updatePassword": "Cập nhật mật khẩu",
-		"inforAccount": "Thông tin tài khoản",
-		"Access_Privacy": "Truy cập và quyền riêng tư",
-		"Access_device": "Truy cập và thiết bị",
-		"ManageDevice_logined": "Quản lý thiết bị đã đăng nhập",
-		"accountAccess": "Truy cập tài khoản",
-		"dowloadDeviceMobile": "Tải xuống thiết bị di động",
-		"changePass": "Thay đổi mật khẩu",
-		"establishMOMO": "Thiết lập MoMo",
-		"choosePayment": "Chọn cách thanh toán",
-		"ChooseService": "Chọn gói dịch vụ phù hợp với bạn",
-		"popularMost": "Phổ biến nhất",
-		"qualityAndImage": "Chất lượng hình và âm",
-		"Resolution": "Độ phân giải",
-		"deviceSupport": "Thiết bị hỗ trợ",
-		"TvShortShow": "Loạt phim truyền hình ngắn",
-		"forgotPas": "Hãy nhập email của bạn để kích hoạt mật khẩu mới!!!",
-		"HasAccountNetflix": "Bạn đã có tài khoản Netflix?"
-	},
-	"orther": {
-		"phone": "Điện thoại di động",
-		"memberForm": "Thành viên từ",
-		"month": "tháng",
-		"year": "năm",
-		"day": "Ngày",
-		"nextPayment": "Ngày thanh toán tiếp theo",
-		"viewPaymentHistory": "Xem lịch sử thanh toán",
-		"inforService": "Thông tin gói dịch vụ",
-		"inforPayment": "Thông tin thanh toán",
-		"inforQuality": "Độ phân giải video 1080p, không quảng cáo khi xem và hơn thế nữa.",
-		"usedDevice": "Đang dùng 0/2 thiết bị tải xuống",
-		"plans": {
-			"mobile": "Gói di động",
-			"basic": "Gói cơ bản",
-			"standard": "Gói tiêu chuẩn",
-			"premium": "Gói cao cấp"
-		},
-		"changePass": "Đổi mật khẩu",
-		"NewPass": "Mật khẩu mới",
-		"res_Pass": "Nhập lại mật khẩu",
-		"currentPass": "Mật khẩu hiện tại",
-		"strongSecurity": "Tăng cường bảo mật",
-		"pleaseWaite": "Vui lòng đợi",
-		"change": "Thay đổi",
-		"i_argee": "Tôi đồng ý",
-		"clause_use": "Điều khoản sử dụng",
-		"privacyPolicy": "Chính sách quyền riêng tư",
-		"and": "và",
-		"WelcomeBack": "Chào mừng bạn quay lại!",
-		"JoinEz": "Tham gia Netflix thật đơn giản.",
-		"enterPassAndSeeNow": "Chỉ cần nhập mật khẩu và bạn sẽ được xem ngay lập tức.",
-		"e_wallet": "Ví điện tử"
-	},
-	"desc": {
-		"manageaccountaccess": "Gần đây, các thiết bị đã đăng nhập này đã hoạt động trên tài khoản này. Bạn có thể đăng xuất bất kỳ thiết bị lạ nào hoặc",
-		"changePass": "Bảo vệ tài khoản của bạn bằng một mật khẩu duy nhất dài ít nhất 6 ký tự.",
-		"WalletOptionMOMO": " Nhập số điện thoại di động MoMo của bạn. Chúng tôi sẽ dùng số điện thoại này để gửi các thông báo và xử lý thanh toán.",
-		"notificationMoMo": "Bạn sẽ được chuyển đến MoMo để hoàn tất việc thanh toán.",
-		"progressPayment": "Quá trình thanh toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào.",
-		"readyCrateMembership": "Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn."
-	},
-	"alerts": {
-		"title": "Bạn có chắc chắn hoàn toàn không?",
-		"subTitle": "Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn tài khoản của bạn và xóa dữ liệu của bạn khỏi máy chủ của chúng tôi.",
-		"loginSuccess": "Đăng nhập thành công!",
-		"LoginAgain": "Vui lòng đăng nhập lại!",
-		"logoutSuccess": "Logout success!",
-		"destroyMemberShip": "Xoá tư cách thành viên thành công!",
-		"success": "Thành công!",
-		"someThingErr": "Đã xảy ra sự cố!",
-		"accountNotMatch": "Tài khoản hoặc mật khẩu không đúng!",
-		"emailNotMatch": "Email không hợp lệ!"
-	},
-	"AuthLayout": {
-		"Login": {
-			"login": "Đăng nhập",
-			"resgiter": "Đăng ký",
-			"resgiternow": "Đăng ký ngay!",
-			"email": "Địa chỉ email*",
-			"password": "Mật khẩu*",
-			"forgotPas": "Quên mật khẩu?",
-			"newJoin": "Bạn mới tham gia Netflix?",
-			"placephoder": {
-				"emailLogin": "Email hoặc số điện thoại",
-				"passLogin": "Mật khẩu"
-			}
-		}
-	},
-	"schema": {
-		"requied": "Trường này không được để trống!",
-		"email": "Vui lòng nhập địa chỉ email hợp lệ!",
-		"password": "Mật khẩu phải dài ít nhất 8 ký tự!",
-		"emailNotExit": "Email không tồn tại!",
-		"checkmail": "Vui lòng kiểm tra email!"
-	}
+  "headerNav": {
+    "home": "Trang chủ",
+    "tvShows": "Phim T.hình",
+    "movies": "Phim",
+    "newAndPopular": "Mới & Phổ biến",
+    "myList": "Danh sách của tôi",
+    "Browse": "Duyệt tìm",
+    "profile": {
+      "password": "Mật khẩu",
+      "account": "Tài khoản",
+      "manageProfiles": "Quản lý hồ sơ",
+      "switchProfiles": "Chuyển hồ sơ",
+      "helpCenter": "Trung tâm trợ giúp",
+      "signOut": "Đăng xuất khỏi Netflix",
+      "inforMemberShip": "Thông tin tư cách thành viên",
+      "Manage_membership": "Quản lý tư cách thành viên"
+    }
+  },
+  "navBar": {
+    "backNetflix": "Quay lại Netflix",
+    "overview": "Tổng quan",
+    "memberShip": "Tư cách thành viên",
+    "security": "Bảo mật",
+    "devices": "Thiết bị"
+  },
+  "button": {
+    "seeAll": "Xem tất cả",
+    "play": "Phát",
+    "inforOther": "Thông tin khác",
+    "destroyMemberShip": "Huỷ tư cách thành viên",
+    "deviceCurrent": "Thiết bị hiện tại",
+    "cancel": "Huỷ",
+    "save": "Lưu",
+    "continue": "Tiếp tục",
+    "createMemberShip": "Kích hoạt tư cách thành viên",
+    "sendMail": "Gửi email cho tôi"
+  },
+  "movie": {
+    "seasons": "Mùa",
+    "cast": "Diễn viên",
+    "genres": "Thể loại",
+    "thisMovieIs": "Phim này là",
+    "episodes": "Tập"
+  },
+  "title": {
+    "myList": "Danh sách của tôi",
+    "quickLinks": "Liên kết nhanh",
+    "ManageAccess_devices": "Quản lý thiết bị truy cập",
+    "updatePassword": "Cập nhật mật khẩu",
+    "inforAccount": "Thông tin tài khoản",
+    "Access_Privacy": "Truy cập và quyền riêng tư",
+    "Access_device": "Truy cập và thiết bị",
+    "ManageDevice_logined": "Quản lý thiết bị đã đăng nhập",
+    "accountAccess": "Truy cập tài khoản",
+    "dowloadDeviceMobile": "Tải xuống thiết bị di động",
+    "changePass": "Thay đổi mật khẩu",
+    "establishMOMO": "Thiết lập MoMo",
+    "choosePayment": "Chọn cách thanh toán",
+    "ChooseService": "Chọn gói dịch vụ phù hợp với bạn",
+    "popularMost": "Phổ biến nhất",
+    "qualityAndImage": "Chất lượng hình và âm",
+    "Resolution": "Độ phân giải",
+    "deviceSupport": "Thiết bị hỗ trợ",
+    "TvShortShow": "Loạt phim truyền hình ngắn",
+    "forgotPas": "Hãy nhập email của bạn để kích hoạt mật khẩu mới!!!",
+    "HasAccountNetflix": "Bạn đã có tài khoản Netflix?"
+  },
+  "orther": {
+    "phone": "Điện thoại di động",
+    "memberForm": "Thành viên từ",
+    "month": "tháng",
+    "year": "năm",
+    "day": "Ngày",
+    "nextPayment": "Ngày thanh toán tiếp theo",
+    "viewPaymentHistory": "Xem lịch sử thanh toán",
+    "inforService": "Thông tin gói dịch vụ",
+    "inforPayment": "Thông tin thanh toán",
+    "inforQuality": "Độ phân giải video 1080p, không quảng cáo khi xem và hơn thế nữa.",
+    "usedDevice": "Đang dùng 0/2 thiết bị tải xuống",
+    "plans": {
+      "mobile": "Gói di động",
+      "basic": "Gói cơ bản",
+      "standard": "Gói tiêu chuẩn",
+      "premium": "Gói cao cấp"
+    },
+    "changePass": "Đổi mật khẩu",
+    "NewPass": "Mật khẩu mới",
+    "res_Pass": "Nhập lại mật khẩu",
+    "currentPass": "Mật khẩu hiện tại",
+    "strongSecurity": "Tăng cường bảo mật",
+    "pleaseWaite": "Vui lòng đợi",
+    "change": "Thay đổi",
+    "i_argee": "Tôi đồng ý",
+    "clause_use": "Điều khoản sử dụng",
+    "privacyPolicy": "Chính sách quyền riêng tư",
+    "and": "và",
+    "WelcomeBack": "Chào mừng bạn quay lại!",
+    "JoinEz": "Tham gia Netflix thật đơn giản.",
+    "enterPassAndSeeNow": "Chỉ cần nhập mật khẩu và bạn sẽ được xem ngay lập tức.",
+    "e_wallet": "Ví điện tử"
+  },
+  "desc": {
+    "manageaccountaccess": "Gần đây, các thiết bị đã đăng nhập này đã hoạt động trên tài khoản này. Bạn có thể đăng xuất bất kỳ thiết bị lạ nào hoặc",
+    "changePass": "Bảo vệ tài khoản của bạn bằng một mật khẩu duy nhất dài ít nhất 6 ký tự.",
+    "WalletOptionMOMO": " Nhập số điện thoại di động MoMo của bạn. Chúng tôi sẽ dùng số điện thoại này để gửi các thông báo và xử lý thanh toán.",
+    "notificationMoMo": "Bạn sẽ được chuyển đến MoMo để hoàn tất việc thanh toán.",
+    "progressPayment": "Quá trình thanh toán của bạn được mã hóa và bạn có thể thay đổi cách thanh toán bất kỳ lúc nào.",
+    "readyCrateMembership": "Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn."
+  },
+  "alerts": {
+    "title": "Bạn có chắc chắn hoàn toàn không?",
+    "subTitle": "Không thể hoàn tác hành động này. Thao tác này sẽ xóa vĩnh viễn tài khoản của bạn và xóa dữ liệu của bạn khỏi máy chủ của chúng tôi.",
+    "loginSuccess": "Đăng nhập thành công!",
+    "LoginAgain": "Vui lòng đăng nhập lại!",
+    "logoutSuccess": "Logout success!",
+    "destroyMemberShip": "Xoá tư cách thành viên thành công!",
+    "success": "Thành công!",
+    "someThingErr": "Đã xảy ra sự cố!",
+    "accountNotMatch": "Tài khoản hoặc mật khẩu không đúng!",
+    "emailNotMatch": "Email không hợp lệ!"
+  },
+  "AuthLayout": {
+    "Login": {
+      "login": "Đăng nhập",
+      "resgiter": "Đăng ký",
+      "resgiternow": "Đăng ký ngay!",
+      "email": "Địa chỉ email*",
+      "password": "Mật khẩu*",
+      "forgotPas": "Quên mật khẩu?",
+      "newJoin": "Bạn mới tham gia Netflix?",
+      "placephoder": {
+        "emailLogin": "Email hoặc số điện thoại",
+        "passLogin": "Mật khẩu"
+      }
+    }
+  },
+  "schema": {
+    "requied": "Trường này không được để trống!",
+    "email": "Vui lòng nhập địa chỉ email hợp lệ!",
+    "password": "Mật khẩu phải dài ít nhất 8 ký tự!",
+    "emailNotExit": "Email không tồn tại!",
+    "checkmail": "Vui lòng kiểm tra email!"
+  }
 }
