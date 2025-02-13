@@ -15,7 +15,7 @@ export const defineCurrency = [
 export const plans = [
   {
     index: 0,
-    name: 'Phone',
+    name: 'Mobile',
     title: 'Di động',
     price: '70000',
     quality: 'Khá',

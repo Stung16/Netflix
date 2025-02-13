@@ -52,17 +52,23 @@ export default function WalletOption({t}: any) {
   // Xử lý submit form
   const onSubmit = (data: MomoFormValues) => {
     setTransition(async () => {
-      const {payload, status} = await paymentRequest.payment({
-        service: option?.name,
-        price: option?.price,
-        phone: data.phoneNumber,
-      })
+      try {
+        const {payload, status} = await paymentRequest.payment({
+          service: option?.name,
+          price: option?.price,
+          phone: data.phoneNumber,
+        })
 
-      if (status === 200) {
-        if (payload?.data?.resultCode === 0) {
-          setOrderIdToLocalStorage(payload?.data?.orderId)
-          return router.push(payload?.data?.payUrl)
+        if (status === 200) {
+          if (payload?.data?.resultCode === 0) {
+            setOrderIdToLocalStorage(payload?.data?.orderId)
+            console.log(payload?.data)
+
+            return router.push(payload?.data?.payUrl)
+          }
         }
+      } catch (error) {
+        console.log(error)
       }
     })
   }
@@ -71,6 +77,8 @@ export default function WalletOption({t}: any) {
     if (option) {
       try {
         const parsedValue = JSON.parse(option)
+        console.log(parsedValue)
+
         setOption(parsedValue)
       } catch (error: any) {
         return router.push('/signup/planform')
