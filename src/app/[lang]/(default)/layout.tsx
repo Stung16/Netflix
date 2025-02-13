@@ -33,6 +33,7 @@ export default async function DefaultLayout({
     return redirect('/signup/planform')
   }
   return (
+    <Suspense fallback={<div>..loading</div>}>
       <Header
         profile={dataAcount}
         lang={params?.lang}
@@ -40,5 +41,6 @@ export default async function DefaultLayout({
       />
       <main className='relative'>{children}</main>
       <Footer t={t} />
+    </Suspense>
   )
 }
