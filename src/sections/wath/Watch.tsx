@@ -34,8 +34,6 @@ export default function Watch({
   trackId: string | number
   dataMovie: any
 }) {
-  console.log(dataMovie)
-
   const Episodes = getAllEpisodes(dataMovie)
   const EpisodeCurrent = Episodes.find((item: any) => item.id === trackId)
   //

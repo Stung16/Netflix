@@ -62,8 +62,6 @@ export default function WalletOption({t}: any) {
         if (status === 200) {
           if (payload?.data?.resultCode === 0) {
             setOrderIdToLocalStorage(payload?.data?.orderId)
-            console.log(payload?.data)
-
             return router.push(payload?.data?.payUrl)
           }
         }
@@ -77,8 +75,6 @@ export default function WalletOption({t}: any) {
     if (option) {
       try {
         const parsedValue = JSON.parse(option)
-        console.log(parsedValue)
-
         setOption(parsedValue)
       } catch (error: any) {
         return router.push('/signup/planform')

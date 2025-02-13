@@ -40,7 +40,6 @@ export default function SignupPass({t}: any) {
     startTransition(async () => {
       try {
         const {payload, status} = await authApiRequest.signup(values)
-        console.log(payload, status)
         if (status === 200) {
           toast.success(t.alerts.loginSuccess)
           router.push('/signup/planform')
