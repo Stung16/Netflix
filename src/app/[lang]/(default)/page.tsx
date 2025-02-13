@@ -1,14 +1,11 @@
 import movieApiRequest from '@/apiRequest/movie'
-import dynamic from 'next/dynamic'
 import {cookies} from 'next/headers'
 import {redirect} from 'next/navigation'
 import React from 'react'
 import getDictionary from '@/app/dictionaries'
 import Banner from '@/sections/home/Banner'
 import {Suspense} from 'react'
-
-// const Banner = dynamic(() => import('@/sections/home/Banner'))
-const ListMovieType = dynamic(() => import('@/sections/home/ListMovieType'))
+import ListMovieType from '@/sections/home/ListMovieType'
 
 export default async function HomePage({
   params,

@@ -202,7 +202,7 @@ export default function FormLogin({t}: any) {
         </span>
         <Link
           className='text-white text-[1rem] font-medium leading-normal tracking-[-0.016rem] xsm:text-xs not-italic xsm:leading-[150%] xsm:tracking-[-0.012rem]'
-          href={`/signup`}
+          href={`/signup/password`}
         >
           {t.AuthLayout.Login.resgiternow}
         </Link>

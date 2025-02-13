@@ -8,9 +8,6 @@ import {useEffect, useState, useTransition} from 'react'
 import {Input} from '@/components/ui/input'
 import Image from 'next/image'
 import Link from 'next/link'
-
-// import IcManager from '@/components/icons/IcManager'
-// import IcChangeProfile from '@/components/icons/IcChangeProfile'
 import IcInforAcount from '@/components/icons/IcInforAcount'
 import IcAcount from '@/components/icons/IcAcount'
 import style from './style.module.css'
@@ -19,6 +16,7 @@ import authApiRequest from '@/apiRequest/auth'
 import {toast} from 'sonner'
 import MenuBarMobile from '@/components/navBar/MenuBarMobile'
 import ChooseLang from '@/components/ChooseLang'
+export const dynamic = 'force-dynamic'
 export default function Header({
   profile,
   lang,

@@ -8,6 +8,7 @@ import {redirect} from 'next/navigation'
 import NavBarAccount from '@/components/navBar/NavBarAccount'
 import getDictionary from '@/app/dictionaries'
 import {Suspense} from 'react'
+export const dynamic = 'force-dynamic'
 
 export default async function AccountLayout({
   children,
