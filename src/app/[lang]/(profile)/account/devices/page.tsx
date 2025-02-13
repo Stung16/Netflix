@@ -16,10 +16,7 @@ export default async function page({params}: {params: {lang: string}}) {
     {
       heading: t.title.accountAccess,
       label: t.title.Access_device,
-      link: redirectLinkWithLang(
-        params.lang,
-        'account/dmanageaccountaccessevices',
-      ),
+      link: redirectLinkWithLang(params.lang, 'account/manageaccountaccess'),
       description: t.title.ManageDevice_logined,
     },
     {
