@@ -5,6 +5,21 @@ import {cookies} from 'next/headers'
 import React from 'react'
 import ListSearch from '@/components/movie/listSearch/page'
 import getDictionary from '@/app/dictionaries'
+import type {Metadata} from 'next'
+type Props = {
+  params: Promise<{lang: string}>
+  searchParams: Promise<{q: string; pathname: string; viewport: string}>
+}
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  return {
+    title: `${(await params).lang === 'en' ? `search: ${(await searchParams).q}` : `Tìm kiếm: ${(await searchParams).q}`}`,
+    description:
+      'Watch unlimited movies, TV shows, and exclusive content on Netflix. Enjoy thousands of titles in HD quality with no ads, anytime, anywhere.',
+  }
+}
 export default async function page({
   searchParams,
   params,

@@ -5,6 +5,12 @@ import Banner from '@/sections/home/Banner'
 import ListMovieType from '@/sections/home/ListMovieType'
 import {cookies} from 'next/headers'
 import React, {Fragment} from 'react'
+import {Metadata} from 'next'
+export const metadata: Metadata = {
+  title: 'Movies - Netflix',
+  description:
+    'Watch unlimited movies, TV shows, and exclusive content on Netflix. Enjoy thousands of titles in HD quality with no ads, anytime, anywhere.',
+}
 export default async function page({
   params,
 }: {

@@ -6,6 +6,12 @@ import getDictionary from '@/app/dictionaries'
 import Banner from '@/sections/home/Banner'
 import {Suspense} from 'react'
 import ListMovieType from '@/sections/home/ListMovieType'
+import {Metadata} from 'next'
+export const metadata: Metadata = {
+  title: 'Home - Netflix',
+  description:
+    'Watch unlimited movies, TV shows, and exclusive content on Netflix. Enjoy thousands of titles in HD quality with no ads, anytime, anywhere.',
+}
 
 export default async function HomePage({
   params,
