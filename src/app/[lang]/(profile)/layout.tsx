@@ -9,7 +9,12 @@ import NavBarAccount from '@/components/navBar/NavBarAccount'
 import getDictionary from '@/app/dictionaries'
 import {Suspense} from 'react'
 export const dynamic = 'force-dynamic'
-
+import {Metadata} from 'next'
+export const metadata: Metadata = {
+  title: 'Profile - Netflix',
+  description:
+    'Manage your Netflix profile settings, customize your preferences, and update your account details for a personalized streaming experience.',
+}
 export default async function AccountLayout({
   children,
   params,

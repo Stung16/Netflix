@@ -9,6 +9,12 @@ import getDictionary from '@/app/dictionaries'
 import Footer from '@/layout/footer/Footer'
 export const dynamic = 'force-dynamic'
 import {Suspense} from 'react'
+import {Metadata} from 'next'
+export const metadata: Metadata = {
+  title: 'Netflix',
+  description:
+    'Watch unlimited movies, TV shows, and exclusive content on Netflix. Enjoy thousands of titles in HD quality with no ads, anytime, anywhere.',
+}
 
 export default async function DefaultLayout({
   children,
